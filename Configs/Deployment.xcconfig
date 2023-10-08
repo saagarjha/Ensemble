@@ -1,0 +1,13 @@
+//
+//  Deployment.xcconfig
+//  MacCast
+//
+//  Created by Saagar Jha on 10/8/23.
+//
+
+CODE_SIGN_IDENTITY = Apple Development
+CURRENT_PROJECT_VERSION = 1
+DEVELOPMENT_TEAM = X4A9GH5NN2
+MACOSX_DEPLOYMENT_TARGET = 14.0
+MARKETING_VERSION = 1.0
+XROS_DEPLOYMENT_TARGET = 1.0

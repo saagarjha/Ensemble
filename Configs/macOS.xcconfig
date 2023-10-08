@@ -1,0 +1,17 @@
+//
+//  macOS.xcconfig
+//  MacCast
+//
+//  Created by Saagar Jha on 10/8/23.
+//
+
+ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon
+CODE_SIGN_ENTITLEMENTS = macOS/MacCast.entitlements
+CODE_SIGN_STYLE = Automatic
+COMBINE_HIDPI_IMAGES = YES
+DEVELOPMENT_ASSET_PATHS = "macOS/Preview Content"
+ENABLE_HARDENED_RUNTIME = YES
+INFOPLIST_KEY_LSApplicationCategoryType = public.app-category.productivity
+LD_RUNPATH_SEARCH_PATHS = $(inherited) @executable_path/../Frameworks
+PRODUCT_BUNDLE_IDENTIFIER = com.saagarjha.MacCast.macOS
+PRODUCT_NAME = MacCast

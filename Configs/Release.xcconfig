@@ -1,0 +1,14 @@
+//
+//  Release.xcconfig
+//  MacCast
+//
+//  Created by Saagar Jha on 10/8/23.
+//
+
+#include "Shared.xcconfig"
+
+DEBUG_INFORMATION_FORMAT = dwarf-with-dsym
+ENABLE_NS_ASSERTIONS = NO
+MTL_ENABLE_DEBUG_INFO = NO
+SWIFT_COMPILATION_MODE = wholemodule
+VALIDATE_PRODUCT = YES

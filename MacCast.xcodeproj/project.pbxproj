@@ -1,0 +1,479 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 56;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		495E8E3B2AD5CE2400946419 /* ImageBufferView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 495E8E3A2AD5CE2400946419 /* ImageBufferView.swift */; };
+		495E8E3D2AD5E6C500946419 /* SerializableConformances.swift in Sources */ = {isa = PBXBuildFile; fileRef = 495E8E3C2AD5E6C500946419 /* SerializableConformances.swift */; };
+		495E8E3E2AD5E6C500946419 /* SerializableConformances.swift in Sources */ = {isa = PBXBuildFile; fileRef = 495E8E3C2AD5E6C500946419 /* SerializableConformances.swift */; };
+		4978BAAC2AD54EDB000C549C /* Video.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4978BAAB2AD54EDB000C549C /* Video.swift */; };
+		4978BAAD2AD54EDB000C549C /* Video.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4978BAAB2AD54EDB000C549C /* Video.swift */; };
+		4978BAAF2AD55D71000C549C /* WindowPreviewView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4978BAAE2AD55D71000C549C /* WindowPreviewView.swift */; };
+		4978BAB12AD55E8B000C549C /* WindowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4978BAB02AD55E8B000C549C /* WindowView.swift */; };
+		49E09B572AD2EE5000B56CD3 /* MacCastApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49E09B562AD2EE5000B56CD3 /* MacCastApp.swift */; };
+		49E09B592AD2EE5000B56CD3 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49E09B582AD2EE5000B56CD3 /* ContentView.swift */; };
+		49E09B5B2AD2EE5100B56CD3 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 49E09B5A2AD2EE5100B56CD3 /* Assets.xcassets */; };
+		49E09B5E2AD2EE5100B56CD3 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 49E09B5D2AD2EE5100B56CD3 /* Preview Assets.xcassets */; };
+		49E09B992AD3237D00B56CD3 /* MacCastApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49E09B982AD3237D00B56CD3 /* MacCastApp.swift */; };
+		49E09B9B2AD3237D00B56CD3 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49E09B9A2AD3237D00B56CD3 /* ContentView.swift */; };
+		49E09B9D2AD3237E00B56CD3 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 49E09B9C2AD3237E00B56CD3 /* Assets.xcassets */; };
+		49E09BA02AD3237E00B56CD3 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 49E09B9F2AD3237E00B56CD3 /* Preview Assets.xcassets */; };
+		49E09BAB2AD33C1600B56CD3 /* AppleConnect in Frameworks */ = {isa = PBXBuildFile; productRef = 49E09BAA2AD33C1600B56CD3 /* AppleConnect */; };
+		49E09BAD2AD33C1F00B56CD3 /* AppleConnect in Frameworks */ = {isa = PBXBuildFile; productRef = 49E09BAC2AD33C1F00B56CD3 /* AppleConnect */; };
+		49E09BB12AD3FDCC00B56CD3 /* ConnectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49E09BB02AD3FDCC00B56CD3 /* ConnectionView.swift */; };
+		49E09BB32AD419CF00B56CD3 /* Messages.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49E09BB22AD419CF00B56CD3 /* Messages.swift */; };
+		49E09BB42AD419CF00B56CD3 /* Messages.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49E09BB22AD419CF00B56CD3 /* Messages.swift */; };
+		49E09BB62AD4F84500B56CD3 /* Serializable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49E09BB52AD4F84500B56CD3 /* Serializable.swift */; };
+		49E09BB72AD4F84500B56CD3 /* Serializable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49E09BB52AD4F84500B56CD3 /* Serializable.swift */; };
+		49E09BBA2AD4F88100B56CD3 /* Cod in Frameworks */ = {isa = PBXBuildFile; productRef = 49E09BB92AD4F88100B56CD3 /* Cod */; };
+		49E09BBC2AD4F88900B56CD3 /* Cod in Frameworks */ = {isa = PBXBuildFile; productRef = 49E09BBB2AD4F88900B56CD3 /* Cod */; };
+		49E09BC22AD52C7800B56CD3 /* macOSInterface.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49E09BC12AD52C7800B56CD3 /* macOSInterface.swift */; };
+		49E09BC32AD52C7800B56CD3 /* macOSInterface.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49E09BC12AD52C7800B56CD3 /* macOSInterface.swift */; };
+		49E09BC52AD52CC900B56CD3 /* Remote.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49E09BC42AD52CC900B56CD3 /* Remote.swift */; };
+		49E09BC72AD52CCE00B56CD3 /* Local.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49E09BC62AD52CCE00B56CD3 /* Local.swift */; };
+		49E09BC92AD52D1600B56CD3 /* Remote.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49E09BC82AD52D1600B56CD3 /* Remote.swift */; };
+		49E09BCB2AD52D1D00B56CD3 /* Local.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49E09BCA2AD52D1D00B56CD3 /* Local.swift */; };
+		49E09BCD2AD52D5900B56CD3 /* Multiplexer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49E09BCC2AD52D5900B56CD3 /* Multiplexer.swift */; };
+		49E09BCE2AD52D5900B56CD3 /* Multiplexer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49E09BCC2AD52D5900B56CD3 /* Multiplexer.swift */; };
+		49E09BD02AD52D9F00B56CD3 /* visionOSInterface.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49E09BCF2AD52D9F00B56CD3 /* visionOSInterface.swift */; };
+		49E09BD12AD52D9F00B56CD3 /* visionOSInterface.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49E09BCF2AD52D9F00B56CD3 /* visionOSInterface.swift */; };
+		49E09BD32AD5390500B56CD3 /* WindowPickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49E09BD22AD5390500B56CD3 /* WindowPickerView.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		495E8E3A2AD5CE2400946419 /* ImageBufferView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageBufferView.swift; sourceTree = "<group>"; };
+		495E8E3C2AD5E6C500946419 /* SerializableConformances.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SerializableConformances.swift; sourceTree = "<group>"; };
+		4978BAAB2AD54EDB000C549C /* Video.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Video.swift; sourceTree = "<group>"; };
+		4978BAAE2AD55D71000C549C /* WindowPreviewView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WindowPreviewView.swift; sourceTree = "<group>"; };
+		4978BAB02AD55E8B000C549C /* WindowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WindowView.swift; sourceTree = "<group>"; };
+		49E09B532AD2EE5000B56CD3 /* MacCast.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MacCast.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		49E09B562AD2EE5000B56CD3 /* MacCastApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MacCastApp.swift; sourceTree = "<group>"; };
+		49E09B582AD2EE5000B56CD3 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		49E09B5A2AD2EE5100B56CD3 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		49E09B5D2AD2EE5100B56CD3 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		49E09B5F2AD2EE5100B56CD3 /* MacCast.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = MacCast.entitlements; sourceTree = "<group>"; };
+		49E09B882AD31A6F00B56CD3 /* Shared.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Shared.xcconfig; sourceTree = "<group>"; };
+		49E09B892AD31AAC00B56CD3 /* Debug.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Debug.xcconfig; sourceTree = "<group>"; };
+		49E09B8A2AD31AB300B56CD3 /* Release.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Release.xcconfig; sourceTree = "<group>"; };
+		49E09B8B2AD31B4400B56CD3 /* Deployment.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Deployment.xcconfig; sourceTree = "<group>"; };
+		49E09B8C2AD320F200B56CD3 /* macOS.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = macOS.xcconfig; sourceTree = "<group>"; };
+		49E09B922AD3237D00B56CD3 /* MacCast.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MacCast.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		49E09B982AD3237D00B56CD3 /* MacCastApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MacCastApp.swift; sourceTree = "<group>"; };
+		49E09B9A2AD3237D00B56CD3 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		49E09B9C2AD3237E00B56CD3 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		49E09B9F2AD3237E00B56CD3 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		49E09BA12AD3237E00B56CD3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		49E09BA52AD3240E00B56CD3 /* visionOS.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = visionOS.xcconfig; sourceTree = "<group>"; };
+		49E09BB02AD3FDCC00B56CD3 /* ConnectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConnectionView.swift; sourceTree = "<group>"; };
+		49E09BB22AD419CF00B56CD3 /* Messages.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Messages.swift; sourceTree = "<group>"; };
+		49E09BB52AD4F84500B56CD3 /* Serializable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Serializable.swift; sourceTree = "<group>"; };
+		49E09BC12AD52C7800B56CD3 /* macOSInterface.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = macOSInterface.swift; sourceTree = "<group>"; };
+		49E09BC42AD52CC900B56CD3 /* Remote.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Remote.swift; sourceTree = "<group>"; };
+		49E09BC62AD52CCE00B56CD3 /* Local.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Local.swift; sourceTree = "<group>"; };
+		49E09BC82AD52D1600B56CD3 /* Remote.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Remote.swift; sourceTree = "<group>"; };
+		49E09BCA2AD52D1D00B56CD3 /* Local.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Local.swift; sourceTree = "<group>"; };
+		49E09BCC2AD52D5900B56CD3 /* Multiplexer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Multiplexer.swift; sourceTree = "<group>"; };
+		49E09BCF2AD52D9F00B56CD3 /* visionOSInterface.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = visionOSInterface.swift; sourceTree = "<group>"; };
+		49E09BD22AD5390500B56CD3 /* WindowPickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WindowPickerView.swift; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		49E09B502AD2EE5000B56CD3 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				49E09BAB2AD33C1600B56CD3 /* AppleConnect in Frameworks */,
+				49E09BBA2AD4F88100B56CD3 /* Cod in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		49E09B8F2AD3237D00B56CD3 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				49E09BAD2AD33C1F00B56CD3 /* AppleConnect in Frameworks */,
+				49E09BBC2AD4F88900B56CD3 /* Cod in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		49E09B4A2AD2EE5000B56CD3 = {
+			isa = PBXGroup;
+			children = (
+				49E09B862AD31A4200B56CD3 /* Configs */,
+				49E09BA82AD33C0100B56CD3 /* Shared */,
+				49E09B552AD2EE5000B56CD3 /* macOS */,
+				49E09B932AD3237D00B56CD3 /* visionOS */,
+				49E09B542AD2EE5000B56CD3 /* Products */,
+				49E09BA92AD33C1600B56CD3 /* Frameworks */,
+			);
+			sourceTree = "<group>";
+		};
+		49E09B542AD2EE5000B56CD3 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				49E09B532AD2EE5000B56CD3 /* MacCast.app */,
+				49E09B922AD3237D00B56CD3 /* MacCast.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		49E09B552AD2EE5000B56CD3 /* macOS */ = {
+			isa = PBXGroup;
+			children = (
+				49E09B5F2AD2EE5100B56CD3 /* MacCast.entitlements */,
+				49E09B582AD2EE5000B56CD3 /* ContentView.swift */,
+				49E09BC62AD52CCE00B56CD3 /* Local.swift */,
+				49E09B562AD2EE5000B56CD3 /* MacCastApp.swift */,
+				49E09BC42AD52CC900B56CD3 /* Remote.swift */,
+				49E09B5A2AD2EE5100B56CD3 /* Assets.xcassets */,
+				49E09B5C2AD2EE5100B56CD3 /* Preview Content */,
+			);
+			path = macOS;
+			sourceTree = "<group>";
+		};
+		49E09B5C2AD2EE5100B56CD3 /* Preview Content */ = {
+			isa = PBXGroup;
+			children = (
+				49E09B5D2AD2EE5100B56CD3 /* Preview Assets.xcassets */,
+			);
+			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		49E09B862AD31A4200B56CD3 /* Configs */ = {
+			isa = PBXGroup;
+			children = (
+				49E09B892AD31AAC00B56CD3 /* Debug.xcconfig */,
+				49E09B8B2AD31B4400B56CD3 /* Deployment.xcconfig */,
+				49E09B8C2AD320F200B56CD3 /* macOS.xcconfig */,
+				49E09B8A2AD31AB300B56CD3 /* Release.xcconfig */,
+				49E09B882AD31A6F00B56CD3 /* Shared.xcconfig */,
+				49E09BA52AD3240E00B56CD3 /* visionOS.xcconfig */,
+			);
+			path = Configs;
+			sourceTree = "<group>";
+		};
+		49E09B932AD3237D00B56CD3 /* visionOS */ = {
+			isa = PBXGroup;
+			children = (
+				49E09BA12AD3237E00B56CD3 /* Info.plist */,
+				49E09BB02AD3FDCC00B56CD3 /* ConnectionView.swift */,
+				49E09B9A2AD3237D00B56CD3 /* ContentView.swift */,
+				495E8E3A2AD5CE2400946419 /* ImageBufferView.swift */,
+				49E09BCA2AD52D1D00B56CD3 /* Local.swift */,
+				49E09B982AD3237D00B56CD3 /* MacCastApp.swift */,
+				49E09BC82AD52D1600B56CD3 /* Remote.swift */,
+				49E09BD22AD5390500B56CD3 /* WindowPickerView.swift */,
+				4978BAAE2AD55D71000C549C /* WindowPreviewView.swift */,
+				4978BAB02AD55E8B000C549C /* WindowView.swift */,
+				49E09B9C2AD3237E00B56CD3 /* Assets.xcassets */,
+				49E09B9E2AD3237E00B56CD3 /* Preview Content */,
+			);
+			path = visionOS;
+			sourceTree = "<group>";
+		};
+		49E09B9E2AD3237E00B56CD3 /* Preview Content */ = {
+			isa = PBXGroup;
+			children = (
+				49E09B9F2AD3237E00B56CD3 /* Preview Assets.xcassets */,
+			);
+			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		49E09BA82AD33C0100B56CD3 /* Shared */ = {
+			isa = PBXGroup;
+			children = (
+				49E09BC12AD52C7800B56CD3 /* macOSInterface.swift */,
+				49E09BB22AD419CF00B56CD3 /* Messages.swift */,
+				49E09BCC2AD52D5900B56CD3 /* Multiplexer.swift */,
+				49E09BB52AD4F84500B56CD3 /* Serializable.swift */,
+				495E8E3C2AD5E6C500946419 /* SerializableConformances.swift */,
+				4978BAAB2AD54EDB000C549C /* Video.swift */,
+				49E09BCF2AD52D9F00B56CD3 /* visionOSInterface.swift */,
+			);
+			path = Shared;
+			sourceTree = "<group>";
+		};
+		49E09BA92AD33C1600B56CD3 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		49E09B522AD2EE5000B56CD3 /* macOS */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 49E09B622AD2EE5100B56CD3 /* Build configuration list for PBXNativeTarget "macOS" */;
+			buildPhases = (
+				49E09B4F2AD2EE5000B56CD3 /* Sources */,
+				49E09B502AD2EE5000B56CD3 /* Frameworks */,
+				49E09B512AD2EE5000B56CD3 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = macOS;
+			packageProductDependencies = (
+				49E09BAA2AD33C1600B56CD3 /* AppleConnect */,
+				49E09BB92AD4F88100B56CD3 /* Cod */,
+			);
+			productName = MacCast;
+			productReference = 49E09B532AD2EE5000B56CD3 /* MacCast.app */;
+			productType = "com.apple.product-type.application";
+		};
+		49E09B912AD3237D00B56CD3 /* visionOS */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 49E09BA22AD3237E00B56CD3 /* Build configuration list for PBXNativeTarget "visionOS" */;
+			buildPhases = (
+				49E09B8E2AD3237D00B56CD3 /* Sources */,
+				49E09B8F2AD3237D00B56CD3 /* Frameworks */,
+				49E09B902AD3237D00B56CD3 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = visionOS;
+			packageProductDependencies = (
+				49E09BAC2AD33C1F00B56CD3 /* AppleConnect */,
+				49E09BBB2AD4F88900B56CD3 /* Cod */,
+			);
+			productName = MacCast;
+			productReference = 49E09B922AD3237D00B56CD3 /* MacCast.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		49E09B4B2AD2EE5000B56CD3 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = 1;
+				LastSwiftUpdateCheck = 1510;
+				LastUpgradeCheck = 1510;
+				TargetAttributes = {
+					49E09B522AD2EE5000B56CD3 = {
+						CreatedOnToolsVersion = 15.1;
+					};
+					49E09B912AD3237D00B56CD3 = {
+						CreatedOnToolsVersion = 15.1;
+					};
+				};
+			};
+			buildConfigurationList = 49E09B4E2AD2EE5000B56CD3 /* Build configuration list for PBXProject "MacCast" */;
+			compatibilityVersion = "Xcode 14.0";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 49E09B4A2AD2EE5000B56CD3;
+			packageReferences = (
+				49E09BA62AD33BD500B56CD3 /* XCRemoteSwiftPackageReference "AppleConnect" */,
+				49E09BB82AD4F86E00B56CD3 /* XCRemoteSwiftPackageReference "Cod" */,
+			);
+			productRefGroup = 49E09B542AD2EE5000B56CD3 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				49E09B522AD2EE5000B56CD3 /* macOS */,
+				49E09B912AD3237D00B56CD3 /* visionOS */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		49E09B512AD2EE5000B56CD3 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				49E09B5E2AD2EE5100B56CD3 /* Preview Assets.xcassets in Resources */,
+				49E09B5B2AD2EE5100B56CD3 /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		49E09B902AD3237D00B56CD3 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				49E09BA02AD3237E00B56CD3 /* Preview Assets.xcassets in Resources */,
+				49E09B9D2AD3237E00B56CD3 /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		49E09B4F2AD2EE5000B56CD3 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				49E09BC72AD52CCE00B56CD3 /* Local.swift in Sources */,
+				49E09BD02AD52D9F00B56CD3 /* visionOSInterface.swift in Sources */,
+				49E09B592AD2EE5000B56CD3 /* ContentView.swift in Sources */,
+				49E09B572AD2EE5000B56CD3 /* MacCastApp.swift in Sources */,
+				49E09BC52AD52CC900B56CD3 /* Remote.swift in Sources */,
+				495E8E3D2AD5E6C500946419 /* SerializableConformances.swift in Sources */,
+				49E09BB62AD4F84500B56CD3 /* Serializable.swift in Sources */,
+				4978BAAC2AD54EDB000C549C /* Video.swift in Sources */,
+				49E09BCD2AD52D5900B56CD3 /* Multiplexer.swift in Sources */,
+				49E09BC22AD52C7800B56CD3 /* macOSInterface.swift in Sources */,
+				49E09BB32AD419CF00B56CD3 /* Messages.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		49E09B8E2AD3237D00B56CD3 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				49E09BCB2AD52D1D00B56CD3 /* Local.swift in Sources */,
+				4978BAAD2AD54EDB000C549C /* Video.swift in Sources */,
+				49E09BD12AD52D9F00B56CD3 /* visionOSInterface.swift in Sources */,
+				495E8E3B2AD5CE2400946419 /* ImageBufferView.swift in Sources */,
+				49E09B9B2AD3237D00B56CD3 /* ContentView.swift in Sources */,
+				49E09BB12AD3FDCC00B56CD3 /* ConnectionView.swift in Sources */,
+				49E09B992AD3237D00B56CD3 /* MacCastApp.swift in Sources */,
+				4978BAAF2AD55D71000C549C /* WindowPreviewView.swift in Sources */,
+				49E09BC92AD52D1600B56CD3 /* Remote.swift in Sources */,
+				4978BAB12AD55E8B000C549C /* WindowView.swift in Sources */,
+				49E09BB72AD4F84500B56CD3 /* Serializable.swift in Sources */,
+				49E09BCE2AD52D5900B56CD3 /* Multiplexer.swift in Sources */,
+				49E09BD32AD5390500B56CD3 /* WindowPickerView.swift in Sources */,
+				49E09BC32AD52C7800B56CD3 /* macOSInterface.swift in Sources */,
+				495E8E3E2AD5E6C500946419 /* SerializableConformances.swift in Sources */,
+				49E09BB42AD419CF00B56CD3 /* Messages.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		49E09B602AD2EE5100B56CD3 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 49E09B892AD31AAC00B56CD3 /* Debug.xcconfig */;
+			buildSettings = {
+			};
+			name = Debug;
+		};
+		49E09B612AD2EE5100B56CD3 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 49E09B8A2AD31AB300B56CD3 /* Release.xcconfig */;
+			buildSettings = {
+			};
+			name = Release;
+		};
+		49E09B632AD2EE5100B56CD3 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 49E09B8C2AD320F200B56CD3 /* macOS.xcconfig */;
+			buildSettings = {
+			};
+			name = Debug;
+		};
+		49E09B642AD2EE5100B56CD3 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 49E09B8C2AD320F200B56CD3 /* macOS.xcconfig */;
+			buildSettings = {
+			};
+			name = Release;
+		};
+		49E09BA32AD3237E00B56CD3 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 49E09BA52AD3240E00B56CD3 /* visionOS.xcconfig */;
+			buildSettings = {
+			};
+			name = Debug;
+		};
+		49E09BA42AD3237E00B56CD3 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 49E09BA52AD3240E00B56CD3 /* visionOS.xcconfig */;
+			buildSettings = {
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		49E09B4E2AD2EE5000B56CD3 /* Build configuration list for PBXProject "MacCast" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				49E09B602AD2EE5100B56CD3 /* Debug */,
+				49E09B612AD2EE5100B56CD3 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		49E09B622AD2EE5100B56CD3 /* Build configuration list for PBXNativeTarget "macOS" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				49E09B632AD2EE5100B56CD3 /* Debug */,
+				49E09B642AD2EE5100B56CD3 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		49E09BA22AD3237E00B56CD3 /* Build configuration list for PBXNativeTarget "visionOS" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				49E09BA32AD3237E00B56CD3 /* Debug */,
+				49E09BA42AD3237E00B56CD3 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		49E09BA62AD33BD500B56CD3 /* XCRemoteSwiftPackageReference "AppleConnect" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/saagarjha/AppleConnect.git";
+			requirement = {
+				branch = main;
+				kind = branch;
+			};
+		};
+		49E09BB82AD4F86E00B56CD3 /* XCRemoteSwiftPackageReference "Cod" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/saagarjha/Cod.git";
+			requirement = {
+				branch = main;
+				kind = branch;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		49E09BAA2AD33C1600B56CD3 /* AppleConnect */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 49E09BA62AD33BD500B56CD3 /* XCRemoteSwiftPackageReference "AppleConnect" */;
+			productName = AppleConnect;
+		};
+		49E09BAC2AD33C1F00B56CD3 /* AppleConnect */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 49E09BA62AD33BD500B56CD3 /* XCRemoteSwiftPackageReference "AppleConnect" */;
+			productName = AppleConnect;
+		};
+		49E09BB92AD4F88100B56CD3 /* Cod */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 49E09BB82AD4F86E00B56CD3 /* XCRemoteSwiftPackageReference "Cod" */;
+			productName = Cod;
+		};
+		49E09BBB2AD4F88900B56CD3 /* Cod */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 49E09BB82AD4F86E00B56CD3 /* XCRemoteSwiftPackageReference "Cod" */;
+			productName = Cod;
+		};
+/* End XCSwiftPackageProductDependency section */
+	};
+	rootObject = 49E09B4B2AD2EE5000B56CD3 /* Project object */;
+}
