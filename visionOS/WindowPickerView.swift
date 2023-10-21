@@ -36,7 +36,9 @@ struct WindowPickerView: View {
 				Text("Loading windows…")
 					.task {
 						do {
-							windows = try await remote.windows
+							windows = try await remote.windows.filter {
+								!($0.title ?? "").isEmpty
+							}
 						} catch {}
 					}
 			}

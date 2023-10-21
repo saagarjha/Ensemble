@@ -13,6 +13,7 @@ protocol visionOSInterface {
 
 	func _handshake(parameters: M.MacOSHandshake.Request) async throws -> M.MacOSHandshake.Reply
 	func _windowFrame(parameters: M.WindowFrame.Request) async throws -> M.WindowFrame.Reply
+	func _childWindows(parameters: M.ChildWindows.Request) async throws -> M.ChildWindows.Reply
 }
 
 enum visionOSMessages {
@@ -32,7 +33,7 @@ enum visionOSMessages {
 		static let id = Messages.windowFrame
 
 		struct Request: Serializable {
-			let windowID: UInt32
+			let windowID: Window.ID
 			let frame: CMSampleBuffer
 
 			func encode() throws -> Data {
@@ -43,6 +44,17 @@ enum visionOSMessages {
 				var data = data
 				return try self.init(windowID: .init(uleb128: &data), frame: .decode(data))
 			}
+		}
+
+		typealias Reply = SerializableVoid
+	}
+
+	struct ChildWindows: Message {
+		static let id = Messages.childWindows
+
+		struct Request: Serializable, Codable {
+			let parent: Window.ID
+			let children: [Window.ID]
 		}
 
 		typealias Reply = SerializableVoid

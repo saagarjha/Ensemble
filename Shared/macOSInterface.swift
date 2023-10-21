@@ -15,13 +15,17 @@ protocol macOSInterface {
 	func _windows(parameters: M.Windows.Request) async throws -> M.Windows.Reply
 	func _windowPreview(parameters: M.WindowPreview.Request) async throws -> M.WindowPreview.Reply
 	func _startCasting(parameters: M.StartCasting.Request) async throws -> M.StartCasting.Reply
+	func _stopCasting(parameters: M.StopCasting.Request) async throws -> M.StopCasting.Reply
+	func _startWatchingForChildWindows(parameters: M.StartWatchingForChildWindows.Request) async throws -> M.StartWatchingForChildWindows.Reply
+	func _stopWatchingForChildWindows(parameters: M.StopWatchingForChildWindows.Request) async throws -> M.StopWatchingForChildWindows.Reply
 
 }
 
 struct Window: Codable, Identifiable {
 	let windowID: UInt32
-	let title: String
+	let title: String?
 	let app: String
+	let frame: CGRect
 
 	var id: UInt32 {
 		windowID
@@ -56,7 +60,7 @@ enum macOSInterfaceMessages {
 		static let previewSize = CGSize(width: 600, height: 400)
 
 		struct Request: Serializable, Codable {
-			let windowID: UInt32
+			let windowID: Window.ID
 		}
 
 		typealias Reply = CMSampleBuffer?
@@ -66,7 +70,37 @@ enum macOSInterfaceMessages {
 		static let id = Messages.startCasting
 
 		struct Request: Serializable, Codable {
-			let windowID: UInt32
+			let windowID: Window.ID
+		}
+
+		typealias Reply = SerializableVoid
+	}
+
+	struct StopCasting: Message {
+		static let id = Messages.stopCasting
+
+		struct Request: Serializable, Codable {
+			let windowID: Window.ID
+		}
+
+		typealias Reply = SerializableVoid
+	}
+
+	struct StartWatchingForChildWindows: Message {
+		static let id = Messages.startWatchingForChildWindows
+
+		struct Request: Serializable, Codable {
+			let windowID: Window.ID
+		}
+
+		typealias Reply = SerializableVoid
+	}
+
+	struct StopWatchingForChildWindows: Message {
+		static let id = Messages.stopWatchingForChildWindows
+
+		struct Request: Serializable, Codable {
+			let windowID: Window.ID
 		}
 
 		typealias Reply = SerializableVoid

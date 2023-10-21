@@ -33,4 +33,12 @@ struct Remote: visionOSInterface {
 	func _windowFrame(parameters: M.WindowFrame.Request) async throws -> M.WindowFrame.Reply {
 		try await M.WindowFrame.send(parameters, through: connection)
 	}
+
+	func childWindows(parent: CGWindowID, children: [CGWindowID]) async throws {
+		_ = try await _childWindows(parameters: .init(parent: parent, children: children))
+	}
+
+	func _childWindows(parameters: M.ChildWindows.Request) async throws -> M.ChildWindows.Reply {
+		try await M.ChildWindows.send(parameters, through: connection)
+	}
 }

@@ -12,7 +12,11 @@ enum Messages: UInt8, CaseIterable {
 	case windows
 	case windowPreview
 	case startCasting
+	case stopCasting
 	case windowFrame
+	case startWatchingForChildWindows
+	case stopWatchingForChildWindows
+	case childWindows
 }
 
 protocol Message {

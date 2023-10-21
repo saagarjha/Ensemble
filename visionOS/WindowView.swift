@@ -26,7 +26,7 @@ struct WindowView: View {
 		}
 		.task {
 			do {
-				for await frame in try await remote.startCasting(forWindowID: window.windowID) {
+				for await frame in try await remote.startCasting(for: window.windowID) {
 					try decoder.decode(frame)
 				}
 			} catch {}

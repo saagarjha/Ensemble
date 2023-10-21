@@ -35,14 +35,14 @@ struct WindowPreviewView: View {
 				Text(window.app)
 					.font(.title)
 					.lineLimit(1)
-				Text(window.title)
+				Text(window.title!)
 					.lineLimit(1)
 			}
 		}
 		.buttonBorderShape(.roundedRectangle)
 		.task {
 			do {
-				guard let preview = try await remote.windowPreview(forWindowID: window.id) else {
+				guard let preview = try await remote.windowPreview(for: window.id) else {
 					return
 				}
 				self.preview = try await VideoDecoder.decode(image: preview)

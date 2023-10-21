@@ -10,16 +10,16 @@ import SwiftUI
 
 struct ContentView: View {
 	var remote: Remote
-	
+
 	@Binding
 	var selectedWindow: Window?
-	
+
 	@Environment(\.openWindow) private var openWindow
 
 	var body: some View {
 		Group {
 			if let selectedWindow {
-				WindowView(remote: remote, window: selectedWindow)
+				RootWindowView(remote: remote, window: selectedWindow)
 			} else {
 				WindowPickerView(remote: remote, selectedWindow: $selectedWindow)
 			}

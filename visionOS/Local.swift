@@ -9,7 +9,8 @@ import CoreMedia
 import Foundation
 
 class Local: LocalInterface, visionOSInterface {
-	var streams = [UInt32: AsyncStream<CMSampleBuffer>.Continuation]()
+	var streams = [Window.ID: AsyncStream<CMSampleBuffer>.Continuation]()
+	var children = [Window.ID: AsyncStream<[Window.ID]>.Continuation]()
 
 	func handle(message: Messages, data: Data) async throws -> Data? {
 		switch message {
@@ -17,6 +18,8 @@ class Local: LocalInterface, visionOSInterface {
 				return try await _handshake(parameters: .decode(data)).encode()
 			case .windowFrame:
 				return try await _windowFrame(parameters: .decode(data)).encode()
+			case .childWindows:
+				return try await _childWindows(parameters: .decode(data)).encode()
 			default:
 				return nil
 		}
@@ -29,6 +32,12 @@ class Local: LocalInterface, visionOSInterface {
 	func _windowFrame(parameters: M.WindowFrame.Request) async throws -> M.WindowFrame.Reply {
 		let stream = streams[parameters.windowID]!
 		stream.yield(parameters.frame)
+		return .init()
+	}
+
+	func _childWindows(parameters: M.ChildWindows.Request) async throws -> M.ChildWindows.Reply {
+		let stream = children[parameters.parent]!
+		stream.yield(parameters.children)
 		return .init()
 	}
 }
