@@ -9,25 +9,29 @@ import AppleConnect
 import SwiftUI
 
 struct ContentView: View {
-	@State
-	var remote: Remote?
-
-	@State
+	var remote: Remote
+	
+	@Binding
 	var selectedWindow: Window?
+	
+	@Environment(\.openWindow) private var openWindow
 
 	var body: some View {
-		if let remote {
+		Group {
 			if let selectedWindow {
 				WindowView(remote: remote, window: selectedWindow)
 			} else {
 				WindowPickerView(remote: remote, selectedWindow: $selectedWindow)
 			}
-		} else {
-			ConnectionView(remote: $remote)
+		}
+		.toolbar {
+			ToolbarItem(placement: .bottomOrnament) {
+				Button(action: {
+					openWindow(id: "window")
+				}) {
+					Image(systemName: "plus")
+				}
+			}
 		}
 	}
-}
-
-#Preview(windowStyle: .automatic) {
-	ContentView()
 }

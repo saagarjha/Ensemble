@@ -9,9 +9,34 @@ import SwiftUI
 
 @main
 struct MacCastApp: App {
+	@State
+	var remote: Remote?
+	
+	// This needs to be available "immedidately" because when the binding
+	// updates it will consult this list, and @State will have a stale value.
+	class _State {
+		var windows = [Window.ID: Window]()
+	}
+	let state = _State()
+	
 	var body: some Scene {
-		WindowGroup {
-			ContentView()
+		WindowGroup("Window", id: "window", for: Window.ID.self) { $window in
+			if let remote {
+				let selectedWindow = Binding(get: {
+					$window.wrappedValue.flatMap {
+						state.windows[$0]
+					}
+				}, set: {
+					if let window = $0 {
+						state.windows[window.id] = window
+						$window.wrappedValue = window.id
+					}
+				})
+				
+				ContentView(remote: remote, selectedWindow: selectedWindow)
+			} else {
+				ConnectionView(remote: $remote)
+			}
 		}
 	}
 }
