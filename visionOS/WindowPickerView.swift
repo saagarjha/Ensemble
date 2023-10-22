@@ -37,7 +37,7 @@ struct WindowPickerView: View {
 					.task {
 						do {
 							windows = try await remote.windows.filter {
-								!($0.title ?? "").isEmpty
+								!($0.title?.isEmpty ?? true) && $0.windowLayer == 0 /* NSWindow.Level.normal */
 							}
 						} catch {}
 					}

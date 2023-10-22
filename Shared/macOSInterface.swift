@@ -26,6 +26,7 @@ struct Window: Codable, Identifiable {
 	let title: String?
 	let app: String
 	let frame: CGRect
+	let windowLayer: Int
 
 	var id: UInt32 {
 		windowID

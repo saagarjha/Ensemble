@@ -47,7 +47,7 @@ class Local: LocalInterface, macOSInterface {
 				else {
 					return nil
 				}
-				return Window(windowID: $0.windowID, title: $0.title, app: application, frame: $0.frame)
+				return Window(windowID: $0.windowID, title: $0.title, app: application, frame: $0.frame, windowLayer: $0.windowLayer)
 			})
 	}
 
