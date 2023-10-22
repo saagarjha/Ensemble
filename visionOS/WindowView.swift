@@ -12,28 +12,21 @@ struct WindowView: View {
 	let window: Window
 
 	@State
-	var frame: CVImageBuffer?
+	var frame: Frame?
 
 	let decoder = VideoDecoder()
 
 	var body: some View {
 		Group {
 			if let frame {
-				ImageBufferView(imageBuffer: frame)
+				FrameView(frame: frame)
 			} else {
-				Text("Connected")
+				Text("Loading…")
 			}
 		}
 		.task {
 			do {
 				for await frame in try await remote.startCasting(for: window.windowID) {
-					try decoder.decode(frame)
-				}
-			} catch {}
-		}
-		.task {
-			do {
-				for try await frame in decoder.frames {
 					self.frame = frame
 				}
 			} catch {}

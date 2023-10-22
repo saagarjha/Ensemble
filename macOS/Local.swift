@@ -5,9 +5,7 @@
 //  Created by Saagar Jha on 10/9/23.
 //
 
-import AVFoundation
 import Foundation
-import ScreenCaptureKit
 
 class Local: LocalInterface, macOSInterface {
 	var remote: Remote!
@@ -59,22 +57,16 @@ class Local: LocalInterface, macOSInterface {
 			return nil
 		}
 
-		return try await VideoEncoder.encode(image: screenshot)
+		return try await Frame(frame: screenshot)
 	}
 
 	func _startCasting(parameters: M.StartCasting.Request) async throws -> M.StartCasting.Reply {
 		let window = try await screenRecorder.lookup(windowID: parameters.windowID)!
 		let stream = try await screenRecorder.stream(window: window)
 
-		let encoder = VideoEncoder()
 		Task {
 			for await frame in stream where frame.imageBuffer != nil {
-				try encoder.encode(frame)
-			}
-		}
-		Task {
-			for try await frame in encoder.frames {
-				try await remote.windowFrame(forWindowID: parameters.windowID, frame: frame)
+				try await remote.windowFrame(forWindowID: parameters.windowID, frame: Frame(frame: frame))
 			}
 		}
 		return .init()

@@ -35,7 +35,7 @@ struct Remote: macOSInterface {
 		try await M.Windows.send(parameters, through: connection)
 	}
 
-	func windowPreview(for windowID: Window.ID) async throws -> CMSampleBuffer? {
+	func windowPreview(for windowID: Window.ID) async throws -> Frame? {
 		try await _windowPreview(parameters: .init(windowID: windowID))
 	}
 
@@ -43,8 +43,8 @@ struct Remote: macOSInterface {
 		try await M.WindowPreview.send(parameters, through: connection)
 	}
 
-	func startCasting(for windowID: Window.ID) async throws -> AsyncStream<CMSampleBuffer> {
-		let (stream, continuation) = AsyncStream.makeStream(of: CMSampleBuffer.self)
+	func startCasting(for windowID: Window.ID) async throws -> AsyncStream<Frame> {
+		let (stream, continuation) = AsyncStream.makeStream(of: Frame.self)
 		local.streams[windowID] = continuation
 		continuation.onTermination = { _ in
 			Task {

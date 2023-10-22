@@ -34,15 +34,15 @@ enum visionOSMessages {
 
 		struct Request: Serializable {
 			let windowID: Window.ID
-			let frame: CMSampleBuffer
+			let frame: Frame
 
-			func encode() throws -> Data {
-				return try windowID.uleb128 + frame.encode()
+			func encode() async throws -> Data {
+				return try await windowID.uleb128 + frame.encode()
 			}
 
-			static func decode(_ data: Data) throws -> Self {
+			static func decode(_ data: Data) async throws -> Self {
 				var data = data
-				return try self.init(windowID: .init(uleb128: &data), frame: .decode(data))
+				return try await self.init(windowID: .init(uleb128: &data), frame: .decode(data))
 			}
 		}
 

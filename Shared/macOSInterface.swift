@@ -64,7 +64,7 @@ enum macOSInterfaceMessages {
 			let windowID: Window.ID
 		}
 
-		typealias Reply = CMSampleBuffer?
+		typealias Reply = Frame?
 	}
 
 	struct StartCasting: Message {

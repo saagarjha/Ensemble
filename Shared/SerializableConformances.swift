@@ -30,22 +30,22 @@ extension Serializable where Self: Codable {
 }
 
 extension Optional: Serializable where Wrapped: Serializable {
-	func encode() throws -> Data {
+	func encode() async throws -> Data {
 		if let self {
-			return try Data([1]) + self.encode()
+			return try await Data([1]) + self.encode()
 		} else {
 			return Data([0])
 		}
 	}
 
-	static func decode(_ data: Data) throws -> Self {
+	static func decode(_ data: Data) async throws -> Self {
 		let discriminator = data.first!
 		let rest = data.dropFirst()
 		switch discriminator {
 			case 0:
 				return nil
 			case 1:
-				return try Wrapped.decode(rest)
+				return try await Wrapped.decode(rest)
 			default:
 				fatalError()
 		}
@@ -103,12 +103,12 @@ extension CMFormatDescription: Serializable {
 }
 
 extension CMSampleBuffer: Serializable {
-	func encode() throws -> Data {
-		try SerializablePack(values: (duration, presentationTimeStamp, decodeTimeStamp, formatDescription!, try dataBuffer!.dataBytes())).encode()
+	func encode() async throws -> Data {
+		try await SerializablePack(values: (duration, presentationTimeStamp, decodeTimeStamp, formatDescription!, try dataBuffer!.dataBytes())).encode()
 	}
 
-	static func decode(_ data: Data) throws -> Self {
-		let (duration, presentationTimeStamp, decodeTimeStamp, formatDescription, data) = try! SerializablePack<CMTime, CMTime, CMTime, CMFormatDescription, Data>.decode(data).values
+	static func decode(_ data: Data) async throws -> Self {
+		let (duration, presentationTimeStamp, decodeTimeStamp, formatDescription, data) = try await SerializablePack<CMTime, CMTime, CMTime, CMFormatDescription, Data>.decode(data).values
 
 		var timing = CMSampleTimingInfo(duration: duration, presentationTimeStamp: presentationTimeStamp, decodeTimeStamp: decodeTimeStamp)
 

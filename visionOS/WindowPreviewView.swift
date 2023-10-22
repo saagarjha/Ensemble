@@ -15,7 +15,7 @@ struct WindowPreviewView: View {
 	var selectedWindow: Window?
 
 	@State
-	var preview: CVImageBuffer?
+	var preview: Frame?
 
 	var body: some View {
 		Button(action: {
@@ -25,7 +25,7 @@ struct WindowPreviewView: View {
 				let size = macOSInterface.M.WindowPreview.previewSize
 				Group {
 					if let preview {
-						ImageBufferView(imageBuffer: preview)
+						FrameView(frame: preview)
 					} else {
 						ProgressView {
 							Text("Loading Preview…")
@@ -45,7 +45,7 @@ struct WindowPreviewView: View {
 				guard let preview = try await remote.windowPreview(for: window.id) else {
 					return
 				}
-				self.preview = try await VideoDecoder.decode(image: preview)
+				self.preview = preview
 			} catch {}
 		}
 	}

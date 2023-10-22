@@ -5,11 +5,10 @@
 //  Created by Saagar Jha on 10/9/23.
 //
 
-import CoreMedia
 import Foundation
 
 class Local: LocalInterface, visionOSInterface {
-	var streams = [Window.ID: AsyncStream<CMSampleBuffer>.Continuation]()
+	var streams = [Window.ID: AsyncStream<Frame>.Continuation]()
 	var children = [Window.ID: AsyncStream<[Window.ID]>.Continuation]()
 
 	func handle(message: Messages, data: Data) async throws -> Data? {

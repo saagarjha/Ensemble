@@ -26,7 +26,7 @@ struct Remote: visionOSInterface {
 		try await M.MacOSHandshake.send(parameters, through: connection)
 	}
 
-	func windowFrame(forWindowID windowID: CGWindowID, frame: CMSampleBuffer) async throws {
+	func windowFrame(forWindowID windowID: CGWindowID, frame: Frame) async throws {
 		_ = try await _windowFrame(parameters: .init(windowID: windowID, frame: frame))
 	}
 

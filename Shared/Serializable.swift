@@ -12,8 +12,8 @@ protocol Serializable {
 	typealias Encoder = CodEncoder
 	typealias Decoder = CodDecoder
 
-	func encode() throws -> Data
-	static func decode(_ data: Data) throws -> Self
+	func encode() async throws -> Data
+	static func decode(_ data: Data) async throws -> Self
 }
 
 struct SerializablePack<each Value: Serializable>: Serializable {
@@ -27,14 +27,14 @@ struct SerializablePack<each Value: Serializable>: Serializable {
 			return (sizes + values).reduce(Data(), +)
 		}
 
-		mutating func encode(_ value: some Serializable) throws {
-			try values.append(value.encode())
+		mutating func encode(_ value: some Serializable) async throws {
+			try await values.append(value.encode())
 		}
 	}
 
-	func encode() throws -> Data {
+	func encode() async throws -> Data {
 		var context = EncodingContext()
-		repeat try context.encode(each values)
+		repeat try await context.encode(each values)
 		return context.data
 	}
 
@@ -56,11 +56,11 @@ struct SerializablePack<each Value: Serializable>: Serializable {
 			}
 		}
 
-		mutating func decode<T: Serializable>(_ type: T.Type) throws -> T {
+		mutating func decode<T: Serializable>(_ type: T.Type) async throws -> T {
 			defer {
 				index += 1
 			}
-			return try T.decode(values[index])
+			return try await T.decode(values[index])
 		}
 	}
 
@@ -80,8 +80,8 @@ struct SerializablePack<each Value: Serializable>: Serializable {
 		}
 	}
 
-	static func decode(_ data: Data) throws -> Self {
+	static func decode(_ data: Data) async throws -> Self {
 		var context = try DecodingContext(data: data, count: PackCounter<repeat each Value>.count)
-		return self.init(values: (repeat try context.decode((each Value).self)))
+		return self.init(values: (repeat try await context.decode((each Value).self)))
 	}
 }

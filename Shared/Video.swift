@@ -7,8 +7,6 @@
 
 import VideoToolbox
 
-let format = kCMVideoCodecType_JPEG
-
 struct VideoEncoder {
 	class State {
 		var session: VTCompressionSession!
@@ -23,7 +21,7 @@ struct VideoEncoder {
 				allocator: kCFAllocatorDefault,
 				width: Int32(CVPixelBufferGetWidth(imageBuffer)),
 				height: Int32(CVPixelBufferGetHeight(imageBuffer)),
-				codecType: format,
+				codecType: kCMVideoCodecType_JPEG,
 				encoderSpecification: nil,
 				imageBufferAttributes: [
 					kCVPixelBufferPixelFormatTypeKey: CVPixelBufferGetPixelFormatType(imageBuffer) as CFNumber
@@ -93,13 +91,15 @@ struct VideoDecoder {
 		}
 
 		func decode(_ frame: CMSampleBuffer) {
-			VTDecompressionSessionDecodeFrame(session, sampleBuffer: frame, flags: [._EnableTemporalProcessing, ._1xRealTimePlayback, ._EnableAsynchronousDecompression], infoFlagsOut: nil) { _, _, buffer, timestamp, time in
+			VTDecompressionSessionDecodeFrame(session, sampleBuffer: frame, flags: [._EnableTemporalProcessing, ._1xRealTimePlayback, ._EnableAsynchronousDecompression], infoFlagsOut: nil) { status, _, buffer, timestamp, time in
+				guard status == noErr else {
+					self.continuation.finish(throwing: NSError(domain: NSOSStatusErrorDomain, code: Int(status)))
+					return
+				}
 
-				if let buffer,
-					timestamp > self.latest
-				{
+				if timestamp > self.latest {
 					self.latest = timestamp
-					self.continuation.yield(buffer)
+					self.continuation.yield(buffer!)
 				}
 			}
 		}

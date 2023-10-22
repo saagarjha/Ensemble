@@ -42,9 +42,15 @@ actor ScreenRecorder {
 		}
 	}
 
+	static func streamConfiguration() -> SCStreamConfiguration {
+		let configuration = SCStreamConfiguration()
+		configuration.pixelFormat = kCVPixelFormatType_32BGRA
+		return configuration
+	}
+
 	func screenshot(window: SCWindow, size: CGSize) async throws -> CMSampleBuffer? {
 		let filter = SCContentFilter(desktopIndependentWindow: window)
-		let configuration = SCStreamConfiguration()
+		let configuration = Self.streamConfiguration()
 		let size = AVMakeRect(aspectRatio: window.frame.size, insideRect: CGRect(origin: .zero, size: size)).size
 		configuration.width = Int(size.width)
 		configuration.height = Int(size.height)
@@ -71,7 +77,7 @@ actor ScreenRecorder {
 		init(window: SCWindow) async throws {
 			let filter = SCContentFilter(desktopIndependentWindow: window)
 
-			let configuration = SCStreamConfiguration()
+			let configuration = ScreenRecorder.streamConfiguration()
 			configuration.width = Int(window.frame.width * CGFloat(filter.pointPixelScale))
 			configuration.height = Int(window.frame.height * CGFloat(filter.pointPixelScale))
 
