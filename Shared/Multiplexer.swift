@@ -48,13 +48,15 @@ struct Multiplexer {
 		Task {
 			do {
 				for try await data in connection.data {
-					let message = Messages(rawValue: data.first!)!
-					var data = data.dropFirst()
-					let token = try Int(uleb128: &data)
-					if let data = try await localInterface.handle(message: message, data: data) {
-						try await send(message: message, data: data, token: token)
-					} else {
-						await replies.yield(data, forToken: token)
+					Task {
+						let message = Messages(rawValue: data.first!)!
+						var data = data.dropFirst()
+						let token = try Int(uleb128: &data)
+						if let data = try await localInterface.handle(message: message, data: data) {
+							try await send(message: message, data: data, token: token)
+						} else {
+							await replies.yield(data, forToken: token)
+						}
 					}
 				}
 			} catch {

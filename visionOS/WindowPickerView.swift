@@ -34,14 +34,19 @@ struct WindowPickerView: View {
 				.navigationTitle("Select a window.")
 			} else {
 				Text("Loading windows…")
-					.task {
-						do {
-							windows = try await remote.windows.filter {
-								!($0.title?.isEmpty ?? true) && $0.windowLayer == 0 /* NSWindow.Level.normal */
-							}
-						} catch {}
-					}
 			}
+		}
+		.task {
+			do {
+				while true {
+					windows = try await remote.windows.filter {
+						!($0.title?.isEmpty ?? true) && $0.windowLayer == 0 /* NSWindow.Level.normal */
+					}.sorted {
+						$0.windowID < $1.windowID
+					}
+					try await Task.sleep(for: .seconds(1))
+				}
+			} catch {}
 		}
 	}
 }

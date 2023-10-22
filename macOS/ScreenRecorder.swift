@@ -54,6 +54,8 @@ actor ScreenRecorder {
 		let size = AVMakeRect(aspectRatio: window.frame.size, insideRect: CGRect(origin: .zero, size: size)).size
 		configuration.width = Int(size.width)
 		configuration.height = Int(size.height)
+		configuration.captureResolution = .nominal
+		configuration.showsCursor = false
 		return try await SCScreenshotManager.captureSampleBuffer(contentFilter: filter, configuration: configuration)
 	}
 

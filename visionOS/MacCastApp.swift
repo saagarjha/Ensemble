@@ -40,5 +40,7 @@ struct MacCastApp: App {
 				ConnectionView(remote: $remote)
 			}
 		}
+		.windowStyle(.plain)
+		.windowResizability(.contentSize)
 	}
 }
