@@ -23,15 +23,30 @@ struct ImageBufferView: View {
 	}
 }
 
+class LayerView: UIView {
+	let sublayer = CALayer()
+
+	override func layoutSubviews() {
+		sublayer.frame = bounds
+	}
+}
+
+extension LayerView {
+	convenience init() {
+		self.init(frame: .zero)
+		layer.addSublayer(sublayer)
+	}
+}
+
 struct AcceleratedImageBufferView: UIViewRepresentable {
 	let imageBuffer: CVImageBuffer
 
-	func makeUIView(context: Context) -> some UIView {
-		let view = UIView()
-		view.layer.contents = imageBuffer
+	func makeUIView(context: Context) -> LayerView {
+		let view = LayerView()
 		return view
 	}
 
-	func updateUIView(_ uiView: UIViewType, context: Context) {
+	func updateUIView(_ uiView: LayerView, context: Context) {
+		uiView.sublayer.contents = imageBuffer
 	}
 }
