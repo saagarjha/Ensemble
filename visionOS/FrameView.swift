@@ -12,9 +12,10 @@ struct FrameView: View {
 
 	var body: some View {
 		let (frame, mask) = frame.frame
-		ImageBufferView(imageBuffer: frame)
+		ImageBufferView(imageBuffer: frame, enableAcceleration: true)
 			.mask {
-				ImageBufferView(imageBuffer: mask)
+				ImageBufferView(imageBuffer: mask, enableAcceleration: false)
+					.equatable()
 			}
 	}
 }

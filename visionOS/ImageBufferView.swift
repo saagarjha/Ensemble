@@ -7,19 +7,41 @@
 
 import SwiftUI
 
-struct ImageBufferView: View {
+struct ImageBufferView: View, Equatable {
 	let imageBuffer: CVImageBuffer
+	var enableAcceleration = true
 
 	var body: some View {
 		#if targetEnvironment(simulator)
+			let simulator = true
+		#else
+			let simulator = false
+		#endif
+		if !simulator, enableAcceleration {
+			AcceleratedImageBufferView(imageBuffer: imageBuffer)
+		} else {
 			let image = CIImage(cvImageBuffer: imageBuffer)
 			let cgImage = CIContext().createCGImage(image, from: image.extent)!
 			Image(uiImage: UIImage(cgImage: cgImage))
 				.resizable()
 				.aspectRatio(contentMode: .fit)
-		#else
-			AcceleratedImageBufferView(imageBuffer: imageBuffer)
-		#endif
+		}
+	}
+
+	static func == (lhs: Self, rhs: Self) -> Bool {
+		CVPixelBufferLockBaseAddress(lhs.imageBuffer, .readOnly)
+		defer {
+			CVPixelBufferUnlockBaseAddress(lhs.imageBuffer, .readOnly)
+		}
+		let left = UnsafeRawBufferPointer(start: CVPixelBufferGetBaseAddress(lhs.imageBuffer), count: CVPixelBufferGetDataSize(lhs.imageBuffer))
+
+		CVPixelBufferLockBaseAddress(rhs.imageBuffer, .readOnly)
+		defer {
+			CVPixelBufferUnlockBaseAddress(rhs.imageBuffer, .readOnly)
+		}
+		let right = UnsafeRawBufferPointer(start: CVPixelBufferGetBaseAddress(rhs.imageBuffer), count: CVPixelBufferGetDataSize(rhs.imageBuffer))
+
+		return left.count == right.count && memcmp(left.baseAddress, right.baseAddress, min(left.count, right.count)) == 0
 	}
 }
 
@@ -35,6 +57,7 @@ extension LayerView {
 	convenience init() {
 		self.init(frame: .zero)
 		layer.addSublayer(sublayer)
+		sublayer.contentsGravity = .resizeAspect
 	}
 }
 
