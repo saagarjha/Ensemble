@@ -44,7 +44,7 @@ struct Remote: macOSInterface {
 	}
 
 	func startCasting(for windowID: Window.ID) async throws -> AsyncStream<Frame> {
-		let (stream, continuation) = AsyncStream.makeStream(of: Frame.self)
+		let (stream, continuation) = AsyncStream.makeStream(of: Frame.self, bufferingPolicy: .bufferingNewest(1))
 		local.streams[windowID] = continuation
 		continuation.onTermination = { _ in
 			Task {

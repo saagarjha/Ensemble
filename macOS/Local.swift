@@ -66,7 +66,9 @@ class Local: LocalInterface, macOSInterface {
 
 		Task {
 			for await frame in stream where frame.imageBuffer != nil {
-				try await remote.windowFrame(forWindowID: parameters.windowID, frame: Frame(frame: frame))
+				Task {
+					try await remote.windowFrame(forWindowID: parameters.windowID, frame: Frame(frame: frame))
+				}
 			}
 		}
 		return .init()
