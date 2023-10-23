@@ -42,13 +42,13 @@ struct WindowPreviewView: View {
 		.buttonBorderShape(.roundedRectangle)
 		.task {
 			do {
-				while true {
-					guard let preview = try await remote.windowPreview(for: window.id) else {
-						return
-					}
-					self.preview = preview
-					try await Task.sleep(for: .seconds(1))
+				// while true {
+				guard let preview = try await remote.windowPreview(for: window.id) else {
+					return
 				}
+				self.preview = preview
+				// try await Task.sleep(for: .seconds(1))
+				// }
 			} catch {}
 		}
 	}
