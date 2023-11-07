@@ -72,13 +72,11 @@ struct Multiplexer {
 	func sendWithReply(message: Messages, data: Data) async throws -> Data {
 		try await withCheckedThrowingContinuation { continuation in
 			Task {
-				Task {
-					let token = await replies.enqueue(continuation)
-					do {
-						try await send(message: message, data: data, token: token)
-					} catch {
-						continuation.resume(throwing: error)
-					}
+				let token = await replies.enqueue(continuation)
+				do {
+					try await send(message: message, data: data, token: token)
+				} catch {
+					continuation.resume(throwing: error)
 				}
 			}
 		}
