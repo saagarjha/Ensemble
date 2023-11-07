@@ -8,13 +8,25 @@
 import Accelerate
 import CoreMedia
 import CoreVideo
+import CryptoKit
 
 struct Frame: Serializable {
 	enum Storage {
 		case encoded(frame: CMSampleBuffer, mask: vImage.PixelBuffer<vImage.Planar8>)
+		case decodedMaskless(image: CVImageBuffer)
 		case decoded(image: CVImageBuffer, mask: CVImageBuffer)
 	}
 	var storage: Storage
+	var skipMask: Bool = false
+
+	var mask: vImage.PixelBuffer<vImage.Planar8> {
+		guard case let .encoded(_, mask) = storage else {
+			preconditionFailure()
+		}
+		return mask
+	}
+
+	var maskHash: SHA256Digest?
 
 	var frame: (CVImageBuffer, CVImageBuffer) {
 		guard case let .decoded(image, mask) = storage else {
@@ -35,13 +47,28 @@ struct Frame: Serializable {
 
 		let mask = vImage.PixelBuffer<vImage.Planar8>(size: .init(cvPixelBuffer: image))
 
+		// Since we'll be taking a hash of this buffer later, fully initialize
+		// it (there may be padding bytes in the rows).
+		mask.withUnsafeMutableBufferPointer {
+			$0.initialize(repeating: 0)
+		}
+
 		source.extractChannel(at: 3 /* BGR[A] */, destination: mask)
 
 		storage = try await .encoded(frame: VideoEncoder.encode(image: frame), mask: mask)
 	}
 
-	init(frame: CMSampleBuffer, mask: vImage.PixelBuffer<vImage.Planar8>) async throws {
+	init(frame: CMSampleBuffer, mask: vImage.PixelBuffer<vImage.Planar8>?) async throws {
 		let image = try await VideoDecoder.decode(image: frame)
+		guard let mask = mask else {
+			storage = .decodedMaskless(image: image)
+			return
+		}
+
+		maskHash = mask.withUnsafeBufferPointer {
+			SHA256.hash(data: $0)
+		}
+
 		assert(CVPixelBufferGetWidth(image) == mask.width)
 		assert(CVPixelBufferGetHeight(image) == mask.height)
 
@@ -67,11 +94,17 @@ struct Frame: Serializable {
 			preconditionFailure()
 		}
 
+		let base = mask.width.uleb128 + mask.height.uleb128 + mask.rowStride.uleb128 + (skipMask ? Data([0]) : Data([1]))
+
+		guard !skipMask else {
+			return try await base + frame.encode()
+		}
+
 		let data = try mask.withUnsafeBufferPointer {
 			try (Data(bytes: $0.baseAddress!, count: $0.count) as NSData).compressed(using: .lz4) as Data
 		}
 
-		return try await mask.width.uleb128 + mask.height.uleb128 + mask.rowStride.uleb128 + SerializablePack(values: (frame, data)).encode()
+		return try await base + SerializablePack(values: (frame, data)).encode()
 	}
 
 	static func decode(_ data: Data) async throws -> Self {
@@ -79,14 +112,28 @@ struct Frame: Serializable {
 		let width = try Int(uleb128: &data)
 		let height = try Int(uleb128: &data)
 		let rowStride = try Int(uleb128: &data)
-		let (frame, compressedData) = try await SerializablePack<CMSampleBuffer, Data>.decode(data).values
-		let buffer = try (compressedData as NSData).decompressed(using: .lz4)
-		defer {
-			withExtendedLifetime(buffer) {}
+
+		let hasMask = data.first! != 0
+		data = data.dropFirst()
+
+		if hasMask {
+			let (frame, compressedData) = try await SerializablePack<CMSampleBuffer, Data>.decode(data).values
+			let buffer = try (compressedData as NSData).decompressed(using: .lz4)
+			defer {
+				withExtendedLifetime(buffer) {}
+			}
+
+			let mask = vImage.PixelBuffer<vImage.Planar8>(data: UnsafeMutableRawPointer(mutating: buffer.bytes), width: width, height: height, byteCountPerRow: rowStride)
+			return try await Self.init(frame: frame, mask: mask)
+		} else {
+			let frame = try await CMSampleBuffer.decode(data)
+			return try await Self.init(frame: frame, mask: nil)
 		}
+	}
 
-		let mask = vImage.PixelBuffer<vImage.Planar8>(data: UnsafeMutableRawPointer(mutating: buffer.bytes), width: width, height: height, byteCountPerRow: rowStride)
-		return try await Self.init(frame: frame, mask: mask)
-
+	mutating func augmentWithMask(_ oldMask: CVImageBuffer) {
+		if case let .decodedMaskless(image) = storage {
+			storage = .decoded(image: image, mask: oldMask)
+		}
 	}
 }

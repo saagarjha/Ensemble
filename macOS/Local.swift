@@ -5,12 +5,22 @@
 //  Created by Saagar Jha on 10/9/23.
 //
 
+import Accelerate
+import CryptoKit
 import Foundation
 
 class Local: LocalInterface, macOSInterface {
 	var remote: Remote!
 
 	let screenRecorder = ScreenRecorder()
+
+	struct Mask {
+		let mask: vImage.PixelBuffer<vImage.Planar8>
+		let hash: SHA256Digest
+		var acknowledged: Bool
+	}
+
+	var windowMasks = [Window.ID: Mask]()
 
 	func handle(message: Messages, data: Data) async throws -> Data? {
 		switch message {
@@ -24,6 +34,8 @@ class Local: LocalInterface, macOSInterface {
 				return try await _startCasting(parameters: .decode(data)).encode()
 			case .stopCasting:
 				return try await _stopCasting(parameters: .decode(data)).encode()
+			case .windowMask:
+				return try await _windowMask(parameters: .decode(data)).encode()
 			case .startWatchingForChildWindows:
 				return try await _startWatchingForChildWindows(parameters: .decode(data)).encode()
 			case .stopWatchingForChildWindows:
@@ -67,7 +79,28 @@ class Local: LocalInterface, macOSInterface {
 		Task {
 			for await frame in stream where frame.imageBuffer != nil {
 				Task {
-					try await remote.windowFrame(forWindowID: parameters.windowID, frame: Frame(frame: frame))
+					var frame = try await Frame(frame: frame)
+					switch windowMasks[parameters.windowID] {
+						case let .some(mask):
+							let same = mask.mask.withUnsafeBufferPointer { oldMask in
+								frame.mask.withUnsafeBufferPointer { newMask in
+									memcmp(oldMask.baseAddress, newMask.baseAddress, min(oldMask.count, newMask.count)) == 0
+								}
+							}
+							if !same {
+								fallthrough
+							}
+						case nil:
+							frame.mask.withUnsafeBufferPointer {
+								windowMasks[parameters.windowID] = Mask(mask: frame.mask, hash: SHA256.hash(data: $0), acknowledged: false)
+							}
+					}
+
+					if let mask = windowMasks[parameters.windowID], mask.acknowledged {
+						frame.skipMask = true
+					}
+
+					try await remote.windowFrame(forWindowID: parameters.windowID, frame: frame)
 				}
 			}
 		}
@@ -76,6 +109,16 @@ class Local: LocalInterface, macOSInterface {
 
 	func _stopCasting(parameters: M.StopCasting.Request) async throws -> M.StopCasting.Reply {
 		await screenRecorder.stopStream(for: parameters.windowID)
+		windowMasks.removeValue(forKey: parameters.windowID)
+		return .init()
+	}
+
+	func _windowMask(parameters: M.WindowMask.Request) async throws -> M.WindowMask.Reply {
+		var mask = windowMasks[parameters.windowID]!
+		if Data(mask.hash) == parameters.hash {
+			mask.acknowledged = true
+		}
+		windowMasks[parameters.windowID] = mask
 		return .init()
 	}
 

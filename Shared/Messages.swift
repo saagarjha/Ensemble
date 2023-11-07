@@ -14,6 +14,7 @@ enum Messages: UInt8, CaseIterable {
 	case startCasting
 	case stopCasting
 	case windowFrame
+	case windowMask
 	case startWatchingForChildWindows
 	case stopWatchingForChildWindows
 	case childWindows

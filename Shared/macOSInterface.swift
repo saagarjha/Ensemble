@@ -6,6 +6,7 @@
 //
 
 import CoreMedia
+import CryptoKit
 import Foundation
 
 protocol macOSInterface {
@@ -16,6 +17,7 @@ protocol macOSInterface {
 	func _windowPreview(parameters: M.WindowPreview.Request) async throws -> M.WindowPreview.Reply
 	func _startCasting(parameters: M.StartCasting.Request) async throws -> M.StartCasting.Reply
 	func _stopCasting(parameters: M.StopCasting.Request) async throws -> M.StopCasting.Reply
+	func _windowMask(parameters: M.WindowMask.Request) async throws -> M.WindowMask.Reply
 	func _startWatchingForChildWindows(parameters: M.StartWatchingForChildWindows.Request) async throws -> M.StartWatchingForChildWindows.Reply
 	func _stopWatchingForChildWindows(parameters: M.StopWatchingForChildWindows.Request) async throws -> M.StopWatchingForChildWindows.Reply
 
@@ -82,6 +84,17 @@ enum macOSInterfaceMessages {
 
 		struct Request: Serializable, Codable {
 			let windowID: Window.ID
+		}
+
+		typealias Reply = SerializableVoid
+	}
+
+	struct WindowMask: Message {
+		static let id = Messages.windowMask
+
+		struct Request: Serializable, Codable {
+			let windowID: Window.ID
+			let hash: Data
 		}
 
 		typealias Reply = SerializableVoid

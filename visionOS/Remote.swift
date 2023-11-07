@@ -15,6 +15,7 @@ struct Remote: macOSInterface {
 	init(connection: Connection) {
 		local = Local()
 		self.connection = Multiplexer(connection: connection, localInterface: local)
+		local.remote = self
 	}
 
 	func handshake() async throws -> Bool {
@@ -61,6 +62,10 @@ struct Remote: macOSInterface {
 
 	func _stopCasting(parameters: M.StopCasting.Request) async throws -> M.StopCasting.Reply {
 		try await M.StopCasting.send(parameters, through: connection)
+	}
+
+	func _windowMask(parameters: M.WindowMask.Request) async throws -> M.WindowMask.Reply {
+		try await M.WindowMask.send(parameters, through: connection)
 	}
 
 	func children(of windowID: Window.ID) async throws -> AsyncStream<[Window.ID]> {
