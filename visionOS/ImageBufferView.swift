@@ -5,30 +5,41 @@
 //  Created by Saagar Jha on 10/10/23.
 //
 
+import MetalKit
 import SwiftUI
 
 struct ImageBufferView: View, Equatable {
 	let imageBuffer: CVImageBuffer
-	var enableAcceleration = true
+	var mask: Bool = false
+	static var useMetal: Bool {
+		#if targetEnvironment(simulator)
+			true
+		#else
+			false
+		#endif
+	}
 
 	var body: some View {
-		#if targetEnvironment(simulator)
-			let simulator = true
-		#else
-			let simulator = false
-		#endif
-		if !simulator, enableAcceleration {
-			AcceleratedImageBufferView(imageBuffer: imageBuffer)
+		if ImageBufferView.useMetal {
+			AcceleratedImageBufferView<MetalAccelerator>(imageBuffer: imageBuffer)
 		} else {
-			let image = CIImage(cvImageBuffer: imageBuffer)
-			let cgImage = CIContext().createCGImage(image, from: image.extent)!
-			Image(uiImage: UIImage(cgImage: cgImage))
-				.resizable()
-				.aspectRatio(contentMode: .fit)
+			if mask {
+				let image = CIImage(cvImageBuffer: imageBuffer)
+				let cgImage = CIContext().createCGImage(image, from: image.extent)!
+				Image(uiImage: UIImage(cgImage: cgImage))
+					.resizable()
+					.aspectRatio(contentMode: .fit)
+			} else {
+				AcceleratedImageBufferView<CoreAnimationAccelerator>(imageBuffer: imageBuffer)
+			}
 		}
 	}
 
 	static func == (lhs: Self, rhs: Self) -> Bool {
+		guard !useMetal else {
+			return false
+		}
+
 		CVPixelBufferLockBaseAddress(lhs.imageBuffer, .readOnly)
 		defer {
 			CVPixelBufferUnlockBaseAddress(lhs.imageBuffer, .readOnly)
@@ -45,15 +56,19 @@ struct ImageBufferView: View, Equatable {
 	}
 }
 
-class LayerView: UIView {
+class CoreAnimationAccelerator: UIView, ImageBufferAccelerator {
 	let sublayer = CALayer()
+
+	func setImageBuffer(_ imageBuffer: CVImageBuffer) {
+		sublayer.contents = imageBuffer
+	}
 
 	override func layoutSubviews() {
 		sublayer.frame = bounds
 	}
 }
 
-extension LayerView {
+extension CoreAnimationAccelerator {
 	convenience init() {
 		self.init(frame: .zero)
 		layer.addSublayer(sublayer)
@@ -61,15 +76,126 @@ extension LayerView {
 	}
 }
 
-struct AcceleratedImageBufferView: UIViewRepresentable {
-	let imageBuffer: CVImageBuffer
-
-	func makeUIView(context: Context) -> LayerView {
-		let view = LayerView()
-		return view
+class MetalAccelerator: UIView, ImageBufferAccelerator {
+	var imageBuffer: CVImageBuffer!
+	var image: CIImage! {
+		didSet {
+			Task {
+				await render()
+			}
+		}
 	}
 
-	func updateUIView(_ uiView: LayerView, context: Context) {
-		uiView.sublayer.contents = imageBuffer
+	override class var layerClass: AnyClass {
+		CAMetalLayer.self
+	}
+
+	override func layoutSubviews() {
+		layer.frame = bounds
+		// If the view lays out again, refresh the Metal layer.
+		Task {
+			await render()
+		}
+	}
+
+	var metalLayer: CAMetalLayer {
+		layer as! CAMetalLayer
+	}
+	let colorSpace = CGColorSpaceCreateDeviceRGB()
+	var commandQueue: MTLCommandQueue!
+	var context: CIContext!
+
+	actor Drawable {
+		var layer: CAMetalLayer
+		let queue = DispatchQueue(label: "\(Bundle.main.bundleIdentifier!).\(_typeName(Drawable.self, qualified: false))")
+		var lastContinuation: CheckedContinuation<CAMetalDrawable?, Never>?
+
+		init(layer: CAMetalLayer) {
+			self.layer = layer
+		}
+
+		func requestDrawable() async -> CAMetalDrawable? {
+			let layer = self.layer
+			lastContinuation?.resume(returning: nil)
+			lastContinuation = nil
+			return await withCheckedContinuation { continuation in
+				lastContinuation = continuation
+				queue.async {
+					let drawable = layer.nextDrawable()
+					Task {
+						await self.yieldDrawable(drawable)
+					}
+				}
+			}
+		}
+
+		func yieldDrawable(_ drawable: CAMetalDrawable?) {
+			lastContinuation?.resume(returning: drawable)
+			lastContinuation = nil
+		}
+	}
+	var drawable: Drawable!
+
+	func setImageBuffer(_ imageBuffer: CVImageBuffer) {
+		if imageBuffer != self.imageBuffer {
+			image = CIImage(cvImageBuffer: imageBuffer)
+		}
+	}
+
+	func render() async {
+		guard frame != .zero,
+			let drawable = await drawable.requestDrawable()
+		else {
+			return
+		}
+
+		let texture = drawable.texture
+		let commandBuffer = commandQueue.makeCommandBuffer()!
+
+		let scale = min(metalLayer.drawableSize.width / image.extent.width, metalLayer.drawableSize.height / image.extent.height)
+		let origin = CGPoint(x: (metalLayer.drawableSize.width - scale * image.extent.width) / 2, y: (metalLayer.drawableSize.height - scale * image.extent.height) / 2)
+		let scaled =
+			image
+			.transformed(by: image.orientationTransform(for: .downMirrored))
+			.transformed(by: CGAffineTransform(scaleX: scale, y: scale))
+			.transformed(by: .init(translationX: origin.x, y: origin.y))
+
+		context.render(scaled, to: texture, commandBuffer: commandBuffer, bounds: .init(origin: .zero, size: metalLayer.drawableSize), colorSpace: colorSpace)
+
+		commandBuffer.present(drawable)
+		commandBuffer.commit()
+	}
+}
+
+extension MetalAccelerator {
+	convenience init() {
+		self.init(frame: .zero)
+		drawable = .init(layer: metalLayer)
+		metalLayer.isOpaque = false
+		// FIXME: figure out how drawables are reserved
+		// metalLayer.allowsNextDrawableTimeout = false
+		metalLayer.contentsScale = contentScaleFactor
+
+		metalLayer.framebufferOnly = false
+		let device = metalLayer.preferredDevice!
+		metalLayer.device = device
+		commandQueue = device.makeCommandQueue()
+		context = CIContext(mtlDevice: device)
+	}
+}
+
+protocol ImageBufferAccelerator: UIView {
+	func setImageBuffer(_ imageBuffer: CVImageBuffer)
+}
+
+struct AcceleratedImageBufferView<UIViewType: ImageBufferAccelerator>: UIViewRepresentable {
+	let imageBuffer: CVImageBuffer
+
+	func makeUIView(context: Context) -> UIViewType {
+		return UIViewType()
+	}
+
+	func updateUIView(_ uiView: UIViewType, context: Context) {
+		uiView.setImageBuffer(imageBuffer)
 	}
 }
