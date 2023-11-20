@@ -19,8 +19,45 @@ class Local: LocalInterface, macOSInterface {
 		let hash: SHA256Digest
 		var acknowledged: Bool
 	}
+	
+	actor Masks {
+		var masks = [Window.ID: Mask]()
+		
+		func unmask(_ frame: inout Frame, for windowID: Window.ID) {
+			switch masks[windowID] {
+				case let .some(mask):
+					let same = mask.mask.withUnsafeBufferPointer { oldMask in
+						frame.mask.withUnsafeBufferPointer { newMask in
+							memcmp(oldMask.baseAddress, newMask.baseAddress, min(oldMask.count, newMask.count)) == 0
+						}
+					}
+					if !same {
+						fallthrough
+					}
+				case nil:
+					frame.mask.withUnsafeBufferPointer {
+						masks[windowID] = Mask(mask: frame.mask, hash: SHA256.hash(data: $0), acknowledged: false)
+					}
+			}
 
-	var windowMasks = [Window.ID: Mask]()
+			if let mask = masks[windowID], mask.acknowledged {
+				frame.skipMask = true
+			}
+		}
+		
+		func remove(for windowID: Window.ID) {
+			masks.removeValue(forKey: windowID)
+		}
+		
+		func acknowledge(hash: Data, for windowID: Window.ID) {
+			var mask = masks[windowID]!
+			if Data(mask.hash) == hash {
+				mask.acknowledged = true
+			}
+			masks[windowID] = mask
+		}
+	}
+	let masks = Masks()
 
 	func handle(message: Messages, data: Data) async throws -> Data? {
 		switch message {
@@ -80,25 +117,7 @@ class Local: LocalInterface, macOSInterface {
 			for await frame in stream where frame.imageBuffer != nil {
 				Task {
 					var frame = try await Frame(frame: frame)
-					switch windowMasks[parameters.windowID] {
-						case let .some(mask):
-							let same = mask.mask.withUnsafeBufferPointer { oldMask in
-								frame.mask.withUnsafeBufferPointer { newMask in
-									memcmp(oldMask.baseAddress, newMask.baseAddress, min(oldMask.count, newMask.count)) == 0
-								}
-							}
-							if !same {
-								fallthrough
-							}
-						case nil:
-							frame.mask.withUnsafeBufferPointer {
-								windowMasks[parameters.windowID] = Mask(mask: frame.mask, hash: SHA256.hash(data: $0), acknowledged: false)
-							}
-					}
-
-					if let mask = windowMasks[parameters.windowID], mask.acknowledged {
-						frame.skipMask = true
-					}
+					await masks.unmask(&frame, for: parameters.windowID)
 
 					try await remote.windowFrame(forWindowID: parameters.windowID, frame: frame)
 				}
@@ -109,16 +128,12 @@ class Local: LocalInterface, macOSInterface {
 
 	func _stopCasting(parameters: M.StopCasting.Request) async throws -> M.StopCasting.Reply {
 		await screenRecorder.stopStream(for: parameters.windowID)
-		windowMasks.removeValue(forKey: parameters.windowID)
+		await masks.remove(for: parameters.windowID)
 		return .init()
 	}
 
 	func _windowMask(parameters: M.WindowMask.Request) async throws -> M.WindowMask.Reply {
-		var mask = windowMasks[parameters.windowID]!
-		if Data(mask.hash) == parameters.hash {
-			mask.acknowledged = true
-		}
-		windowMasks[parameters.windowID] = mask
+		await masks.acknowledge(hash: parameters.hash, for: parameters.windowID)
 		return .init()
 	}
 
