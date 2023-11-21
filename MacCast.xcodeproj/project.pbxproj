@@ -17,6 +17,8 @@
 		4978BAAD2AD54EDB000C549C /* Video.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4978BAAB2AD54EDB000C549C /* Video.swift */; };
 		4978BAAF2AD55D71000C549C /* WindowPreviewView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4978BAAE2AD55D71000C549C /* WindowPreviewView.swift */; };
 		4978BAB12AD55E8B000C549C /* WindowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4978BAB02AD55E8B000C549C /* WindowView.swift */; };
+		4989D3402B0B9393005E2E7A /* shut_up_logging.c in Sources */ = {isa = PBXBuildFile; fileRef = 4989D33F2B0B9393005E2E7A /* shut_up_logging.c */; };
+		4989D3412B0B9393005E2E7A /* shut_up_logging.c in Sources */ = {isa = PBXBuildFile; fileRef = 4989D33F2B0B9393005E2E7A /* shut_up_logging.c */; };
 		49B352C72AE53A9300BCE03D /* Frame.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49B352C62AE53A9300BCE03D /* Frame.swift */; };
 		49B352C82AE53A9300BCE03D /* Frame.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49B352C62AE53A9300BCE03D /* Frame.swift */; };
 		49B352CB2AE593C300BCE03D /* FrameView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49B352C92AE593C300BCE03D /* FrameView.swift */; };
@@ -59,6 +61,7 @@
 		4978BAAB2AD54EDB000C549C /* Video.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Video.swift; sourceTree = "<group>"; };
 		4978BAAE2AD55D71000C549C /* WindowPreviewView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WindowPreviewView.swift; sourceTree = "<group>"; };
 		4978BAB02AD55E8B000C549C /* WindowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WindowView.swift; sourceTree = "<group>"; };
+		4989D33F2B0B9393005E2E7A /* shut_up_logging.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = shut_up_logging.c; sourceTree = "<group>"; };
 		49B352C62AE53A9300BCE03D /* Frame.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Frame.swift; sourceTree = "<group>"; };
 		49B352C92AE593C300BCE03D /* FrameView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FrameView.swift; sourceTree = "<group>"; };
 		49E09B532AD2EE5000B56CD3 /* MacCast.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MacCast.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -212,6 +215,7 @@
 				495E8E3C2AD5E6C500946419 /* SerializableConformances.swift */,
 				4978BAAB2AD54EDB000C549C /* Video.swift */,
 				49E09BCF2AD52D9F00B56CD3 /* visionOSInterface.swift */,
+				4989D33F2B0B9393005E2E7A /* shut_up_logging.c */,
 			);
 			path = Shared;
 			sourceTree = "<group>";
@@ -280,9 +284,11 @@
 				TargetAttributes = {
 					49E09B522AD2EE5000B56CD3 = {
 						CreatedOnToolsVersion = 15.1;
+						LastSwiftMigration = 1510;
 					};
 					49E09B912AD3237D00B56CD3 = {
 						CreatedOnToolsVersion = 15.1;
+						LastSwiftMigration = 1510;
 					};
 				};
 			};
@@ -344,6 +350,7 @@
 				49E09BC52AD52CC900B56CD3 /* Remote.swift in Sources */,
 				495E8E3D2AD5E6C500946419 /* SerializableConformances.swift in Sources */,
 				49E09BB62AD4F84500B56CD3 /* Serializable.swift in Sources */,
+				4989D3402B0B9393005E2E7A /* shut_up_logging.c in Sources */,
 				4978BAAC2AD54EDB000C549C /* Video.swift in Sources */,
 				49E09BCD2AD52D5900B56CD3 /* Multiplexer.swift in Sources */,
 				49E09BC22AD52C7800B56CD3 /* macOSInterface.swift in Sources */,
@@ -360,6 +367,7 @@
 				49E09BCB2AD52D1D00B56CD3 /* Local.swift in Sources */,
 				4978BAAD2AD54EDB000C549C /* Video.swift in Sources */,
 				49E09BD12AD52D9F00B56CD3 /* visionOSInterface.swift in Sources */,
+				4989D3412B0B9393005E2E7A /* shut_up_logging.c in Sources */,
 				495E8E3B2AD5CE2400946419 /* ImageBufferView.swift in Sources */,
 				49E09B9B2AD3237D00B56CD3 /* ContentView.swift in Sources */,
 				49E09BB12AD3FDCC00B56CD3 /* ConnectionView.swift in Sources */,
