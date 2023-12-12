@@ -119,9 +119,15 @@ actor ScreenRecorder {
 		Task {
 			while childObservers.contains(windowID) {
 				try await Task.sleep(for: .seconds(1))
-				var windows = Set(SLSCopyAssociatedWindows(SLSMainConnectionID(), windowID) as! [CGWindowID])
-				windows.remove(windowID)
-				continuation.yield(Array(windows))
+				var childWindows = Set(SLSCopyAssociatedWindows(SLSMainConnectionID(), windowID) as! [CGWindowID])
+				childWindows.remove(windowID)
+
+				let root = try await lookup(windowID: windowID)!
+				let overlays = try await windows.filter {
+					$0.owningApplication == root.owningApplication && $0.windowLayer > NSWindow.Level.normal.rawValue && $0.frame.intersects(root.frame)
+				}.map(\.windowID)
+
+				continuation.yield(Array(childWindows) + overlays)
 			}
 			continuation.finish()
 		}
