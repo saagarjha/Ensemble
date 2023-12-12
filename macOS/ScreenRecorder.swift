@@ -82,6 +82,9 @@ actor ScreenRecorder {
 			let configuration = ScreenRecorder.streamConfiguration()
 			configuration.width = Int(window.frame.width * CGFloat(filter.pointPixelScale))
 			configuration.height = Int(window.frame.height * CGFloat(filter.pointPixelScale))
+			if #available(macOS 14.2, *) {
+				configuration.includeChildWindows = false
+			}
 
 			stream = SCStream(filter: filter, configuration: configuration, delegate: nil)
 			output = Output(continuation: continuation)
