@@ -85,6 +85,7 @@ actor ScreenRecorder {
 			if #available(macOS 14.2, *) {
 				configuration.includeChildWindows = false
 			}
+			configuration.showsCursor = false
 
 			stream = SCStream(filter: filter, configuration: configuration, delegate: nil)
 			output = Output(continuation: continuation)

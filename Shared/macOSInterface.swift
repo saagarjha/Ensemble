@@ -20,7 +20,10 @@ protocol macOSInterface {
 	func _windowMask(parameters: M.WindowMask.Request) async throws -> M.WindowMask.Reply
 	func _startWatchingForChildWindows(parameters: M.StartWatchingForChildWindows.Request) async throws -> M.StartWatchingForChildWindows.Reply
 	func _stopWatchingForChildWindows(parameters: M.StopWatchingForChildWindows.Request) async throws -> M.StopWatchingForChildWindows.Reply
-
+	func _mouseMoved(parameters: M.MouseMoved.Request) async throws -> M.MouseMoved.Reply
+	func _clicked(parameters: M.Clicked.Request) async throws -> M.Clicked.Reply
+	func _scrolled(parameters: M.Scrolled.Request) async throws -> M.Scrolled.Reply
+	func _typed(parameters: M.Typed.Request) async throws -> M.Typed.Reply
 }
 
 struct Window: Codable, Identifiable {
@@ -115,6 +118,55 @@ enum macOSInterfaceMessages {
 
 		struct Request: Serializable, Codable {
 			let windowID: Window.ID
+		}
+
+		typealias Reply = SerializableVoid
+	}
+
+	struct MouseMoved: Message {
+		static let id = Messages.mouseMoved
+
+		struct Request: Serializable, Codable {
+			let windowID: Window.ID
+			let x: CGFloat
+			let y: CGFloat
+		}
+
+		typealias Reply = SerializableVoid
+	}
+
+	struct Clicked: Message {
+		static let id = Messages.clicked
+
+		struct Request: Serializable, Codable {
+			let windowID: Window.ID
+			let x: CGFloat
+			let y: CGFloat
+		}
+
+		typealias Reply = SerializableVoid
+	}
+
+	struct Scrolled: Message {
+		static let id = Messages.scrolled
+
+		struct Request: Serializable, Codable {
+			let windowID: Window.ID
+			let x: CGFloat
+			let y: CGFloat
+		}
+
+		typealias Reply = SerializableVoid
+	}
+
+	struct Typed: Message {
+		static let id = Messages.typed
+
+		struct Request: Serializable, Codable {
+			let windowID: Window.ID
+
+			let key: Key
+			let down: Bool
 		}
 
 		typealias Reply = SerializableVoid

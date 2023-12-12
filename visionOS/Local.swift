@@ -15,7 +15,7 @@ class Local: LocalInterface, visionOSInterface {
 	var children = [Window.ID: AsyncStream<[Window.ID]>.Continuation]()
 	actor Masks {
 		var masks = [Window.ID: CVImageBuffer]()
-		
+
 		func mask(_ frame: inout Frame, for windowID: Window.ID) {
 			if let mask = masks[windowID] {
 				frame.augmentWithMask(mask)
@@ -24,7 +24,6 @@ class Local: LocalInterface, visionOSInterface {
 		}
 	}
 	let masks = Masks()
-	
 
 	func handle(message: Messages, data: Data) async throws -> Data? {
 		switch message {
@@ -47,7 +46,7 @@ class Local: LocalInterface, visionOSInterface {
 		let stream = streams[parameters.windowID]!
 		var frame = parameters.frame
 		await masks.mask(&frame, for: parameters.windowID)
-		
+
 		if let maskHash = frame.maskHash {
 			Task {
 				try await remote._windowMask(parameters: .init(windowID: parameters.windowID, hash: Data(maskHash)))

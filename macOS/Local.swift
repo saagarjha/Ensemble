@@ -13,16 +13,17 @@ class Local: LocalInterface, macOSInterface {
 	var remote: Remote!
 
 	let screenRecorder = ScreenRecorder()
+	let eventDispatcher = EventDispatcher()
 
 	struct Mask {
 		let mask: vImage.PixelBuffer<vImage.Planar8>
 		let hash: SHA256Digest
 		var acknowledged: Bool
 	}
-	
+
 	actor Masks {
 		var masks = [Window.ID: Mask]()
-		
+
 		func unmask(_ frame: inout Frame, for windowID: Window.ID) {
 			switch masks[windowID] {
 				case let .some(mask):
@@ -44,11 +45,11 @@ class Local: LocalInterface, macOSInterface {
 				frame.skipMask = true
 			}
 		}
-		
+
 		func remove(for windowID: Window.ID) {
 			masks.removeValue(forKey: windowID)
 		}
-		
+
 		func acknowledge(hash: Data, for windowID: Window.ID) {
 			var mask = masks[windowID]!
 			if Data(mask.hash) == hash {
@@ -77,6 +78,14 @@ class Local: LocalInterface, macOSInterface {
 				return try await _startWatchingForChildWindows(parameters: .decode(data)).encode()
 			case .stopWatchingForChildWindows:
 				return try await _stopWatchingForChildWindows(parameters: .decode(data)).encode()
+			case .mouseMoved:
+				return try await _mouseMoved(parameters: .decode(data)).encode()
+			case .clicked:
+				return try await _clicked(parameters: .decode(data)).encode()
+			case .scrolled:
+				return try await _scrolled(parameters: .decode(data)).encode()
+			case .typed:
+				return try await _typed(parameters: .decode(data)).encode()
 			default:
 				return nil
 		}
@@ -148,6 +157,31 @@ class Local: LocalInterface, macOSInterface {
 
 	func _stopWatchingForChildWindows(parameters: M.StopWatchingForChildWindows.Request) async throws -> M.StopWatchingForChildWindows.Reply {
 		await screenRecorder.stopWatchingForChildren(windowID: parameters.windowID)
+		return .init()
+	}
+
+	func _mouseMoved(parameters: M.MouseMoved.Request) async throws -> M.MouseMoved.Reply {
+		let window = try await screenRecorder.lookup(windowID: parameters.windowID)!
+		await eventDispatcher.injectMouseMoved(to: .init(x: window.frame.minX + window.frame.width * parameters.x, y: window.frame.minY + window.frame.height * parameters.y))
+
+		return .init()
+	}
+
+	func _clicked(parameters: M.Clicked.Request) async throws -> M.Clicked.Reply {
+		let window = try await screenRecorder.lookup(windowID: parameters.windowID)!
+		await eventDispatcher.injectClick(at: .init(x: window.frame.minX + window.frame.width * parameters.x, y: window.frame.minY + window.frame.height * parameters.y))
+		return .init()
+	}
+
+	func _scrolled(parameters: M.Scrolled.Request) async throws -> M.Scrolled.Reply {
+		await eventDispatcher.injectScroll(translationX: parameters.x, translationY: parameters.y)
+
+		return .init()
+	}
+
+	func _typed(parameters: M.Typed.Request) async throws -> M.Typed.Reply {
+		await eventDispatcher.injectKey(key: parameters.key, down: parameters.down)
+
 		return .init()
 	}
 }

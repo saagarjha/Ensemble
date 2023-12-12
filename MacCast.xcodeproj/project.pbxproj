@@ -10,9 +10,12 @@
 		49226A2F2AE43EF50044CFC9 /* SPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49226A2E2AE43EF50044CFC9 /* SPI.swift */; };
 		49226A312AE447C10044CFC9 /* ScreenRecorder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49226A302AE447C10044CFC9 /* ScreenRecorder.swift */; };
 		49226A332AE45D710044CFC9 /* RootWindowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49226A322AE45D710044CFC9 /* RootWindowView.swift */; };
+		494DFBD12B29111C00205CAC /* Keys.swift in Sources */ = {isa = PBXBuildFile; fileRef = 494DFBD02B29111C00205CAC /* Keys.swift */; };
+		494DFBD22B29111C00205CAC /* Keys.swift in Sources */ = {isa = PBXBuildFile; fileRef = 494DFBD02B29111C00205CAC /* Keys.swift */; };
 		495E8E3B2AD5CE2400946419 /* ImageBufferView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 495E8E3A2AD5CE2400946419 /* ImageBufferView.swift */; };
 		495E8E3D2AD5E6C500946419 /* SerializableConformances.swift in Sources */ = {isa = PBXBuildFile; fileRef = 495E8E3C2AD5E6C500946419 /* SerializableConformances.swift */; };
 		495E8E3E2AD5E6C500946419 /* SerializableConformances.swift in Sources */ = {isa = PBXBuildFile; fileRef = 495E8E3C2AD5E6C500946419 /* SerializableConformances.swift */; };
+		497716902B29260A0048ED18 /* EventView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4977168F2B29260A0048ED18 /* EventView.swift */; };
 		4978BAAC2AD54EDB000C549C /* Video.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4978BAAB2AD54EDB000C549C /* Video.swift */; };
 		4978BAAD2AD54EDB000C549C /* Video.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4978BAAB2AD54EDB000C549C /* Video.swift */; };
 		4978BAAF2AD55D71000C549C /* WindowPreviewView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4978BAAE2AD55D71000C549C /* WindowPreviewView.swift */; };
@@ -50,14 +53,17 @@
 		49E09BD02AD52D9F00B56CD3 /* visionOSInterface.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49E09BCF2AD52D9F00B56CD3 /* visionOSInterface.swift */; };
 		49E09BD12AD52D9F00B56CD3 /* visionOSInterface.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49E09BCF2AD52D9F00B56CD3 /* visionOSInterface.swift */; };
 		49E09BD32AD5390500B56CD3 /* WindowPickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49E09BD22AD5390500B56CD3 /* WindowPickerView.swift */; };
+		49EDAA6E2B28E58A00546EAB /* Events.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49EDAA6D2B28E58A00546EAB /* Events.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		49226A2E2AE43EF50044CFC9 /* SPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SPI.swift; sourceTree = "<group>"; };
 		49226A302AE447C10044CFC9 /* ScreenRecorder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScreenRecorder.swift; sourceTree = "<group>"; };
 		49226A322AE45D710044CFC9 /* RootWindowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootWindowView.swift; sourceTree = "<group>"; };
+		494DFBD02B29111C00205CAC /* Keys.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Keys.swift; sourceTree = "<group>"; };
 		495E8E3A2AD5CE2400946419 /* ImageBufferView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageBufferView.swift; sourceTree = "<group>"; };
 		495E8E3C2AD5E6C500946419 /* SerializableConformances.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SerializableConformances.swift; sourceTree = "<group>"; };
+		4977168F2B29260A0048ED18 /* EventView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventView.swift; sourceTree = "<group>"; };
 		4978BAAB2AD54EDB000C549C /* Video.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Video.swift; sourceTree = "<group>"; };
 		4978BAAE2AD55D71000C549C /* WindowPreviewView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WindowPreviewView.swift; sourceTree = "<group>"; };
 		4978BAB02AD55E8B000C549C /* WindowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WindowView.swift; sourceTree = "<group>"; };
@@ -93,6 +99,7 @@
 		49E09BCC2AD52D5900B56CD3 /* Multiplexer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Multiplexer.swift; sourceTree = "<group>"; };
 		49E09BCF2AD52D9F00B56CD3 /* visionOSInterface.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = visionOSInterface.swift; sourceTree = "<group>"; };
 		49E09BD22AD5390500B56CD3 /* WindowPickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WindowPickerView.swift; sourceTree = "<group>"; };
+		49EDAA6D2B28E58A00546EAB /* Events.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Events.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -143,6 +150,7 @@
 			children = (
 				49E09B5F2AD2EE5100B56CD3 /* MacCast.entitlements */,
 				49E09B582AD2EE5000B56CD3 /* ContentView.swift */,
+				49EDAA6D2B28E58A00546EAB /* Events.swift */,
 				49E09BC62AD52CCE00B56CD3 /* Local.swift */,
 				49E09B562AD2EE5000B56CD3 /* MacCastApp.swift */,
 				49E09BC42AD52CC900B56CD3 /* Remote.swift */,
@@ -181,6 +189,7 @@
 				49E09BA12AD3237E00B56CD3 /* Info.plist */,
 				49E09BB02AD3FDCC00B56CD3 /* ConnectionView.swift */,
 				49E09B9A2AD3237D00B56CD3 /* ContentView.swift */,
+				4977168F2B29260A0048ED18 /* EventView.swift */,
 				49B352C92AE593C300BCE03D /* FrameView.swift */,
 				495E8E3A2AD5CE2400946419 /* ImageBufferView.swift */,
 				49E09BCA2AD52D1D00B56CD3 /* Local.swift */,
@@ -207,7 +216,9 @@
 		49E09BA82AD33C0100B56CD3 /* Shared */ = {
 			isa = PBXGroup;
 			children = (
+				4989D33F2B0B9393005E2E7A /* shut_up_logging.c */,
 				49B352C62AE53A9300BCE03D /* Frame.swift */,
+				494DFBD02B29111C00205CAC /* Keys.swift */,
 				49E09BC12AD52C7800B56CD3 /* macOSInterface.swift */,
 				49E09BB22AD419CF00B56CD3 /* Messages.swift */,
 				49E09BCC2AD52D5900B56CD3 /* Multiplexer.swift */,
@@ -215,7 +226,6 @@
 				495E8E3C2AD5E6C500946419 /* SerializableConformances.swift */,
 				4978BAAB2AD54EDB000C549C /* Video.swift */,
 				49E09BCF2AD52D9F00B56CD3 /* visionOSInterface.swift */,
-				4989D33F2B0B9393005E2E7A /* shut_up_logging.c */,
 			);
 			path = Shared;
 			sourceTree = "<group>";
@@ -342,6 +352,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				49226A2F2AE43EF50044CFC9 /* SPI.swift in Sources */,
+				494DFBD12B29111C00205CAC /* Keys.swift in Sources */,
 				49E09BC72AD52CCE00B56CD3 /* Local.swift in Sources */,
 				49E09BD02AD52D9F00B56CD3 /* visionOSInterface.swift in Sources */,
 				49E09B592AD2EE5000B56CD3 /* ContentView.swift in Sources */,
@@ -353,6 +364,7 @@
 				4989D3402B0B9393005E2E7A /* shut_up_logging.c in Sources */,
 				4978BAAC2AD54EDB000C549C /* Video.swift in Sources */,
 				49E09BCD2AD52D5900B56CD3 /* Multiplexer.swift in Sources */,
+				49EDAA6E2B28E58A00546EAB /* Events.swift in Sources */,
 				49E09BC22AD52C7800B56CD3 /* macOSInterface.swift in Sources */,
 				49E09BB32AD419CF00B56CD3 /* Messages.swift in Sources */,
 				49226A312AE447C10044CFC9 /* ScreenRecorder.swift in Sources */,
@@ -367,6 +379,7 @@
 				49E09BCB2AD52D1D00B56CD3 /* Local.swift in Sources */,
 				4978BAAD2AD54EDB000C549C /* Video.swift in Sources */,
 				49E09BD12AD52D9F00B56CD3 /* visionOSInterface.swift in Sources */,
+				494DFBD22B29111C00205CAC /* Keys.swift in Sources */,
 				4989D3412B0B9393005E2E7A /* shut_up_logging.c in Sources */,
 				495E8E3B2AD5CE2400946419 /* ImageBufferView.swift in Sources */,
 				49E09B9B2AD3237D00B56CD3 /* ContentView.swift in Sources */,
@@ -375,6 +388,7 @@
 				4978BAAF2AD55D71000C549C /* WindowPreviewView.swift in Sources */,
 				49E09BC92AD52D1600B56CD3 /* Remote.swift in Sources */,
 				49B352CB2AE593C300BCE03D /* FrameView.swift in Sources */,
+				497716902B29260A0048ED18 /* EventView.swift in Sources */,
 				4978BAB12AD55E8B000C549C /* WindowView.swift in Sources */,
 				49E09BB72AD4F84500B56CD3 /* Serializable.swift in Sources */,
 				49E09BCE2AD52D5900B56CD3 /* Multiplexer.swift in Sources */,

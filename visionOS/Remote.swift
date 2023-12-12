@@ -87,4 +87,20 @@ struct Remote: macOSInterface {
 	func _stopWatchingForChildWindows(parameters: M.StopWatchingForChildWindows.Request) async throws -> M.StopWatchingForChildWindows.Reply {
 		try await M.StopWatchingForChildWindows.send(parameters, through: connection)
 	}
+
+	func _mouseMoved(parameters: M.MouseMoved.Request) async throws -> M.MouseMoved.Reply {
+		try await M.MouseMoved.send(parameters, through: connection)
+	}
+
+	func _clicked(parameters: M.Clicked.Request) async throws -> M.Clicked.Reply {
+		try await M.Clicked.send(parameters, through: connection)
+	}
+
+	func _scrolled(parameters: M.Scrolled.Request) async throws -> M.Scrolled.Reply {
+		try await M.Scrolled.send(parameters, through: connection)
+	}
+
+	func _typed(parameters: M.Typed.Request) async throws -> M.Typed.Reply {
+		try await M.Typed.send(parameters, through: connection)
+	}
 }

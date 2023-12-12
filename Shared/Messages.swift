@@ -18,6 +18,10 @@ enum Messages: UInt8, CaseIterable {
 	case startWatchingForChildWindows
 	case stopWatchingForChildWindows
 	case childWindows
+	case mouseMoved
+	case clicked
+	case scrolled
+	case typed
 }
 
 protocol Message {
