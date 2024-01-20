@@ -13,5 +13,5 @@ DEVELOPMENT_ASSET_PATHS = "macOS/Preview Content"
 ENABLE_HARDENED_RUNTIME = YES
 INFOPLIST_KEY_LSApplicationCategoryType = public.app-category.productivity
 LD_RUNPATH_SEARCH_PATHS = $(inherited) @executable_path/../Frameworks
-PRODUCT_BUNDLE_IDENTIFIER = com.saagarjha.MacCast.macOS
+PRODUCT_BUNDLE_IDENTIFIER = com.saagarjha.MacCast
 PRODUCT_NAME = MacCast
