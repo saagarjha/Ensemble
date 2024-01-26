@@ -12,6 +12,8 @@
 		49226A332AE45D710044CFC9 /* RootWindowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49226A322AE45D710044CFC9 /* RootWindowView.swift */; };
 		494DFBD12B29111C00205CAC /* Keys.swift in Sources */ = {isa = PBXBuildFile; fileRef = 494DFBD02B29111C00205CAC /* Keys.swift */; };
 		494DFBD22B29111C00205CAC /* Keys.swift in Sources */ = {isa = PBXBuildFile; fileRef = 494DFBD02B29111C00205CAC /* Keys.swift */; };
+		495A8AB22B6478AE00520461 /* Bundle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 495A8AB12B6478AE00520461 /* Bundle.swift */; };
+		495A8AB32B6478AE00520461 /* Bundle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 495A8AB12B6478AE00520461 /* Bundle.swift */; };
 		495E8E3B2AD5CE2400946419 /* ImageBufferView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 495E8E3A2AD5CE2400946419 /* ImageBufferView.swift */; };
 		495E8E3D2AD5E6C500946419 /* SerializableConformances.swift in Sources */ = {isa = PBXBuildFile; fileRef = 495E8E3C2AD5E6C500946419 /* SerializableConformances.swift */; };
 		495E8E3E2AD5E6C500946419 /* SerializableConformances.swift in Sources */ = {isa = PBXBuildFile; fileRef = 495E8E3C2AD5E6C500946419 /* SerializableConformances.swift */; };
@@ -61,6 +63,7 @@
 		49226A302AE447C10044CFC9 /* ScreenRecorder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScreenRecorder.swift; sourceTree = "<group>"; };
 		49226A322AE45D710044CFC9 /* RootWindowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootWindowView.swift; sourceTree = "<group>"; };
 		494DFBD02B29111C00205CAC /* Keys.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Keys.swift; sourceTree = "<group>"; };
+		495A8AB12B6478AE00520461 /* Bundle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Bundle.swift; sourceTree = "<group>"; };
 		495E8E3A2AD5CE2400946419 /* ImageBufferView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageBufferView.swift; sourceTree = "<group>"; };
 		495E8E3C2AD5E6C500946419 /* SerializableConformances.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SerializableConformances.swift; sourceTree = "<group>"; };
 		4977168F2B29260A0048ED18 /* EventView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventView.swift; sourceTree = "<group>"; };
@@ -217,6 +220,7 @@
 			isa = PBXGroup;
 			children = (
 				4989D33F2B0B9393005E2E7A /* shut_up_logging.c */,
+				495A8AB12B6478AE00520461 /* Bundle.swift */,
 				49B352C62AE53A9300BCE03D /* Frame.swift */,
 				494DFBD02B29111C00205CAC /* Keys.swift */,
 				49E09BC12AD52C7800B56CD3 /* macOSInterface.swift */,
@@ -358,6 +362,7 @@
 				49E09B592AD2EE5000B56CD3 /* ContentView.swift in Sources */,
 				49B352C72AE53A9300BCE03D /* Frame.swift in Sources */,
 				49E09B572AD2EE5000B56CD3 /* MacCastApp.swift in Sources */,
+				495A8AB22B6478AE00520461 /* Bundle.swift in Sources */,
 				49E09BC52AD52CC900B56CD3 /* Remote.swift in Sources */,
 				495E8E3D2AD5E6C500946419 /* SerializableConformances.swift in Sources */,
 				49E09BB62AD4F84500B56CD3 /* Serializable.swift in Sources */,
@@ -381,6 +386,7 @@
 				49E09BD12AD52D9F00B56CD3 /* visionOSInterface.swift in Sources */,
 				494DFBD22B29111C00205CAC /* Keys.swift in Sources */,
 				4989D3412B0B9393005E2E7A /* shut_up_logging.c in Sources */,
+				495A8AB32B6478AE00520461 /* Bundle.swift in Sources */,
 				495E8E3B2AD5CE2400946419 /* ImageBufferView.swift in Sources */,
 				49E09B9B2AD3237D00B56CD3 /* ContentView.swift in Sources */,
 				49E09BB12AD3FDCC00B56CD3 /* ConnectionView.swift in Sources */,

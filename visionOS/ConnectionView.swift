@@ -61,7 +61,7 @@ struct ConnectionView: View {
 								fatalError()
 						}
 					}
-					Text("To get started, open MacCast on your Mac and select it from the list.")
+					Text("To get started, open \(Bundle.main.name) on your Mac and select it from the list.")
 						.padding()
 				}
 				.navigationTitle("Available Macs")

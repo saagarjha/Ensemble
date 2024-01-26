@@ -8,7 +8,7 @@
 import Foundation
 
 enum Messages: UInt8, CaseIterable {
-	static let version = Int(Bundle.main.infoDictionary![kCFBundleVersionKey as String] as! String)!
+	static let version = Bundle.main.version
 	case visionOSHandshake
 	case macOSHandshake
 	case windows
