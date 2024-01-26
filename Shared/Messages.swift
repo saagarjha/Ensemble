@@ -22,7 +22,12 @@ enum Messages: UInt8, CaseIterable {
 	case childWindows
 	case mouseMoved
 	case clicked
-	case scrolled
+	case scrollBegan
+	case scrollChanged
+	case scrollEnded
+	case dragBegan
+	case dragChanged
+	case dragEnded
 	case typed
 }
 

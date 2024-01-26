@@ -39,28 +39,61 @@ struct EventView: UIViewRepresentable {
 	let view = KeyView()
 	let coordinator: Coordinator
 
+	enum ScrollEvent {
+		case began
+		case changed(CGPoint)
+		case ended
+	}
+
+	enum DragEvent {
+		case began(CGPoint)
+		case changed(CGPoint)
+		case ended(CGPoint)
+	}
+
 	init() {
 		coordinator = .init(view: view)
 	}
 
 	class Coordinator {
 		let view: UIView
-		let (hoverStream, hoverContinuation) = AsyncStream.makeStream(of: CGPoint.self)
-		let (panStream, panContinuation) = AsyncStream.makeStream(of: CGPoint.self)
+		let (scrollStream, scrollContinuation) = AsyncStream.makeStream(of: ScrollEvent.self)
+		let (dragStream, dragContinuation) = AsyncStream.makeStream(of: DragEvent.self)
 
 		init(view: UIView) {
 			self.view = view
 		}
 
 		@objc
-		func hover(_ sender: UIHoverGestureRecognizer) {
-			hoverContinuation.yield(sender.location(in: view))
+		func scroll(_ sender: UIPanGestureRecognizer) {
+			switch sender.state {
+				case .began:
+					scrollContinuation.yield(.began)
+				case .changed:
+					scrollContinuation.yield(.changed(sender.translation(in: view)))
+					sender.setTranslation(.zero, in: view)
+				case .ended:
+					scrollContinuation.yield(.ended)
+				default:
+					return
+			}
 		}
 
 		@objc
 		func pan(_ sender: UIPanGestureRecognizer) {
-			panContinuation.yield(sender.translation(in: view))
-			sender.setTranslation(.zero, in: view)
+			var position = sender.location(in: view)
+			position.x /= view.frame.width
+			position.y /= view.frame.height
+			switch sender.state {
+				case .began:
+					dragContinuation.yield(.began(position))
+				case .changed:
+					dragContinuation.yield(.changed(position))
+				case .ended:
+					dragContinuation.yield(.ended(position))
+				default:
+					return
+			}
 		}
 	}
 
@@ -72,12 +105,13 @@ struct EventView: UIViewRepresentable {
 	}
 
 	func makeCoordinator() -> Coordinator {
-		let hoverGestureRecognizer = UIHoverGestureRecognizer(target: coordinator, action: #selector(Coordinator.hover(_:)))
-		view.addGestureRecognizer(hoverGestureRecognizer)
+		let scrollGestureRecognizer = UIPanGestureRecognizer(target: coordinator, action: #selector(Coordinator.scroll(_:)))
+		scrollGestureRecognizer.allowedScrollTypesMask = .all
+		scrollGestureRecognizer.allowedTouchTypes = []
+		view.addGestureRecognizer(scrollGestureRecognizer)
 
-		let panGestureRecognizer = UIPanGestureRecognizer(target: coordinator, action: #selector(Coordinator.pan(_:)))
-		panGestureRecognizer.allowedScrollTypesMask = .all
-		view.addGestureRecognizer(panGestureRecognizer)
+		let dragGestureRecognizer = UIPanGestureRecognizer(target: coordinator, action: #selector(Coordinator.pan(_:)))
+		view.addGestureRecognizer(dragGestureRecognizer)
 		return coordinator
 	}
 }

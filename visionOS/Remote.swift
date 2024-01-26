@@ -102,8 +102,28 @@ struct Remote: macOSInterface {
 		try await M.Clicked.send(parameters, through: connection)
 	}
 
-	func _scrolled(parameters: M.Scrolled.Request) async throws -> M.Scrolled.Reply {
-		try await M.Scrolled.send(parameters, through: connection)
+	func _scrollBegan(parameters: M.ScrollBegan.Request) async throws -> M.ScrollBegan.Reply {
+		try await M.ScrollBegan.send(parameters, through: connection)
+	}
+
+	func _scrollChanged(parameters: M.ScrollChanged.Request) async throws -> M.ScrollChanged.Reply {
+		try await M.ScrollChanged.send(parameters, through: connection)
+	}
+
+	func _scrollEnded(parameters: M.ScrollEnded.Request) async throws -> M.ScrollEnded.Reply {
+		try await M.ScrollEnded.send(parameters, through: connection)
+	}
+
+	func _dragBegan(parameters: M.DragBegan.Request) async throws -> M.DragBegan.Reply {
+		try await M.DragBegan.send(parameters, through: connection)
+	}
+
+	func _dragChanged(parameters: M.DragChanged.Request) async throws -> M.DragChanged.Reply {
+		try await M.DragChanged.send(parameters, through: connection)
+	}
+
+	func _dragEnded(parameters: M.DragEnded.Request) async throws -> M.DragEnded.Reply {
+		try await M.DragEnded.send(parameters, through: connection)
 	}
 
 	func _typed(parameters: M.Typed.Request) async throws -> M.Typed.Reply {

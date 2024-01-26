@@ -13,15 +13,46 @@ actor EventDispatcher {
 		event.post(tap: .cghidEventTap)
 	}
 
-	func injectClick(at location: NSPoint) {
-		let down = CGEvent(mouseEventSource: nil, mouseType: .leftMouseDown, mouseCursorPosition: location, mouseButton: .left)!
-		let up = CGEvent(mouseEventSource: nil, mouseType: .leftMouseUp, mouseCursorPosition: location, mouseButton: .left)!
-		down.post(tap: .cghidEventTap)
-		up.post(tap: .cghidEventTap)
+	func injectClick(at location: NSPoint, count: Int) {
+		for direction in [.leftMouseDown, .leftMouseUp] as [CGEventType] {
+			let event = CGEvent(mouseEventSource: nil, mouseType: direction, mouseCursorPosition: location, mouseButton: .left)!
+			event.setIntegerValueField(.mouseEventClickState, value: Int64(count))
+			event.post(tap: .cghidEventTap)
+		}
 	}
 
-	func injectScroll(translationX: CGFloat, translationY: CGFloat) {
+	func injectScrollBegan() {
+		let event = CGEvent(scrollWheelEvent2Source: nil, units: .pixel, wheelCount: 2, wheel1: 0, wheel2: 0, wheel3: 0)!
+		event.setIntegerValueField(.scrollWheelEventScrollPhase, value: Int64(CGGesturePhase.began.rawValue))
+		event.post(tap: .cghidEventTap)
+
+	}
+
+	func injectScrollChanged(translationX: CGFloat, translationY: CGFloat) {
 		let event = CGEvent(scrollWheelEvent2Source: nil, units: .pixel, wheelCount: 2, wheel1: Int32(translationY), wheel2: Int32(translationX), wheel3: 0)!
+		event.setIntegerValueField(.scrollWheelEventScrollCount, value: 1)
+		event.setIntegerValueField(.scrollWheelEventScrollPhase, value: Int64(CGGesturePhase.changed.rawValue))
+		event.post(tap: .cghidEventTap)
+	}
+
+	func injectScrollEnded() {
+		let event = CGEvent(scrollWheelEvent2Source: nil, units: .pixel, wheelCount: 2, wheel1: 0, wheel2: 0, wheel3: 0)!
+		event.setIntegerValueField(.scrollWheelEventScrollPhase, value: Int64(CGGesturePhase.ended.rawValue))
+		event.post(tap: .cghidEventTap)
+	}
+
+	func injectDragBegan(at location: NSPoint) {
+		let event = CGEvent(mouseEventSource: nil, mouseType: .leftMouseDown, mouseCursorPosition: location, mouseButton: .left)!
+		event.post(tap: .cghidEventTap)
+	}
+
+	func injectDragChanged(to location: NSPoint) {
+		let event = CGEvent(mouseEventSource: nil, mouseType: .leftMouseDragged, mouseCursorPosition: location, mouseButton: .left)!
+		event.post(tap: .cghidEventTap)
+	}
+
+	func injectDragEnded(at location: NSPoint) {
+		let event = CGEvent(mouseEventSource: nil, mouseType: .leftMouseUp, mouseCursorPosition: location, mouseButton: .left)!
 		event.post(tap: .cghidEventTap)
 	}
 

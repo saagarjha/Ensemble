@@ -83,8 +83,18 @@ class Local: LocalInterface, macOSInterface {
 				return try await _mouseMoved(parameters: .decode(data)).encode()
 			case .clicked:
 				return try await _clicked(parameters: .decode(data)).encode()
-			case .scrolled:
-				return try await _scrolled(parameters: .decode(data)).encode()
+			case .scrollBegan:
+				return try await _scrollBegan(parameters: .decode(data)).encode()
+			case .scrollChanged:
+				return try await _scrollChanged(parameters: .decode(data)).encode()
+			case .scrollEnded:
+				return try await _scrollEnded(parameters: .decode(data)).encode()
+			case .dragBegan:
+				return try await _dragBegan(parameters: .decode(data)).encode()
+			case .dragChanged:
+				return try await _dragChanged(parameters: .decode(data)).encode()
+			case .dragEnded:
+				return try await _dragEnded(parameters: .decode(data)).encode()
 			case .typed:
 				return try await _typed(parameters: .decode(data)).encode()
 			default:
@@ -170,12 +180,45 @@ class Local: LocalInterface, macOSInterface {
 
 	func _clicked(parameters: M.Clicked.Request) async throws -> M.Clicked.Reply {
 		let window = try await screenRecorder.lookup(windowID: parameters.windowID)!
-		await eventDispatcher.injectClick(at: .init(x: window.frame.minX + window.frame.width * parameters.x, y: window.frame.minY + window.frame.height * parameters.y))
+		await eventDispatcher.injectClick(at: .init(x: window.frame.minX + window.frame.width * parameters.x, y: window.frame.minY + window.frame.height * parameters.y), count: parameters.count)
 		return .init()
 	}
 
-	func _scrolled(parameters: M.Scrolled.Request) async throws -> M.Scrolled.Reply {
-		await eventDispatcher.injectScroll(translationX: parameters.x, translationY: parameters.y)
+	func _scrollBegan(parameters: M.ScrollBegan.Request) async throws -> M.ScrollBegan.Reply {
+		await eventDispatcher.injectScrollBegan()
+
+		return .init()
+	}
+
+	func _scrollChanged(parameters: M.ScrollChanged.Request) async throws -> M.ScrollChanged.Reply {
+		await eventDispatcher.injectScrollChanged(translationX: parameters.x, translationY: parameters.y)
+
+		return .init()
+	}
+
+	func _scrollEnded(parameters: M.ScrollEnded.Request) async throws -> M.ScrollEnded.Reply {
+		await eventDispatcher.injectScrollEnded()
+
+		return .init()
+	}
+
+	func _dragBegan(parameters: M.DragBegan.Request) async throws -> M.DragBegan.Reply {
+		let window = try await screenRecorder.lookup(windowID: parameters.windowID)!
+		await eventDispatcher.injectDragBegan(at: .init(x: window.frame.minX + window.frame.width * parameters.x, y: window.frame.minY + window.frame.height * parameters.y))
+
+		return .init()
+	}
+
+	func _dragChanged(parameters: M.DragChanged.Request) async throws -> M.DragChanged.Reply {
+		let window = try await screenRecorder.lookup(windowID: parameters.windowID)!
+		await eventDispatcher.injectDragChanged(to: .init(x: window.frame.minX + window.frame.width * parameters.x, y: window.frame.minY + window.frame.height * parameters.y))
+
+		return .init()
+	}
+
+	func _dragEnded(parameters: M.DragEnded.Request) async throws -> M.DragEnded.Reply {
+		let window = try await screenRecorder.lookup(windowID: parameters.windowID)!
+		await eventDispatcher.injectDragEnded(at: .init(x: window.frame.minX + window.frame.width * parameters.x, y: window.frame.minY + window.frame.height * parameters.y))
 
 		return .init()
 	}

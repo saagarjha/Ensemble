@@ -22,7 +22,12 @@ protocol macOSInterface {
 	func _stopWatchingForChildWindows(parameters: M.StopWatchingForChildWindows.Request) async throws -> M.StopWatchingForChildWindows.Reply
 	func _mouseMoved(parameters: M.MouseMoved.Request) async throws -> M.MouseMoved.Reply
 	func _clicked(parameters: M.Clicked.Request) async throws -> M.Clicked.Reply
-	func _scrolled(parameters: M.Scrolled.Request) async throws -> M.Scrolled.Reply
+	func _scrollBegan(parameters: M.ScrollBegan.Request) async throws -> M.ScrollBegan.Reply
+	func _scrollChanged(parameters: M.ScrollChanged.Request) async throws -> M.ScrollChanged.Reply
+	func _scrollEnded(parameters: M.ScrollEnded.Request) async throws -> M.ScrollEnded.Reply
+	func _dragBegan(parameters: M.DragBegan.Request) async throws -> M.DragBegan.Reply
+	func _dragChanged(parameters: M.DragChanged.Request) async throws -> M.DragChanged.Reply
+	func _dragEnded(parameters: M.DragEnded.Request) async throws -> M.DragEnded.Reply
 	func _typed(parameters: M.Typed.Request) async throws -> M.Typed.Reply
 }
 
@@ -143,13 +148,70 @@ enum macOSInterfaceMessages {
 			let windowID: Window.ID
 			let x: CGFloat
 			let y: CGFloat
+			let count: Int
 		}
 
 		typealias Reply = SerializableVoid
 	}
 
-	struct Scrolled: Message {
-		static let id = Messages.scrolled
+	struct ScrollBegan: Message {
+		static let id = Messages.scrollBegan
+
+		struct Request: Serializable, Codable {
+			let windowID: Window.ID
+		}
+
+		typealias Reply = SerializableVoid
+	}
+
+	struct ScrollChanged: Message {
+		static let id = Messages.scrollChanged
+
+		struct Request: Serializable, Codable {
+			let windowID: Window.ID
+			let x: CGFloat
+			let y: CGFloat
+		}
+
+		typealias Reply = SerializableVoid
+	}
+
+	struct ScrollEnded: Message {
+		static let id = Messages.scrollEnded
+
+		struct Request: Serializable, Codable {
+			let windowID: Window.ID
+		}
+
+		typealias Reply = SerializableVoid
+	}
+
+	struct DragBegan: Message {
+		static let id = Messages.dragBegan
+
+		struct Request: Serializable, Codable {
+			let windowID: Window.ID
+			let x: CGFloat
+			let y: CGFloat
+		}
+
+		typealias Reply = SerializableVoid
+	}
+
+	struct DragChanged: Message {
+		static let id = Messages.dragChanged
+
+		struct Request: Serializable, Codable {
+			let windowID: Window.ID
+			let x: CGFloat
+			let y: CGFloat
+		}
+
+		typealias Reply = SerializableVoid
+	}
+
+	struct DragEnded: Message {
+		static let id = Messages.dragEnded
 
 		struct Request: Serializable, Codable {
 			let windowID: Window.ID
