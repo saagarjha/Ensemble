@@ -15,4 +15,4 @@ INFOPLIST_KEY_ITSAppUsesNonExemptEncryption = NO
 INFOPLIST_KEY_LSApplicationCategoryType = public.app-category.productivity
 LD_RUNPATH_SEARCH_PATHS = $(inherited) @executable_path/../Frameworks
 PRODUCT_BUNDLE_IDENTIFIER = com.saagarjha.MacCast
-PRODUCT_NAME = MacCast
+PRODUCT_NAME = Ensemble

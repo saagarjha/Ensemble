@@ -73,7 +73,7 @@
 		4989D33F2B0B9393005E2E7A /* shut_up_logging.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = shut_up_logging.c; sourceTree = "<group>"; };
 		49B352C62AE53A9300BCE03D /* Frame.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Frame.swift; sourceTree = "<group>"; };
 		49B352C92AE593C300BCE03D /* FrameView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FrameView.swift; sourceTree = "<group>"; };
-		49E09B532AD2EE5000B56CD3 /* MacCast.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MacCast.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		49E09B532AD2EE5000B56CD3 /* Ensemble.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Ensemble.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		49E09B562AD2EE5000B56CD3 /* MacCastApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MacCastApp.swift; sourceTree = "<group>"; };
 		49E09B582AD2EE5000B56CD3 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		49E09B5A2AD2EE5100B56CD3 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -84,7 +84,7 @@
 		49E09B8A2AD31AB300B56CD3 /* Release.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Release.xcconfig; sourceTree = "<group>"; };
 		49E09B8B2AD31B4400B56CD3 /* Deployment.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Deployment.xcconfig; sourceTree = "<group>"; };
 		49E09B8C2AD320F200B56CD3 /* macOS.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = macOS.xcconfig; sourceTree = "<group>"; };
-		49E09B922AD3237D00B56CD3 /* MacCast.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MacCast.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		49E09B922AD3237D00B56CD3 /* Ensemble.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Ensemble.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		49E09B982AD3237D00B56CD3 /* MacCastApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MacCastApp.swift; sourceTree = "<group>"; };
 		49E09B9A2AD3237D00B56CD3 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		49E09B9C2AD3237E00B56CD3 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -142,8 +142,8 @@
 		49E09B542AD2EE5000B56CD3 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				49E09B532AD2EE5000B56CD3 /* MacCast.app */,
-				49E09B922AD3237D00B56CD3 /* MacCast.app */,
+				49E09B532AD2EE5000B56CD3 /* Ensemble.app */,
+				49E09B922AD3237D00B56CD3 /* Ensemble.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -262,7 +262,7 @@
 				49E09BB92AD4F88100B56CD3 /* Cod */,
 			);
 			productName = MacCast;
-			productReference = 49E09B532AD2EE5000B56CD3 /* MacCast.app */;
+			productReference = 49E09B532AD2EE5000B56CD3 /* Ensemble.app */;
 			productType = "com.apple.product-type.application";
 		};
 		49E09B912AD3237D00B56CD3 /* visionOS */ = {
@@ -283,7 +283,7 @@
 				49E09BBB2AD4F88900B56CD3 /* Cod */,
 			);
 			productName = MacCast;
-			productReference = 49E09B922AD3237D00B56CD3 /* MacCast.app */;
+			productReference = 49E09B922AD3237D00B56CD3 /* Ensemble.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
