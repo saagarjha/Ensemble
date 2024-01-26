@@ -48,6 +48,7 @@ enum macOSInterfaceMessages {
 
 		struct Reply: Serializable, Codable {
 			let version: Int
+			let name: String
 		}
 	}
 

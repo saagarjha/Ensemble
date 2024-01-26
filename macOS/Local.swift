@@ -8,6 +8,7 @@
 import Accelerate
 import CryptoKit
 import Foundation
+import SystemConfiguration
 
 class Local: LocalInterface, macOSInterface {
 	var remote: Remote!
@@ -92,7 +93,7 @@ class Local: LocalInterface, macOSInterface {
 	}
 
 	func _handshake(parameters: M.VisionOSHandshake.Request) async throws -> M.VisionOSHandshake.Reply {
-		return .init(version: Messages.version)
+		return .init(version: Messages.version, name: SCDynamicStoreCopyComputerName(nil, nil)! as String)
 	}
 
 	func _windows(parameters: M.Windows.Request) async throws -> M.Windows.Reply {

@@ -11,6 +11,7 @@ import CoreMedia
 
 struct Remote: visionOSInterface {
 	let connection: Multiplexer
+	var name: String!
 
 	init(connection: Connection) {
 		let local = Local()
@@ -18,8 +19,13 @@ struct Remote: visionOSInterface {
 		local.remote = self
 	}
 
-	func handshake() async throws -> Bool {
-		try await _handshake(parameters: .init(version: Messages.version)).version == Messages.version
+	mutating func handshake() async throws -> Bool {
+		let handshake = try await _handshake(parameters: .init(version: Messages.version))
+		guard handshake.version == Messages.version else {
+			return false
+		}
+		name = handshake.name
+		return true
 	}
 
 	func _handshake(parameters: M.MacOSHandshake.Request) async throws -> M.MacOSHandshake.Reply {

@@ -5,8 +5,10 @@
 //  Created by Saagar Jha on 10/9/23.
 //
 
+import Foundation
+
 enum Messages: UInt8, CaseIterable {
-	static let version = 1
+	static let version = Int(Bundle.main.infoDictionary![kCFBundleVersionKey as String] as! String)!
 	case visionOSHandshake
 	case macOSHandshake
 	case windows

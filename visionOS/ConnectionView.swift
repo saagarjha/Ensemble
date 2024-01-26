@@ -49,7 +49,7 @@ struct ConnectionView: View {
 									Task {
 										do {
 											let connection = try await Connection(endpoint: endpoint, key: Data())
-											let remote = Remote(connection: connection)
+											var remote = Remote(connection: connection)
 											if try await remote.handshake() {
 												self.remote = remote
 											}

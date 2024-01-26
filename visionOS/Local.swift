@@ -7,6 +7,7 @@
 
 import CoreVideo
 import Foundation
+import UIKit
 
 class Local: LocalInterface, visionOSInterface {
 	var remote: Remote!
@@ -39,7 +40,7 @@ class Local: LocalInterface, visionOSInterface {
 	}
 
 	func _handshake(parameters: M.MacOSHandshake.Request) async throws -> M.MacOSHandshake.Reply {
-		return .init(version: Messages.version)
+		return await .init(version: Messages.version, name: UIDevice.current.name)
 	}
 
 	func _windowFrame(parameters: M.WindowFrame.Request) async throws -> M.WindowFrame.Reply {

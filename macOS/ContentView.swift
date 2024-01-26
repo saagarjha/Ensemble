@@ -27,7 +27,7 @@ struct ContentView: View {
 			VStack(spacing: 20) {
 				if let remote {
 					VStack(alignment: .leading) {
-						Text("Connected to Apple Vision Pro")
+						Text("Connected to \(remote.name)")
 							.font(.title)
 					}
 					HStack {
@@ -61,7 +61,7 @@ struct ContentView: View {
 				do {
 					for try await connection in Connection.advertise(forServiceType: service, key: Data()) {
 						let connection = try await Connection(connection: connection)
-						let remote = Remote(connection: connection)
+						var remote = Remote(connection: connection)
 						if try await remote.handshake() {
 							self.remote = remote
 						}
