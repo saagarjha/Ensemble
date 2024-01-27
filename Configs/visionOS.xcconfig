@@ -8,7 +8,6 @@
 ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon
 DEVELOPMENT_ASSET_PATHS = "visionOS/Preview Content"
 INFOPLIST_FILE = $(TARGET_NAME)/Info.plist
-INFOPLIST_KEY_ITSAppUsesNonExemptEncryption = NO
 LD_RUNPATH_SEARCH_PATHS = $(inherited) @executable_path/Frameworks
 PRODUCT_BUNDLE_IDENTIFIER = com.saagarjha.MacCast
 PRODUCT_NAME = Ensemble

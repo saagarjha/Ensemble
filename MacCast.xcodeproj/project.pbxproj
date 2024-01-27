@@ -64,6 +64,7 @@
 		49226A322AE45D710044CFC9 /* RootWindowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootWindowView.swift; sourceTree = "<group>"; };
 		494DFBD02B29111C00205CAC /* Keys.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Keys.swift; sourceTree = "<group>"; };
 		495A8AB12B6478AE00520461 /* Bundle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Bundle.swift; sourceTree = "<group>"; };
+		495A8AB42B651F3D00520461 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		495E8E3A2AD5CE2400946419 /* ImageBufferView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageBufferView.swift; sourceTree = "<group>"; };
 		495E8E3C2AD5E6C500946419 /* SerializableConformances.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SerializableConformances.swift; sourceTree = "<group>"; };
 		4977168F2B29260A0048ED18 /* EventView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventView.swift; sourceTree = "<group>"; };
@@ -152,6 +153,7 @@
 			isa = PBXGroup;
 			children = (
 				49E09B5F2AD2EE5100B56CD3 /* MacCast.entitlements */,
+				495A8AB42B651F3D00520461 /* Info.plist */,
 				49E09B582AD2EE5000B56CD3 /* ContentView.swift */,
 				49EDAA6D2B28E58A00546EAB /* Events.swift */,
 				49E09BC62AD52CCE00B56CD3 /* Local.swift */,
