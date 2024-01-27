@@ -1,0 +1,101 @@
+name: Release
+
+on:
+  push:
+    paths:
+      - Configs/Deployment.xcconfig
+
+jobs:
+  upload:
+    runs-on: macos-13
+    environment: Release
+    env:
+      GITHUB_API_BASE_URL: https://api.github.com/repos/${{ github.repository }}
+      GH_TOKEN: ${{ github.token }}
+      XCODEBUILD_EXTRA_ARGS: >
+        -allowProvisioningUpdates
+        -authenticationKeyPath /tmp/AuthKey.p8
+        -authenticationKeyID ${{ secrets.AUTHENTICATION_KEY_ID }}
+        -authenticationKeyIssuerID ${{ secrets.AUTHENTICATION_KEY_ISSUER_ID }}
+    permissions:
+      contents: write
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - name: Create App Store Connect Key file
+        run: echo "${{ secrets.APP_STORE_CONNECT_KEY }}" | base64 -d > /tmp/AuthKey.p8
+
+      - name: Set up signing
+        run: |
+          KEYCHAIN="$RUNNER_TEMP/keychain.keychain-db"
+          KEYCHAIN_PASSWORD=password
+
+          echo "${{ secrets.CERTIFICATE }}" | base64 -d > "$RUNNER_TEMP/Certificate.p12"
+
+          security create-keychain -p "$KEYCHAIN_PASSWORD" "$KEYCHAIN"
+          security set-keychain-settings "$KEYCHAIN"
+          security unlock-keychain -p "$KEYCHAIN_PASSWORD" "$KEYCHAIN"
+          security list-keychains -d user -s "$KEYCHAIN"
+          security import "$RUNNER_TEMP/Certificate.p12" -P "${{ secrets.CERTIFICATE_PASSWORD }}" -A -k "$KEYCHAIN"
+
+          mkdir -p ~/Library/MobileDevice/Provisioning\ Profiles
+          cp Release/iOS.mobileprovision ~/Library/MobileDevice/Provisioning\ Profiles
+
+      - name: Select Xcode
+        run: sudo xcode-select -s /Applications/Xcode_15.2.app
+
+      - name: Set up visionOS SDK
+        run: |
+          defaults write com.apple.dt.Xcode AllowUnsupportedVisionOSHost -bool YES
+          defaults write com.apple.CoreSimulator AllowUnsupportedVisionOSHost -bool YES
+          xcodebuild -downloadPlatform visionOS
+
+      - name: System Info
+        run: |
+          uname -a
+          xcodebuild -version
+
+      - name: Archive macOS
+        run: xcodebuild -scheme macOS -archivePath macOS.xcarchive archive
+
+      - name: Archive visionOS
+        run: xcodebuild -scheme visionOS -archivePath visionOS.xcarchive archive
+
+      - name: Collect Assets
+        run: |
+          (
+            cd macOS.xcarchive/Products/Applications/
+            zip -r macOS.zip Ensemble.app
+            mv macOS.zip ../../..
+          )
+
+          (
+            cd macOS.xcarchive/dSYMs/
+            zip -r macOS-symbols.zip Ensemble.app.dSYM/
+            mv macOS-symbols.zip ../..
+          )
+
+          (
+            cd visionOS.xcarchive/Products/Applications/
+            zip -r visionOS.zip Ensemble.app
+            mv visionOS.zip ../../..
+          )
+
+          (
+            cd visionOS.xcarchive/dSYMs/
+            zip -r visionOS-symbols.zip Ensemble.app.dSYM/
+            mv visionOS-symbols.zip ../..
+          )
+
+      - name: Create Release
+        run: |
+          version="$(cat Configs/Deployment.xcconfig | grep CURRENT_PROJECT_VERSION | awk '{ print $3 }')"
+
+          gh release create "v$version" -t "Build $version" -p macOS.zip macOS-symbols.zip visionOS.zip visionOS-symbols.zip
+
+      - name: Upload macOS
+        run: xcodebuild $XCODEBUILD_EXTRA_ARGS -exportArchive -exportOptionsPlist Release/ExportOptions.plist -archivePath macOS.xcarchive/ -exportPath macOS
+
+      - name: Upload visionOS
+        run: xcodebuild $XCODEBUILD_EXTRA_ARGS -exportArchive -exportOptionsPlist Release/ExportOptions.plist -archivePath visionOS.xcarchive/ -exportPath visionOS
