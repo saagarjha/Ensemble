@@ -83,7 +83,7 @@ actor ScreenRecorder {
 			configuration.width = Int(window.frame.width * CGFloat(filter.pointPixelScale))
 			configuration.height = Int(window.frame.height * CGFloat(filter.pointPixelScale))
 			if #available(macOS 14.2, *) {
-				configuration.includeChildWindows = false
+				configuration.includeChildWindows = SLSCopyAssociatedWindows == nil
 			}
 			configuration.showsCursor = false
 
@@ -119,7 +119,14 @@ actor ScreenRecorder {
 		Task {
 			while childObservers.contains(windowID) {
 				try await Task.sleep(for: .seconds(1))
-				var childWindows = Set(SLSCopyAssociatedWindows(SLSMainConnectionID(), windowID) as! [CGWindowID])
+				var childWindows =
+					if let SLSCopyAssociatedWindows,
+						let SLSMainConnectionID
+					{
+						Set(SLSCopyAssociatedWindows(SLSMainConnectionID(), windowID) as? [CGWindowID] ?? [])
+					} else {
+						Set<CGWindowID>()
+					}
 				childWindows.remove(windowID)
 
 				let root = try await lookup(windowID: windowID)!
