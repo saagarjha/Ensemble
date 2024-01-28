@@ -31,4 +31,4 @@ jobs:
           xcodebuild -version
 
       - name: Build
-        run: xcodebuild -project MacCast.xcodeproj -scheme ${{ matrix.scheme }} CODE_SIGNING_ALLOWED=NO
+        run: xcodebuild -project Ensemble.xcodeproj -scheme ${{ matrix.scheme }} CODE_SIGNING_ALLOWED=NO

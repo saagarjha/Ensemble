@@ -1,6 +1,6 @@
 //
 //  Keys.swift
-//  MacCast
+//  Shared
 //
 //  Created by Saagar Jha on 12/12/23.
 //

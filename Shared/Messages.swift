@@ -1,6 +1,6 @@
 //
 //  Messages.swift
-//  MacCast
+//  Shared
 //
 //  Created by Saagar Jha on 10/9/23.
 //

@@ -1,6 +1,6 @@
 //
 //  FrameView.swift
-//  MacCast
+//  visionOS
 //
 //  Created by Saagar Jha on 10/22/23.
 //

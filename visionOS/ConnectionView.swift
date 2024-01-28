@@ -9,7 +9,7 @@ import AppleConnect
 import Network
 import SwiftUI
 
-let service = "_maccast._tcp"
+let service = "_\(Bundle.main.name.lowercased())._tcp"
 
 struct ConnectionView: View {
 	@Binding

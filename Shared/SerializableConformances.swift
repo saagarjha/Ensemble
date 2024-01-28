@@ -1,6 +1,6 @@
 //
 //  SerializableConformances.swift
-//  MacCast
+//  Shared
 //
 //  Created by Saagar Jha on 10/10/23.
 //

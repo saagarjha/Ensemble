@@ -1,6 +1,6 @@
 //
 //  Bundle.swift
-//  MacCast
+//  Shared
 //
 //  Created by Saagar Jha on 1/26/24.
 //

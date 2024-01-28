@@ -14,10 +14,10 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "49E09B912AD3237D00B56CD3"
-               BuildableName = "MacCast.app"
-               BlueprintName = "visionOS"
-               ReferencedContainer = "container:MacCast.xcodeproj">
+               BlueprintIdentifier = "49E09B522AD2EE5000B56CD3"
+               BuildableName = "Ensemble.app"
+               BlueprintName = "macOS"
+               ReferencedContainer = "container:Ensemble.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -43,10 +43,10 @@
          runnableDebuggingMode = "0">
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "49E09B912AD3237D00B56CD3"
-            BuildableName = "MacCast.app"
-            BlueprintName = "visionOS"
-            ReferencedContainer = "container:MacCast.xcodeproj">
+            BlueprintIdentifier = "49E09B522AD2EE5000B56CD3"
+            BuildableName = "Ensemble.app"
+            BlueprintName = "macOS"
+            ReferencedContainer = "container:Ensemble.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </LaunchAction>
@@ -60,10 +60,10 @@
          runnableDebuggingMode = "0">
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "49E09B912AD3237D00B56CD3"
-            BuildableName = "MacCast.app"
-            BlueprintName = "visionOS"
-            ReferencedContainer = "container:MacCast.xcodeproj">
+            BlueprintIdentifier = "49E09B522AD2EE5000B56CD3"
+            BuildableName = "Ensemble.app"
+            BlueprintName = "macOS"
+            ReferencedContainer = "container:Ensemble.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </ProfileAction>

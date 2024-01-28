@@ -27,11 +27,11 @@
 		49B352C72AE53A9300BCE03D /* Frame.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49B352C62AE53A9300BCE03D /* Frame.swift */; };
 		49B352C82AE53A9300BCE03D /* Frame.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49B352C62AE53A9300BCE03D /* Frame.swift */; };
 		49B352CB2AE593C300BCE03D /* FrameView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49B352C92AE593C300BCE03D /* FrameView.swift */; };
-		49E09B572AD2EE5000B56CD3 /* MacCastApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49E09B562AD2EE5000B56CD3 /* MacCastApp.swift */; };
+		49E09B572AD2EE5000B56CD3 /* EnsembleApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49E09B562AD2EE5000B56CD3 /* EnsembleApp.swift */; };
 		49E09B592AD2EE5000B56CD3 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49E09B582AD2EE5000B56CD3 /* ContentView.swift */; };
 		49E09B5B2AD2EE5100B56CD3 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 49E09B5A2AD2EE5100B56CD3 /* Assets.xcassets */; };
 		49E09B5E2AD2EE5100B56CD3 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 49E09B5D2AD2EE5100B56CD3 /* Preview Assets.xcassets */; };
-		49E09B992AD3237D00B56CD3 /* MacCastApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49E09B982AD3237D00B56CD3 /* MacCastApp.swift */; };
+		49E09B992AD3237D00B56CD3 /* EnsembleApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49E09B982AD3237D00B56CD3 /* EnsembleApp.swift */; };
 		49E09B9B2AD3237D00B56CD3 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49E09B9A2AD3237D00B56CD3 /* ContentView.swift */; };
 		49E09B9D2AD3237E00B56CD3 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 49E09B9C2AD3237E00B56CD3 /* Assets.xcassets */; };
 		49E09BA02AD3237E00B56CD3 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 49E09B9F2AD3237E00B56CD3 /* Preview Assets.xcassets */; };
@@ -75,18 +75,18 @@
 		49B352C62AE53A9300BCE03D /* Frame.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Frame.swift; sourceTree = "<group>"; };
 		49B352C92AE593C300BCE03D /* FrameView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FrameView.swift; sourceTree = "<group>"; };
 		49E09B532AD2EE5000B56CD3 /* Ensemble.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Ensemble.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		49E09B562AD2EE5000B56CD3 /* MacCastApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MacCastApp.swift; sourceTree = "<group>"; };
+		49E09B562AD2EE5000B56CD3 /* EnsembleApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnsembleApp.swift; sourceTree = "<group>"; };
 		49E09B582AD2EE5000B56CD3 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		49E09B5A2AD2EE5100B56CD3 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		49E09B5D2AD2EE5100B56CD3 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
-		49E09B5F2AD2EE5100B56CD3 /* MacCast.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = MacCast.entitlements; sourceTree = "<group>"; };
+		49E09B5F2AD2EE5100B56CD3 /* Ensemble.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Ensemble.entitlements; sourceTree = "<group>"; };
 		49E09B882AD31A6F00B56CD3 /* Shared.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Shared.xcconfig; sourceTree = "<group>"; };
 		49E09B892AD31AAC00B56CD3 /* Debug.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Debug.xcconfig; sourceTree = "<group>"; };
 		49E09B8A2AD31AB300B56CD3 /* Release.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Release.xcconfig; sourceTree = "<group>"; };
 		49E09B8B2AD31B4400B56CD3 /* Deployment.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Deployment.xcconfig; sourceTree = "<group>"; };
 		49E09B8C2AD320F200B56CD3 /* macOS.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = macOS.xcconfig; sourceTree = "<group>"; };
 		49E09B922AD3237D00B56CD3 /* Ensemble.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Ensemble.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		49E09B982AD3237D00B56CD3 /* MacCastApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MacCastApp.swift; sourceTree = "<group>"; };
+		49E09B982AD3237D00B56CD3 /* EnsembleApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnsembleApp.swift; sourceTree = "<group>"; };
 		49E09B9A2AD3237D00B56CD3 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		49E09B9C2AD3237E00B56CD3 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		49E09B9F2AD3237E00B56CD3 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
@@ -152,12 +152,12 @@
 		49E09B552AD2EE5000B56CD3 /* macOS */ = {
 			isa = PBXGroup;
 			children = (
-				49E09B5F2AD2EE5100B56CD3 /* MacCast.entitlements */,
+				49E09B5F2AD2EE5100B56CD3 /* Ensemble.entitlements */,
 				495A8AB42B651F3D00520461 /* Info.plist */,
 				49E09B582AD2EE5000B56CD3 /* ContentView.swift */,
+				49E09B562AD2EE5000B56CD3 /* EnsembleApp.swift */,
 				49EDAA6D2B28E58A00546EAB /* Events.swift */,
 				49E09BC62AD52CCE00B56CD3 /* Local.swift */,
-				49E09B562AD2EE5000B56CD3 /* MacCastApp.swift */,
 				49E09BC42AD52CC900B56CD3 /* Remote.swift */,
 				49226A302AE447C10044CFC9 /* ScreenRecorder.swift */,
 				49226A2E2AE43EF50044CFC9 /* SPI.swift */,
@@ -194,11 +194,11 @@
 				49E09BA12AD3237E00B56CD3 /* Info.plist */,
 				49E09BB02AD3FDCC00B56CD3 /* ConnectionView.swift */,
 				49E09B9A2AD3237D00B56CD3 /* ContentView.swift */,
+				49E09B982AD3237D00B56CD3 /* EnsembleApp.swift */,
 				4977168F2B29260A0048ED18 /* EventView.swift */,
 				49B352C92AE593C300BCE03D /* FrameView.swift */,
 				495E8E3A2AD5CE2400946419 /* ImageBufferView.swift */,
 				49E09BCA2AD52D1D00B56CD3 /* Local.swift */,
-				49E09B982AD3237D00B56CD3 /* MacCastApp.swift */,
 				49E09BC82AD52D1600B56CD3 /* Remote.swift */,
 				49226A322AE45D710044CFC9 /* RootWindowView.swift */,
 				49E09BD22AD5390500B56CD3 /* WindowPickerView.swift */,
@@ -263,7 +263,7 @@
 				49E09BAA2AD33C1600B56CD3 /* AppleConnect */,
 				49E09BB92AD4F88100B56CD3 /* Cod */,
 			);
-			productName = MacCast;
+			productName = Ensemble;
 			productReference = 49E09B532AD2EE5000B56CD3 /* Ensemble.app */;
 			productType = "com.apple.product-type.application";
 		};
@@ -284,7 +284,7 @@
 				49E09BAC2AD33C1F00B56CD3 /* AppleConnect */,
 				49E09BBB2AD4F88900B56CD3 /* Cod */,
 			);
-			productName = MacCast;
+			productName = Ensemble;
 			productReference = 49E09B922AD3237D00B56CD3 /* Ensemble.app */;
 			productType = "com.apple.product-type.application";
 		};
@@ -308,7 +308,7 @@
 					};
 				};
 			};
-			buildConfigurationList = 49E09B4E2AD2EE5000B56CD3 /* Build configuration list for PBXProject "MacCast" */;
+			buildConfigurationList = 49E09B4E2AD2EE5000B56CD3 /* Build configuration list for PBXProject "Ensemble" */;
 			compatibilityVersion = "Xcode 14.0";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
@@ -363,7 +363,7 @@
 				49E09BD02AD52D9F00B56CD3 /* visionOSInterface.swift in Sources */,
 				49E09B592AD2EE5000B56CD3 /* ContentView.swift in Sources */,
 				49B352C72AE53A9300BCE03D /* Frame.swift in Sources */,
-				49E09B572AD2EE5000B56CD3 /* MacCastApp.swift in Sources */,
+				49E09B572AD2EE5000B56CD3 /* EnsembleApp.swift in Sources */,
 				495A8AB22B6478AE00520461 /* Bundle.swift in Sources */,
 				49E09BC52AD52CC900B56CD3 /* Remote.swift in Sources */,
 				495E8E3D2AD5E6C500946419 /* SerializableConformances.swift in Sources */,
@@ -392,7 +392,7 @@
 				495E8E3B2AD5CE2400946419 /* ImageBufferView.swift in Sources */,
 				49E09B9B2AD3237D00B56CD3 /* ContentView.swift in Sources */,
 				49E09BB12AD3FDCC00B56CD3 /* ConnectionView.swift in Sources */,
-				49E09B992AD3237D00B56CD3 /* MacCastApp.swift in Sources */,
+				49E09B992AD3237D00B56CD3 /* EnsembleApp.swift in Sources */,
 				4978BAAF2AD55D71000C549C /* WindowPreviewView.swift in Sources */,
 				49E09BC92AD52D1600B56CD3 /* Remote.swift in Sources */,
 				49B352CB2AE593C300BCE03D /* FrameView.swift in Sources */,
@@ -456,7 +456,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		49E09B4E2AD2EE5000B56CD3 /* Build configuration list for PBXProject "MacCast" */ = {
+		49E09B4E2AD2EE5000B56CD3 /* Build configuration list for PBXProject "Ensemble" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				49E09B602AD2EE5100B56CD3 /* Debug */,

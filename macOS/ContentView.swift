@@ -1,6 +1,6 @@
 //
 //  ContentView.swift
-//  MacCast
+//  macOS
 //
 //  Created by Saagar Jha on 10/8/23.
 //
@@ -8,7 +8,7 @@
 import AppleConnect
 import SwiftUI
 
-let service = "_maccast._tcp"
+let service = "_\(Bundle.main.name.lowercased())._tcp"
 
 struct ContentView: View {
 	@State

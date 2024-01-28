@@ -1,12 +1,12 @@
 //
 //  macOS.xcconfig
-//  MacCast
+//  Ensemble
 //
 //  Created by Saagar Jha on 10/8/23.
 //
 
 ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon
-CODE_SIGN_ENTITLEMENTS = macOS/MacCast.entitlements
+CODE_SIGN_ENTITLEMENTS = macOS/Ensemble.entitlements
 CODE_SIGN_STYLE = Automatic
 COMBINE_HIDPI_IMAGES = YES
 DEVELOPMENT_ASSET_PATHS = "macOS/Preview Content"

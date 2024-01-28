@@ -1,6 +1,6 @@
 //
-//  MacCastApp.swift
-//  MacCast
+//  EnsembleApp.swift
+//  visionOS
 //
 //  Created by Saagar Jha on 10/8/23.
 //
@@ -8,7 +8,7 @@
 import SwiftUI
 
 @main
-struct MacCastApp: App {
+struct EnsembleApp: App {
 	@State
 	var remote: Remote?
 

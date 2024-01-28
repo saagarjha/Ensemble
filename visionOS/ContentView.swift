@@ -1,6 +1,6 @@
 //
 //  ContentView.swift
-//  MacCast
+//  visionOS
 //
 //  Created by Saagar Jha on 10/8/23.
 //

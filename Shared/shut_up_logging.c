@@ -1,6 +1,6 @@
 //
 //  shut_up_logging.c
-//  MacCast
+//  Shared
 //
 //  Created by Saagar Jha on 11/20/23.
 //
