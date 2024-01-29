@@ -180,7 +180,7 @@ class Local: LocalInterface, macOSInterface {
 
 	func _clicked(parameters: M.Clicked.Request) async throws -> M.Clicked.Reply {
 		let window = try await screenRecorder.lookup(windowID: parameters.windowID)!
-		await eventDispatcher.injectClick(at: .init(x: window.frame.minX + window.frame.width * parameters.x, y: window.frame.minY + window.frame.height * parameters.y), count: parameters.count)
+		await eventDispatcher.injectClick(at: .init(x: window.frame.minX + window.frame.width * parameters.x, y: window.frame.minY + window.frame.height * parameters.y))
 		return .init()
 	}
 

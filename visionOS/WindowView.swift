@@ -60,15 +60,11 @@ struct WindowView: View {
 									} catch {}
 								}
 						}
-						.onTapGesture(count: 3) {
-							click(at: $0, in: geometry.size, count: 3)
-						}
-						// FIXME: This isn't detected
-						.onTapGesture(count: 2) {
-							click(at: $0, in: geometry.size, count: 2)
-						}
-						.onTapGesture {
-							click(at: $0, in: geometry.size, count: 1)
+						.onTapGesture { location in
+							eventView.view.becomeFirstResponder()
+							Task {
+								_ = try await remote._clicked(parameters: .init(windowID: window.windowID, x: location.x / geometry.size.width, y: location.y / geometry.size.height))
+							}
 						}
 						.onContinuousHover(coordinateSpace: .local) {
 							switch $0 {
@@ -96,13 +92,6 @@ struct WindowView: View {
 					self.frame = frame
 				}
 			} catch {}
-		}
-	}
-
-	func click(at location: CGPoint, in size: CGSize, count: Int) {
-		eventView.view.becomeFirstResponder()
-		Task {
-			_ = try await remote._clicked(parameters: .init(windowID: window.windowID, x: location.x / size.width, y: location.y / size.height, count: count))
 		}
 	}
 }

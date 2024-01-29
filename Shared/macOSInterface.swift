@@ -148,7 +148,6 @@ enum macOSInterfaceMessages {
 			let windowID: Window.ID
 			let x: CGFloat
 			let y: CGFloat
-			let count: Int
 		}
 
 		typealias Reply = SerializableVoid
