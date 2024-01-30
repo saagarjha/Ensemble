@@ -10,20 +10,13 @@ jobs:
     strategy:
       matrix:
         scheme: [macOS, visionOS]
-    runs-on: macos-13
+    runs-on: macos-14
     steps:
       - name: Checkout
         uses: actions/checkout@v3
 
       - name: Select Xcode
         run: sudo xcode-select -s /Applications/Xcode_15.2.app
-
-      - name: Set up visionOS SDK
-        if: matrix.scheme == 'visionOS'
-        run: |
-          defaults write com.apple.dt.Xcode AllowUnsupportedVisionOSHost -bool YES
-          defaults write com.apple.CoreSimulator AllowUnsupportedVisionOSHost -bool YES
-          xcodebuild -downloadPlatform visionOS
 
       - name: System Info
         run: |

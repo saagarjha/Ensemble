@@ -7,7 +7,7 @@ on:
 
 jobs:
   upload:
-    runs-on: macos-13
+    runs-on: macos-14
     environment: Release
     env:
       GITHUB_API_BASE_URL: https://api.github.com/repos/${{ github.repository }}
@@ -44,12 +44,6 @@ jobs:
 
       - name: Select Xcode
         run: sudo xcode-select -s /Applications/Xcode_15.2.app
-
-      - name: Set up visionOS SDK
-        run: |
-          defaults write com.apple.dt.Xcode AllowUnsupportedVisionOSHost -bool YES
-          defaults write com.apple.CoreSimulator AllowUnsupportedVisionOSHost -bool YES
-          xcodebuild -downloadPlatform visionOS
 
       - name: System Info
         run: |
