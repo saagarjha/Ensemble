@@ -223,6 +223,14 @@ class Local: LocalInterface, macOSInterface {
 		return .init()
 	}
 
+	func _windowSizeChanged(parameters: M.WindowSizeChanged.Request) async throws -> M.WindowSizeChanged.Reply {
+		let window = try await screenRecorder.lookup(windowID: parameters.windowID)!
+        // TODO - unsure how to actually dispatch the window change event to macOS at this point
+		// await eventDispatcher.injectWindowSizeChanged(to: .init(width: parameters.width, height: parameters.height))
+
+		return .init()
+	}
+
 	func _typed(parameters: M.Typed.Request) async throws -> M.Typed.Reply {
 		await eventDispatcher.injectKey(key: parameters.key, down: parameters.down)
 

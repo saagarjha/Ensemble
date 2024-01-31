@@ -28,6 +28,7 @@ enum Messages: UInt8, CaseIterable {
 	case dragBegan
 	case dragChanged
 	case dragEnded
+    case windowSizeChanged
 	case typed
 }
 

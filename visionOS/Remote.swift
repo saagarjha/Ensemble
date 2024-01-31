@@ -125,6 +125,10 @@ struct Remote: macOSInterface {
 	func _dragEnded(parameters: M.DragEnded.Request) async throws -> M.DragEnded.Reply {
 		try await M.DragEnded.send(parameters, through: connection)
 	}
+    
+    func _windowSizeChanged(parameters: M.WindowSizeChanged.Request) async throws -> M.WindowSizeChanged.Reply {
+        try await M.WindowSizeChanged.send(parameters, through: connection)
+    }
 
 	func _typed(parameters: M.Typed.Request) async throws -> M.Typed.Reply {
 		try await M.Typed.send(parameters, through: connection)

@@ -81,6 +81,14 @@ struct WindowView: View {
 						.onAppear {
 							eventView.view.becomeFirstResponder()
 						}
+                        .onChange(of: geometry.size, { oldSize, newSize in
+                            Task {
+                                do {
+                                    _ = try await remote._windowSizeChanged(parameters: .init(windowID: window.windowID, width: newSize.width, height: newSize.height) )
+                                } catch {}
+                            }
+                            
+                        })
 				}
 			} else {
 				Text("Loading…")

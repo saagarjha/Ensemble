@@ -28,6 +28,7 @@ protocol macOSInterface {
 	func _dragBegan(parameters: M.DragBegan.Request) async throws -> M.DragBegan.Reply
 	func _dragChanged(parameters: M.DragChanged.Request) async throws -> M.DragChanged.Reply
 	func _dragEnded(parameters: M.DragEnded.Request) async throws -> M.DragEnded.Reply
+    func _windowSizeChanged(parameters: M.WindowSizeChanged.Request) async throws -> M.WindowSizeChanged.Reply
 	func _typed(parameters: M.Typed.Request) async throws -> M.Typed.Reply
 }
 
@@ -220,6 +221,19 @@ enum macOSInterfaceMessages {
 
 		typealias Reply = SerializableVoid
 	}
+
+
+    struct WindowSizeChanged: Message {
+        static let id = Messages.windowSizeChanged
+
+        struct Request: Serializable, Codable {
+            let windowID: Window.ID
+            let width: CGFloat
+            let height: CGFloat
+        }
+
+        typealias Reply = SerializableVoid
+    }
 
 	struct Typed: Message {
 		static let id = Messages.typed
