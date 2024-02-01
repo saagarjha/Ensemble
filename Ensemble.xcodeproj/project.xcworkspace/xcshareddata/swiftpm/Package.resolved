@@ -6,7 +6,7 @@
       "location" : "https://github.com/saagarjha/AppleConnect.git",
       "state" : {
         "branch" : "main",
-        "revision" : "2ae05663ac072f5bbbdb18e3c9dd7cbc2fd4462a"
+        "revision" : "56b1ce222d8d5902b2d2dc224ba62d4361d9065c"
       }
     },
     {
@@ -15,7 +15,7 @@
       "location" : "https://github.com/saagarjha/Cod.git",
       "state" : {
         "branch" : "main",
-        "revision" : "9ab61a00a5d9e4d21ed15af36734ea435cb4cf8c"
+        "revision" : "c359a08accfb49662a17cdfc5e333c7b4e5c2c56"
       }
     }
   ],
