@@ -40,7 +40,7 @@ struct ContentView: View {
 					VStack(alignment: .leading, spacing: 8) {
 						Text("Waiting to connect…")
 							.font(.title)
-						Text("Launch \(Bundle.main.infoDictionary![kCFBundleNameKey as String] as! String) on your Apple Vision Pro and enter this pairing code when prompted.")
+						Text("Launch \(Bundle.main.name) on your Apple Vision Pro and enter this pairing code when prompted.")
 					}
 					let characters = Array(pairingCode)
 					HStack(spacing: 20) {
