@@ -16,6 +16,15 @@ struct ContentView: View {
 
 	@State
 	var remote: Remote?
+	@State
+	var askForPermissions = false
+	
+	@Preference("SuppressPermissionsView", defaultValue: false)
+	var suppressPermissionsView
+	
+	init() {
+		_askForPermissions = State(initialValue: !Permission.allCases.allSatisfy(\.enabled) && !suppressPermissionsView)
+	}
 
 	var body: some View {
 		HStack(spacing: 50) {
@@ -73,6 +82,9 @@ struct ContentView: View {
 		}
 		.padding(40)
 		.frame(width: 800, height: 400)
+		.sheet(isPresented: $askForPermissions) {
+			PermissionsView(askForPermissions: $askForPermissions, suppressPermissionsView: _suppressPermissionsView)
+		}
 	}
 
 	static func generatePairingCode() -> String {
