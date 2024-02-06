@@ -65,7 +65,15 @@ actor EventDispatcher {
 	}
 
 	func injectKey(key: Key, down: Bool) {
-		let event = CGEvent(keyboardEventSource: nil, virtualKey: CGKeyCode(key.macOSCode), keyDown: down)!
-		event.post(tap: .cghidEventTap)
+		// FB13590408
+		if let CGPostKeyboardEvent {
+			_ = CGPostKeyboardEvent(0, CGKeyCode(key.macOSCode), down ? 1 : 0)
+		} else {
+			let event = CGEvent(keyboardEventSource: .init(stateID: .hidSystemState), virtualKey: CGKeyCode(key.macOSCode), keyDown: down)!
+			event.post(tap: .cghidEventTap)
+		}
 	}
 }
+
+// This is marked as deprecated and unavailable in Swift. Rude.
+let CGPostKeyboardEvent = unsafeBitCast(dlsym(dlopen(nil, RTLD_LAZY), "CGPostKeyboardEvent"), to: (@convention(c) (CGCharCode, CGKeyCode, boolean_t) -> CGError)?.self)
