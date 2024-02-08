@@ -89,7 +89,7 @@ struct PermissionsView: View {
 			}
 		}
 		.padding(20)
-		// TODO: Figure out why SwiftUI is cutting off the bottom of this view
+		// FB13593200
 		.padding(.bottom, 24)
 		.fixedSize(horizontal: true, vertical: true)
 		.task {
