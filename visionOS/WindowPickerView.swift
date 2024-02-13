@@ -12,6 +12,8 @@ struct WindowPickerView: View {
 
 	@State
 	var windows: [Window]?
+	@State
+	var filter: String = ""
 
 	@Binding
 	var selectedWindow: Window?
@@ -24,7 +26,10 @@ struct WindowPickerView: View {
 						columns: [GridItem(), GridItem()],
 						spacing: 20,
 						content: {
-							ForEach(windows) { window in
+							let filteredWindows = windows.filter {
+								filter.isEmpty || $0.app.localizedStandardContains(filter) || $0.title?.localizedStandardContains(filter) ?? false
+							}
+							ForEach(filteredWindows) { window in
 								WindowPreviewView(remote: remote, window: window, selectedWindow: $selectedWindow)
 							}
 						}
@@ -32,6 +37,7 @@ struct WindowPickerView: View {
 					.padding(20)
 				}
 				.navigationTitle("Select a window.")
+				.searchable(text: $filter)
 			} else {
 				Text("Loading windows…")
 			}
