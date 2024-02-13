@@ -18,10 +18,12 @@ struct ContentView: View {
 	var remote: Remote?
 	@State
 	var askForPermissions = false
-	
+	@State
+	var prewarmedHelper = false
+
 	@Preference("SuppressPermissionsView", defaultValue: false)
 	var suppressPermissionsView
-	
+
 	init() {
 		_askForPermissions = State(initialValue: !Permission.allCases.allSatisfy(\.enabled) && !suppressPermissionsView)
 	}
@@ -84,6 +86,18 @@ struct ContentView: View {
 		.frame(width: 800, height: 400)
 		.sheet(isPresented: $askForPermissions) {
 			PermissionsView(askForPermissions: $askForPermissions, suppressPermissionsView: _suppressPermissionsView)
+		}
+		.onChange(of: askForPermissions, initial: true) {
+			// FIXME: This races with the first code that calls accessibility
+			// APIs, and this is an awful place to put it to boot.
+			Task {
+				if !prewarmedHelper,
+					Permission.helper.supported,
+					Permission.helper.enabled
+				{
+					prewarmedHelper = await Permission.prewarmHelper()
+				}
+			}
 		}
 	}
 

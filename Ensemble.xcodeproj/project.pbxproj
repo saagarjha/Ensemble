@@ -70,6 +70,7 @@
 		49226A302AE447C10044CFC9 /* ScreenRecorder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScreenRecorder.swift; sourceTree = "<group>"; };
 		49226A322AE45D710044CFC9 /* RootWindowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootWindowView.swift; sourceTree = "<group>"; };
 		494DFBD02B29111C00205CAC /* Keys.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Keys.swift; sourceTree = "<group>"; };
+		495A72332B78F0F500970992 /* ensemble_helper_v1.sh */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; path = ensemble_helper_v1.sh; sourceTree = "<group>"; };
 		495A8AB12B6478AE00520461 /* Bundle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Bundle.swift; sourceTree = "<group>"; };
 		495A8AB42B651F3D00520461 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		495E8E3A2AD5CE2400946419 /* ImageBufferView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageBufferView.swift; sourceTree = "<group>"; };
@@ -161,6 +162,7 @@
 			children = (
 				49E09B5F2AD2EE5100B56CD3 /* Ensemble.entitlements */,
 				495A8AB42B651F3D00520461 /* Info.plist */,
+				495A72332B78F0F500970992 /* ensemble_helper_v1.sh */,
 				49E09B582AD2EE5000B56CD3 /* ContentView.swift */,
 				49E09B562AD2EE5000B56CD3 /* EnsembleApp.swift */,
 				49EDAA6D2B28E58A00546EAB /* Events.swift */,
@@ -263,6 +265,7 @@
 				49E09B4F2AD2EE5000B56CD3 /* Sources */,
 				49E09B502AD2EE5000B56CD3 /* Frameworks */,
 				49E09B512AD2EE5000B56CD3 /* Resources */,
+				495A72372B78F70F00970992 /* Copy Helper */,
 			);
 			buildRules = (
 			);
@@ -361,6 +364,29 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		495A72372B78F70F00970992 /* Copy Helper */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"$(SRCROOT)/macOS/ensemble_helper_v1.sh",
+			);
+			name = "Copy Helper";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(BUILT_PRODUCTS_DIR)/$(SHARED_SUPPORT_FOLDER_PATH)/ensemble_helper_v1.sh",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "# This is a copy files phase but it preserves the execute bit\nset -x\n\ncp \"$SRCROOT/macOS/ensemble_helper_v1.sh\" \"$BUILT_PRODUCTS_DIR/$SHARED_SUPPORT_FOLDER_PATH/\"\n";
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		49E09B4F2AD2EE5000B56CD3 /* Sources */ = {

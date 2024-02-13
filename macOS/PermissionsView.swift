@@ -10,17 +10,19 @@ import SwiftUI
 struct PermissionsView: View {
 	@Binding
 	var askForPermissions: Bool
+	@State
+	var showInstallHelper = false
 	// Updates the view
 	@State
 	var _updatePermissions = false
-	
+
 	@Preference
 	var suppressPermissionsView: Bool
 
 	var body: some View {
 		VStack(spacing: 12) {
 			let _ = _updatePermissions
-			
+
 			HStack(spacing: 20) {
 				Image(nsImage: NSImage(named: NSImage.applicationIconName)!)
 					.renderingMode(.original)
@@ -28,7 +30,7 @@ struct PermissionsView: View {
 					.scaledToFit()
 					.fixedSize()
 					.scaleEffect(.init(width: 0.9, height: 0.9))
-					
+
 				VStack(alignment: .leading, spacing: 8) {
 					Text("Welcome to Ensemble.")
 						.font(.system(.title))
@@ -42,7 +44,7 @@ struct PermissionsView: View {
 				.frame(maxWidth: 400)
 			}
 			Divider()
-			HStack {
+			HStack(spacing: 0) {
 				// TODO: Figure out if I can use alignment guides or something
 				Spacer()
 					.frame(width: 100)
@@ -51,31 +53,37 @@ struct PermissionsView: View {
 						LabeledContent(permission.name) {
 							VStack(alignment: .leading) {
 								Button(action: {
+									guard permission != .helper else {
+										showInstallHelper = true
+										return
+									}
 									permission.request()
 								}) {
 									HStack(spacing: 4) {
-										if permission.enabled {
+										if !permission.supported {
+											Image(systemName: "exclamationmark.circle")
+												.symbolRenderingMode(.multicolor)
+										} else if permission.enabled {
 											Image(systemName: "checkmark.circle")
 												.symbolRenderingMode(.multicolor)
-											Text("Enabled!")
-										} else {
-											Text("Request…")
 										}
+										Text(permission.prompt)
 									}
-									.frame(width: 100)
+									.frame(width: 128)
 								}
-								.disabled(permission.enabled)
+								.disabled(permission.enabled || !permission.supported)
 								Text(permission.reason)
 									.font(.caption)
 									.foregroundStyle(.secondary)
-									.frame(maxWidth: 300)
-									.fixedSize(horizontal: false, vertical: true)
 							}
 							.padding(4)
 						}
 					}
 				}
+				.frame(width: 384)
+				Spacer()
 			}
+			.frame(maxWidth: .infinity)
 			Divider()
 			HStack {
 				Spacer()
@@ -89,8 +97,6 @@ struct PermissionsView: View {
 			}
 		}
 		.padding(20)
-		// FB13593200
-		.padding(.bottom, 24)
 		.fixedSize(horizontal: true, vertical: true)
 		.task {
 			while true {
@@ -104,6 +110,24 @@ struct PermissionsView: View {
 		.overlay {
 			PreventsApplicationTerminationWhenModalView()
 		}
+		.alert(
+			"Install \(Bundle.main.name) Helper", isPresented: $showInstallHelper,
+			actions: {
+				Button("Start") {
+					Permission.helper.request()
+				}
+				.keyboardShortcut(.defaultAction)
+				Button("Cancel") {}
+					.keyboardShortcut(.cancelAction)
+			}
+		) {
+			Text(
+				"""
+				The \(Bundle.main.name) Helper builds on the Accessibility permission to provide the app authority to all user interface elements on your Mac. This allows it to direct events at specific apps, interact with menus, and be notified of changes in window layout.
+
+				This access powers some of the most advanced features of \(Bundle.main.name), but must be installed manually. To authorize access, please copy \(Permission.helperScriptName) to this application's scripts directory.
+				""")
+		}
 	}
 }
 
@@ -112,16 +136,16 @@ struct PreventsApplicationTerminationWhenModalView: NSViewRepresentable {
 		override func viewDidMoveToWindow() {
 			window?.preventsApplicationTerminationWhenModal = false
 		}
-		
+
 		override func hitTest(_ point: NSPoint) -> NSView? {
 			nil
 		}
 	}
-	
+
 	func makeNSView(context: Context) -> some NSView {
 		_View()
 	}
-	
+
 	func updateNSView(_ nsView: NSViewType, context: Context) {
 	}
 }
