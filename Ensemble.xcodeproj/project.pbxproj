@@ -28,6 +28,7 @@
 		4978BAB12AD55E8B000C549C /* WindowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4978BAB02AD55E8B000C549C /* WindowView.swift */; };
 		4989D3402B0B9393005E2E7A /* shut_up_logging.c in Sources */ = {isa = PBXBuildFile; fileRef = 4989D33F2B0B9393005E2E7A /* shut_up_logging.c */; };
 		4989D3412B0B9393005E2E7A /* shut_up_logging.c in Sources */ = {isa = PBXBuildFile; fileRef = 4989D33F2B0B9393005E2E7A /* shut_up_logging.c */; };
+		4992A6012B68291900844A16 /* WindowManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4992A6002B68291900844A16 /* WindowManager.swift */; };
 		49B352C72AE53A9300BCE03D /* Frame.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49B352C62AE53A9300BCE03D /* Frame.swift */; };
 		49B352C82AE53A9300BCE03D /* Frame.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49B352C62AE53A9300BCE03D /* Frame.swift */; };
 		49B352CB2AE593C300BCE03D /* FrameView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49B352C92AE593C300BCE03D /* FrameView.swift */; };
@@ -80,6 +81,7 @@
 		4978BAAE2AD55D71000C549C /* WindowPreviewView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WindowPreviewView.swift; sourceTree = "<group>"; };
 		4978BAB02AD55E8B000C549C /* WindowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WindowView.swift; sourceTree = "<group>"; };
 		4989D33F2B0B9393005E2E7A /* shut_up_logging.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = shut_up_logging.c; sourceTree = "<group>"; };
+		4992A6002B68291900844A16 /* WindowManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WindowManager.swift; sourceTree = "<group>"; };
 		49B352C62AE53A9300BCE03D /* Frame.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Frame.swift; sourceTree = "<group>"; };
 		49B352C92AE593C300BCE03D /* FrameView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FrameView.swift; sourceTree = "<group>"; };
 		49E09B532AD2EE5000B56CD3 /* Ensemble.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Ensemble.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -172,6 +174,7 @@
 				49E09BC42AD52CC900B56CD3 /* Remote.swift */,
 				49226A302AE447C10044CFC9 /* ScreenRecorder.swift */,
 				49226A2E2AE43EF50044CFC9 /* SPI.swift */,
+				4992A6002B68291900844A16 /* WindowManager.swift */,
 				49E09B5A2AD2EE5100B56CD3 /* Assets.xcassets */,
 				49E09B5C2AD2EE5100B56CD3 /* Preview Content */,
 			);
@@ -411,6 +414,7 @@
 				49EDAA6E2B28E58A00546EAB /* Events.swift in Sources */,
 				4901A14C2B7246760040D2EE /* Preference.swift in Sources */,
 				49E09BC22AD52C7800B56CD3 /* macOSInterface.swift in Sources */,
+				4992A6012B68291900844A16 /* WindowManager.swift in Sources */,
 				49E09BB32AD419CF00B56CD3 /* Messages.swift in Sources */,
 				4901A14A2B721EAB0040D2EE /* PermissionsView.swift in Sources */,
 				49226A312AE447C10044CFC9 /* ScreenRecorder.swift in Sources */,

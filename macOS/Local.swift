@@ -15,6 +15,7 @@ class Local: LocalInterface, macOSInterface {
 
 	let screenRecorder = ScreenRecorder()
 	let eventDispatcher = EventDispatcher()
+	let windowManager = WindowManager()
 
 	struct Mask {
 		let mask: vImage.PixelBuffer<vImage.Planar8>
@@ -108,7 +109,7 @@ class Local: LocalInterface, macOSInterface {
 
 	func _windows(parameters: M.Windows.Request) async throws -> M.Windows.Reply {
 		return try await .init(
-			windows: screenRecorder.windows.compactMap {
+			windows: windowManager.allWindows.compactMap {
 				guard let application = $0.owningApplication?.applicationName,
 					$0.isOnScreen
 				else {
@@ -119,7 +120,7 @@ class Local: LocalInterface, macOSInterface {
 	}
 
 	func _windowPreview(parameters: M.WindowPreview.Request) async throws -> M.WindowPreview.Reply {
-		guard let window = try await screenRecorder.lookup(windowID: parameters.windowID),
+		guard let window = try await windowManager.lookupWindow(byID: parameters.windowID),
 			window.isOnScreen,
 			let screenshot = try await screenRecorder.screenshot(window: window, size: M.WindowPreview.previewSize)
 		else {
@@ -130,7 +131,7 @@ class Local: LocalInterface, macOSInterface {
 	}
 
 	func _startCasting(parameters: M.StartCasting.Request) async throws -> M.StartCasting.Reply {
-		let window = try await screenRecorder.lookup(windowID: parameters.windowID)!
+		let window = try await windowManager.lookupWindow(byID: parameters.windowID)!
 		let stream = try await screenRecorder.stream(window: window)
 
 		Task {
@@ -157,9 +158,11 @@ class Local: LocalInterface, macOSInterface {
 		return .init()
 	}
 
+	var childObservers = [CGWindowID: Task<Void, Error>]()
+
 	func _startWatchingForChildWindows(parameters: M.StartWatchingForChildWindows.Request) async throws -> M.StartWatchingForChildWindows.Reply {
-		Task {
-			for await children in await screenRecorder.watchForChildren(windowID: parameters.windowID) {
+		childObservers[parameters.windowID] = Task {
+			for try await children in await windowManager.childrenOfWindow(idenitifiedBy: parameters.windowID) {
 				try await remote.childWindows(parent: parameters.windowID, children: children)
 			}
 		}
@@ -167,19 +170,19 @@ class Local: LocalInterface, macOSInterface {
 	}
 
 	func _stopWatchingForChildWindows(parameters: M.StopWatchingForChildWindows.Request) async throws -> M.StopWatchingForChildWindows.Reply {
-		await screenRecorder.stopWatchingForChildren(windowID: parameters.windowID)
+		childObservers.removeValue(forKey: parameters.windowID)!.cancel()
 		return .init()
 	}
 
 	func _mouseMoved(parameters: M.MouseMoved.Request) async throws -> M.MouseMoved.Reply {
-		let window = try await screenRecorder.lookup(windowID: parameters.windowID)!
+		let window = try await windowManager.lookupWindow(byID: parameters.windowID)!
 		await eventDispatcher.injectMouseMoved(to: .init(x: window.frame.minX + window.frame.width * parameters.x, y: window.frame.minY + window.frame.height * parameters.y))
 
 		return .init()
 	}
 
 	func _clicked(parameters: M.Clicked.Request) async throws -> M.Clicked.Reply {
-		let window = try await screenRecorder.lookup(windowID: parameters.windowID)!
+		let window = try await windowManager.lookupWindow(byID: parameters.windowID)!
 		await eventDispatcher.injectClick(at: .init(x: window.frame.minX + window.frame.width * parameters.x, y: window.frame.minY + window.frame.height * parameters.y))
 		return .init()
 	}
@@ -203,21 +206,21 @@ class Local: LocalInterface, macOSInterface {
 	}
 
 	func _dragBegan(parameters: M.DragBegan.Request) async throws -> M.DragBegan.Reply {
-		let window = try await screenRecorder.lookup(windowID: parameters.windowID)!
+		let window = try await windowManager.lookupWindow(byID: parameters.windowID)!
 		await eventDispatcher.injectDragBegan(at: .init(x: window.frame.minX + window.frame.width * parameters.x, y: window.frame.minY + window.frame.height * parameters.y))
 
 		return .init()
 	}
 
 	func _dragChanged(parameters: M.DragChanged.Request) async throws -> M.DragChanged.Reply {
-		let window = try await screenRecorder.lookup(windowID: parameters.windowID)!
+		let window = try await windowManager.lookupWindow(byID: parameters.windowID)!
 		await eventDispatcher.injectDragChanged(to: .init(x: window.frame.minX + window.frame.width * parameters.x, y: window.frame.minY + window.frame.height * parameters.y))
 
 		return .init()
 	}
 
 	func _dragEnded(parameters: M.DragEnded.Request) async throws -> M.DragEnded.Reply {
-		let window = try await screenRecorder.lookup(windowID: parameters.windowID)!
+		let window = try await windowManager.lookupWindow(byID: parameters.windowID)!
 		await eventDispatcher.injectDragEnded(at: .init(x: window.frame.minX + window.frame.width * parameters.x, y: window.frame.minY + window.frame.height * parameters.y))
 
 		return .init()
