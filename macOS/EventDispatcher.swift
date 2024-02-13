@@ -1,5 +1,5 @@
 //
-//  Events.swift
+//  EventDispatcher.swift
 //  macOS
 //
 //  Created by Saagar Jha on 12/12/23.
@@ -12,7 +12,7 @@ actor EventDispatcher {
 		let event = CGEvent(mouseEventSource: nil, mouseType: .mouseMoved, mouseCursorPosition: location, mouseButton: .center)!
 		event.post(tap: .cghidEventTap)
 	}
-	
+
 	var lastClick = ContinuousClock.Instant.now
 	var clickCount: Int64 = 0
 
@@ -21,7 +21,7 @@ actor EventDispatcher {
 			lastClick = .now
 		}
 		clickCount = ContinuousClock.Instant.now - lastClick < .seconds(NSEvent.doubleClickInterval) ? clickCount + 1 : 1
-		
+
 		for direction in [.leftMouseDown, .leftMouseUp] as [CGEventType] {
 			let event = CGEvent(mouseEventSource: nil, mouseType: direction, mouseCursorPosition: location, mouseButton: .left)!
 			event.setIntegerValueField(.mouseEventClickState, value: clickCount)

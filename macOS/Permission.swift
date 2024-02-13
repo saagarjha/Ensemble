@@ -1,5 +1,5 @@
 //
-//  Permissions.swift
+//  Permission.swift
 //  macOS
 //
 //  Created by Saagar Jha on 2/5/24.

@@ -12,7 +12,7 @@ struct Preference<T>: DynamicProperty {
 	// Forces an update
 	@State
 	var value = false
-	
+
 	let key: String
 	let defaultValue: T
 
@@ -61,7 +61,7 @@ struct CodablePreference<T: Codable> {
 	// Forces an update
 	@State
 	var value = false
-	
+
 	var key: String
 	var defaultValue: T
 
@@ -87,7 +87,7 @@ struct CodablePreference<T: Codable> {
 			UserDefaults.standard.setValue(try! JSONEncoder().encode(newValue), forKey: key)
 		}
 	}
-	
+
 	var projectedValue: Binding<T> {
 		Binding(
 			get: {

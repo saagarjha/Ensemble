@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		4901A1482B721BEF0040D2EE /* Permissions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4901A1472B721BEF0040D2EE /* Permissions.swift */; };
+		4901A1482B721BEF0040D2EE /* Permission.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4901A1472B721BEF0040D2EE /* Permission.swift */; };
 		4901A14A2B721EAB0040D2EE /* PermissionsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4901A1492B721EAB0040D2EE /* PermissionsView.swift */; };
 		4901A14C2B7246760040D2EE /* Preference.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4901A14B2B7246760040D2EE /* Preference.swift */; };
 		4901A14D2B7246760040D2EE /* Preference.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4901A14B2B7246760040D2EE /* Preference.swift */; };
@@ -60,11 +60,11 @@
 		49E09BD02AD52D9F00B56CD3 /* visionOSInterface.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49E09BCF2AD52D9F00B56CD3 /* visionOSInterface.swift */; };
 		49E09BD12AD52D9F00B56CD3 /* visionOSInterface.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49E09BCF2AD52D9F00B56CD3 /* visionOSInterface.swift */; };
 		49E09BD32AD5390500B56CD3 /* WindowPickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49E09BD22AD5390500B56CD3 /* WindowPickerView.swift */; };
-		49EDAA6E2B28E58A00546EAB /* Events.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49EDAA6D2B28E58A00546EAB /* Events.swift */; };
+		49EDAA6E2B28E58A00546EAB /* EventDispatcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49EDAA6D2B28E58A00546EAB /* EventDispatcher.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		4901A1472B721BEF0040D2EE /* Permissions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Permissions.swift; sourceTree = "<group>"; };
+		4901A1472B721BEF0040D2EE /* Permission.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Permission.swift; sourceTree = "<group>"; };
 		4901A1492B721EAB0040D2EE /* PermissionsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PermissionsView.swift; sourceTree = "<group>"; };
 		4901A14B2B7246760040D2EE /* Preference.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Preference.swift; sourceTree = "<group>"; };
 		49226A2E2AE43EF50044CFC9 /* SPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SPI.swift; sourceTree = "<group>"; };
@@ -113,7 +113,7 @@
 		49E09BCC2AD52D5900B56CD3 /* Multiplexer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Multiplexer.swift; sourceTree = "<group>"; };
 		49E09BCF2AD52D9F00B56CD3 /* visionOSInterface.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = visionOSInterface.swift; sourceTree = "<group>"; };
 		49E09BD22AD5390500B56CD3 /* WindowPickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WindowPickerView.swift; sourceTree = "<group>"; };
-		49EDAA6D2B28E58A00546EAB /* Events.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Events.swift; sourceTree = "<group>"; };
+		49EDAA6D2B28E58A00546EAB /* EventDispatcher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventDispatcher.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -167,9 +167,9 @@
 				495A72332B78F0F500970992 /* ensemble_helper_v1.sh */,
 				49E09B582AD2EE5000B56CD3 /* ContentView.swift */,
 				49E09B562AD2EE5000B56CD3 /* EnsembleApp.swift */,
-				49EDAA6D2B28E58A00546EAB /* Events.swift */,
+				49EDAA6D2B28E58A00546EAB /* EventDispatcher.swift */,
 				49E09BC62AD52CCE00B56CD3 /* Local.swift */,
-				4901A1472B721BEF0040D2EE /* Permissions.swift */,
+				4901A1472B721BEF0040D2EE /* Permission.swift */,
 				4901A1492B721EAB0040D2EE /* PermissionsView.swift */,
 				49E09BC42AD52CC900B56CD3 /* Remote.swift */,
 				49226A302AE447C10044CFC9 /* ScreenRecorder.swift */,
@@ -396,7 +396,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				4901A1482B721BEF0040D2EE /* Permissions.swift in Sources */,
+				4901A1482B721BEF0040D2EE /* Permission.swift in Sources */,
 				49226A2F2AE43EF50044CFC9 /* SPI.swift in Sources */,
 				494DFBD12B29111C00205CAC /* Keys.swift in Sources */,
 				49E09BC72AD52CCE00B56CD3 /* Local.swift in Sources */,
@@ -411,7 +411,7 @@
 				4989D3402B0B9393005E2E7A /* shut_up_logging.c in Sources */,
 				4978BAAC2AD54EDB000C549C /* Video.swift in Sources */,
 				49E09BCD2AD52D5900B56CD3 /* Multiplexer.swift in Sources */,
-				49EDAA6E2B28E58A00546EAB /* Events.swift in Sources */,
+				49EDAA6E2B28E58A00546EAB /* EventDispatcher.swift in Sources */,
 				4901A14C2B7246760040D2EE /* Preference.swift in Sources */,
 				49E09BC22AD52C7800B56CD3 /* macOSInterface.swift in Sources */,
 				4992A6012B68291900844A16 /* WindowManager.swift in Sources */,

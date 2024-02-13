@@ -11,7 +11,7 @@ extension Bundle {
 	var name: String {
 		Bundle.main.infoDictionary![kCFBundleNameKey as String] as! String
 	}
-	
+
 	var version: Int {
 		Int(Bundle.main.infoDictionary![kCFBundleVersionKey as String] as! String)!
 	}
