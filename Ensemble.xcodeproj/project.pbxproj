@@ -32,6 +32,7 @@
 		49B352C72AE53A9300BCE03D /* Frame.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49B352C62AE53A9300BCE03D /* Frame.swift */; };
 		49B352C82AE53A9300BCE03D /* Frame.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49B352C62AE53A9300BCE03D /* Frame.swift */; };
 		49B352CB2AE593C300BCE03D /* FrameView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49B352C92AE593C300BCE03D /* FrameView.swift */; };
+		49CC03D72B87770C00F9F672 /* disable_accessibility.c in Sources */ = {isa = PBXBuildFile; fileRef = 49CC03D62B87770C00F9F672 /* disable_accessibility.c */; };
 		49E09B572AD2EE5000B56CD3 /* EnsembleApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49E09B562AD2EE5000B56CD3 /* EnsembleApp.swift */; };
 		49E09B592AD2EE5000B56CD3 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49E09B582AD2EE5000B56CD3 /* ContentView.swift */; };
 		49E09B5B2AD2EE5100B56CD3 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 49E09B5A2AD2EE5100B56CD3 /* Assets.xcassets */; };
@@ -84,6 +85,7 @@
 		4992A6002B68291900844A16 /* WindowManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WindowManager.swift; sourceTree = "<group>"; };
 		49B352C62AE53A9300BCE03D /* Frame.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Frame.swift; sourceTree = "<group>"; };
 		49B352C92AE593C300BCE03D /* FrameView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FrameView.swift; sourceTree = "<group>"; };
+		49CC03D62B87770C00F9F672 /* disable_accessibility.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = disable_accessibility.c; sourceTree = "<group>"; };
 		49E09B532AD2EE5000B56CD3 /* Ensemble.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Ensemble.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		49E09B562AD2EE5000B56CD3 /* EnsembleApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnsembleApp.swift; sourceTree = "<group>"; };
 		49E09B582AD2EE5000B56CD3 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -205,6 +207,7 @@
 		49E09B932AD3237D00B56CD3 /* visionOS */ = {
 			isa = PBXGroup;
 			children = (
+				49CC03D62B87770C00F9F672 /* disable_accessibility.c */,
 				49E09BA12AD3237E00B56CD3 /* Info.plist */,
 				49E09BB02AD3FDCC00B56CD3 /* ConnectionView.swift */,
 				49E09B9A2AD3237D00B56CD3 /* ContentView.swift */,
@@ -438,6 +441,7 @@
 				4901A14D2B7246760040D2EE /* Preference.swift in Sources */,
 				49E09B992AD3237D00B56CD3 /* EnsembleApp.swift in Sources */,
 				4978BAAF2AD55D71000C549C /* WindowPreviewView.swift in Sources */,
+				49CC03D72B87770C00F9F672 /* disable_accessibility.c in Sources */,
 				49E09BC92AD52D1600B56CD3 /* Remote.swift in Sources */,
 				49B352CB2AE593C300BCE03D /* FrameView.swift in Sources */,
 				497716902B29260A0048ED18 /* EventView.swift in Sources */,
