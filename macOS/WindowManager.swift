@@ -147,7 +147,7 @@ extension AXObserver {
 			// Retain the observer until the stream is finished
 			let _observer = observer
 			continuation.onTermination = { _ in
-				_ = _observer
+				withExtendedLifetime(_observer) {}
 			}
 		}
 	}
