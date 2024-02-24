@@ -113,4 +113,7 @@ jobs:
         run: |
           version="$(cat Configs/Deployment.xcconfig | grep CURRENT_PROJECT_VERSION | awk '{ print $3 }')"
 
+          # Make sure we all have all the latest tags (for notes)
+          git fetch --tags
+
           Release/send_to_testflight.swift "$version"
