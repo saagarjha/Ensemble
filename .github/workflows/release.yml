@@ -10,7 +10,6 @@ jobs:
     runs-on: macos-14
     environment: Release
     env:
-      GITHUB_API_BASE_URL: https://api.github.com/repos/${{ github.repository }}
       GH_TOKEN: ${{ github.token }}
       XCODEBUILD_EXTRA_ARGS: >
         -allowProvisioningUpdates
@@ -22,6 +21,18 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v3
+
+      - name: Sanity check
+        run: |
+          set -x
+
+          version="$(cat Configs/Deployment.xcconfig | grep CURRENT_PROJECT_VERSION | awk '{ print $3 }')"
+
+          # Make sure this version doesn't exist already
+          ! git tag --list | grep -q "v$version"
+
+          # Check that the commit message matches the version
+          git log -1 --pretty=%B | grep "\($version\)"
 
       - name: Create App Store Connect Key file
         run: echo "${{ secrets.APP_STORE_CONNECT_KEY }}" | base64 -d > /tmp/AuthKey.p8
