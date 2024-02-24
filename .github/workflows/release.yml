@@ -93,3 +93,10 @@ jobs:
 
       - name: Upload visionOS
         run: xcodebuild $XCODEBUILD_EXTRA_ARGS -exportArchive -exportOptionsPlist Release/ExportOptions.plist -archivePath visionOS.xcarchive/ -exportPath visionOS
+
+      - name: Send to TestFlight
+        env:
+          AUTHENTICATION_KEY=/tmp/AuthKey.p8
+          AUTHENTICATION_KEY_ID=${{ secrets.AUTHENTICATION_KEY_ID }}
+          AUTHENTICATION_KEY_ISSUER_ID=${{ secrets.AUTHENTICATION_KEY_ISSUER_ID }}
+        run: Release/send_to_testflight.sh
