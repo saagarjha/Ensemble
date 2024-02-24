@@ -386,11 +386,11 @@
 			outputFileListPaths = (
 			);
 			outputPaths = (
-				"$(BUILT_PRODUCTS_DIR)/$(SHARED_SUPPORT_FOLDER_PATH)/ensemble_helper_v1.sh",
+				"$(TARGET_BUILD_DIR)/$(SHARED_SUPPORT_FOLDER_PATH)/ensemble_helper_v1.sh",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "# This is a copy files phase but it preserves the execute bit\nset -x\n\ncp \"$SRCROOT/macOS/ensemble_helper_v1.sh\" \"$BUILT_PRODUCTS_DIR/$SHARED_SUPPORT_FOLDER_PATH/\"\n";
+			shellScript = "# This is a copy files phase but it preserves the execute bit\nset -x\n\ncp \"$SCRIPT_INPUT_FILE_0\" \"$SCRIPT_OUTPUT_FILE_0\"\n";
 		};
 /* End PBXShellScriptBuildPhase section */
 
