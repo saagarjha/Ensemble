@@ -96,7 +96,10 @@ jobs:
 
       - name: Send to TestFlight
         env:
-          AUTHENTICATION_KEY=/tmp/AuthKey.p8
-          AUTHENTICATION_KEY_ID=${{ secrets.AUTHENTICATION_KEY_ID }}
-          AUTHENTICATION_KEY_ISSUER_ID=${{ secrets.AUTHENTICATION_KEY_ISSUER_ID }}
-        run: Release/send_to_testflight.sh
+          AUTHENTICATION_KEY: /tmp/AuthKey.p8
+          AUTHENTICATION_KEY_ID: ${{ secrets.AUTHENTICATION_KEY_ID }}
+          AUTHENTICATION_KEY_ISSUER_ID: ${{ secrets.AUTHENTICATION_KEY_ISSUER_ID }}
+        run: |
+          version="$(cat Configs/Deployment.xcconfig | grep CURRENT_PROJECT_VERSION | awk '{ print $3 }')"
+
+          Release/send_to_testflight.sh "$version"
