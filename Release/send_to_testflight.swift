@@ -44,6 +44,18 @@ struct API {
 			return header + "." + payload + "." + signature
 		}
 
+		// Debugging helper
+		static func decode<T: Decodable>(_: T.Type, from data: Data, endpoint: String) throws -> T {
+			do {
+				return try JSONDecoder().decode(T.self, from: data)
+			} catch {
+				fputs("Failed to decode response from \(endpoint)! Data:\n", stderr)
+				try FileHandle.standardError.write(contentsOf: data)
+				try FileHandle.standardError.synchronize()
+				throw error
+			}
+		}
+
 		func _getRequest(endpoint: String) async throws -> Data {
 			var request = URLRequest(url: URL(string: endpoint)!)
 			request.addValue("Bearer \(try generateJWT())", forHTTPHeaderField: "Authorization")
@@ -53,7 +65,7 @@ struct API {
 		func getRequest<T: Codable>(endpoint: String, parsing response: T.Type) async throws -> T {
 			var request = URLRequest(url: URL(string: endpoint)!)
 			request.addValue("Bearer \(try generateJWT())", forHTTPHeaderField: "Authorization")
-			return try JSONDecoder().decode(T.self, from: await URLSession.shared.data(for: request).0)
+			return try Self.decode(T.self, from: await URLSession.shared.data(for: request).0, endpoint: endpoint)
 		}
 
 		func _postyRequest(endpoint: String, method: String = "POST", object: Encodable) async throws -> Data {
