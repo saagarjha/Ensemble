@@ -260,6 +260,9 @@ struct API {
 	}
 }
 
+// Turn off buffering so GitHub Actions prints output immediately
+setbuf(stdout, nil)
+
 let build = CommandLine.arguments[1]
 print("Performing steps for build \(build)...")
 
