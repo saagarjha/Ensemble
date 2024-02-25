@@ -27,6 +27,7 @@ jobs:
           set -x
 
           version="$(cat Configs/Deployment.xcconfig | grep CURRENT_PROJECT_VERSION | awk '{ print $3 }')"
+          marketing_version="$(cat Configs/Deployment.xcconfig | grep MARKETING_VERSION | awk '{ print $3 }')"
 
           # Grab all the tags
           git fetch --tags
@@ -35,6 +36,7 @@ jobs:
 
           # Check that the commit message matches the version
           git log -1 --pretty=%B | grep "\($version\)"
+          git log -1 --pretty=%B | grep "\($marketing_version\)"
 
       - name: Create App Store Connect Key file
         run: echo "${{ secrets.APP_STORE_CONNECT_KEY }}" | base64 -d > /tmp/AuthKey.p8
