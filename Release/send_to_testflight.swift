@@ -277,11 +277,12 @@ setbuf(stdout, nil)
 
 let build = CommandLine.arguments[1]
 print("Performing steps for build \(build)...")
+print()
 
 let _key = ProcessInfo.processInfo.environment["AUTHENTICATION_KEY"]!
 let keyID = ProcessInfo.processInfo.environment["AUTHENTICATION_KEY_ID"]!
 let issuerID = ProcessInfo.processInfo.environment["AUTHENTICATION_KEY_ISSUER_ID"]!
-print("Loading authentication from \(_key), keyID \(keyID), \(issuerID)...", terminator: "")
+print("Loading authentication from \(_key), keyID \(keyID), issuerID \(issuerID)...", terminator: "")
 
 let key = try Data(contentsOf: URL(fileURLWithPath: _key))
 let api = try API(key: key, keyID: keyID, issuerID: issuerID)
@@ -383,5 +384,8 @@ for build in [macOSBuild, visionOSBuild] {
 
 	print("Submitting build \(build.id) for review...", terminator: "")
 	try await api.submitBuildForReview(buildID: build.id)
-	print("")
+	print("Submitted!")
 }
+
+print()
+print("Finished!")
