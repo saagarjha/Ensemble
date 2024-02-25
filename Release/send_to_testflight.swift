@@ -56,16 +56,28 @@ struct API {
 			}
 		}
 
+		static func send(_ request: URLRequest) async throws -> Data {
+			let (data, response) = try await URLSession.shared.data(for: request)
+			let statusCode = (response as! HTTPURLResponse).statusCode
+			guard 200..<300 ~= statusCode else {
+				fputs("Got an error code \(statusCode) from \(request.url!)! Response:\n", stderr)
+				try FileHandle.standardError.write(contentsOf: data)
+				try FileHandle.standardError.synchronize()
+				throw NSError(domain: "\(ProcessInfo.processInfo.processName)-HTTP", code: statusCode)
+			}
+			return data
+		}
+
 		func _getRequest(endpoint: String) async throws -> Data {
 			var request = URLRequest(url: URL(string: endpoint)!)
 			request.addValue("Bearer \(try generateJWT())", forHTTPHeaderField: "Authorization")
-			return try await URLSession.shared.data(for: request).0
+			return try await Self.send(request)
 		}
 
 		func getRequest<T: Codable>(endpoint: String, parsing response: T.Type) async throws -> T {
 			var request = URLRequest(url: URL(string: endpoint)!)
 			request.addValue("Bearer \(try generateJWT())", forHTTPHeaderField: "Authorization")
-			return try Self.decode(T.self, from: await URLSession.shared.data(for: request).0, endpoint: endpoint)
+			return try Self.decode(T.self, from: await Self.send(request), endpoint: endpoint)
 		}
 
 		func _postyRequest(endpoint: String, method: String = "POST", object: Encodable) async throws -> Data {
@@ -74,7 +86,7 @@ struct API {
 			request.addValue("application/json", forHTTPHeaderField: "Content-Type")
 			request.httpMethod = method
 			request.httpBody = try JSONEncoder().encode(object)
-			return try await URLSession.shared.data(for: request).0
+			return try await Self.send(request)
 		}
 
 		struct Response<T: Codable>: Codable {
