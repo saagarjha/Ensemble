@@ -28,6 +28,8 @@ jobs:
 
           version="$(cat Configs/Deployment.xcconfig | grep CURRENT_PROJECT_VERSION | awk '{ print $3 }')"
 
+          # Grab all the tags
+          git fetch --tags
           # Make sure this version doesn't exist already
           ! git tag --list | grep -q "v$version"
 
