@@ -29,6 +29,7 @@ protocol macOSInterface {
 	func _dragChanged(parameters: M.DragChanged.Request) async throws -> M.DragChanged.Reply
 	func _dragEnded(parameters: M.DragEnded.Request) async throws -> M.DragEnded.Reply
 	func _typed(parameters: M.Typed.Request) async throws -> M.Typed.Reply
+	func _appIcon(parameters: M.AppIcon.Request) async throws -> M.AppIcon.Reply
 }
 
 struct Window: Codable, Identifiable {
@@ -232,5 +233,26 @@ enum macOSInterfaceMessages {
 		}
 
 		typealias Reply = SerializableVoid
+	}
+
+	struct AppIcon: Message {
+		static let id = Messages.appIcon
+
+		struct Request: Serializable, Codable {
+			let windowID: Window.ID
+			let size: CGSize
+		}
+
+		struct Reply: Serializable {
+			let image: Data
+
+			func encode() -> Data {
+				image
+			}
+
+			static func decode(_ data: Data) -> Self {
+				.init(image: data)
+			}
+		}
 	}
 }

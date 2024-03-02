@@ -86,6 +86,10 @@ struct Remote: macOSInterface {
 		return stream
 	}
 
+	func appIcon(for windowID: Window.ID, size: CGSize) async throws -> Data {
+		try await _appIcon(parameters: .init(windowID: windowID, size: size)).image
+	}
+
 	func _startWatchingForChildWindows(parameters: M.StartWatchingForChildWindows.Request) async throws -> M.StartWatchingForChildWindows.Reply {
 		try await M.StartWatchingForChildWindows.send(parameters, through: connection)
 	}
@@ -128,5 +132,9 @@ struct Remote: macOSInterface {
 
 	func _typed(parameters: M.Typed.Request) async throws -> M.Typed.Reply {
 		try await M.Typed.send(parameters, through: connection)
+	}
+
+	func _appIcon(parameters: M.AppIcon.Request) async throws -> M.AppIcon.Reply {
+		try await M.AppIcon.send(parameters, through: connection)
 	}
 }

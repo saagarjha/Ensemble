@@ -29,6 +29,7 @@ enum Messages: UInt8, CaseIterable {
 	case dragChanged
 	case dragEnded
 	case typed
+	case appIcon
 }
 
 protocol Message {

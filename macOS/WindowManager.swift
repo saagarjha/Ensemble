@@ -99,29 +99,40 @@ actor WindowManager {
 		applications = newApplications
 	}
 
-	func childrenOfWindow(idenitifiedBy windowID: CGWindowID) -> AsyncThrowingStream<[CGWindowID], Error> {
-		let window = windows[windowID]!
-		let application = window.application!
-		var iterator = application.windowUpdates.makeAsyncIterator()
-		return AsyncThrowingStream {
-			await iterator.next()
-			try await self.updateWindows()
-			return application.childWindows(of: window)
+	func _lookupWindow(byID id: CGWindowID) async throws -> Window? {
+		guard let window = windows[id] else {
+			try await updateWindows()
+			return windows[id]
 		}
+		return window
 	}
 
 	func lookupWindow(byID id: CGWindowID) async throws -> SCWindow? {
-		guard let window = windows[id]?.window else {
-			try await updateWindows()
-			return windows[id]?.window
+		try await _lookupWindow(byID: id)?.window
+	}
+
+	func lookupApplication(forWindowID id: CGWindowID) async throws -> NSRunningApplication? {
+		guard let pid = try await _lookupWindow(byID: id)?.application.application.processID else {
+			return nil
 		}
-		return window
+		return NSRunningApplication(processIdentifier: pid)
 	}
 
 	var allWindows: [SCWindow] {
 		get async throws {
 			try await updateWindows()
 			return windows.values.map(\.window)
+		}
+	}
+
+	func childrenOfWindow(identifiedBy windowID: CGWindowID) async throws -> AsyncThrowingStream<[CGWindowID], Error> {
+		let window = try await _lookupWindow(byID: windowID)!
+		let application = window.application!
+		var iterator = application.windowUpdates.makeAsyncIterator()
+		return AsyncThrowingStream {
+			await iterator.next()
+			try await self.updateWindows()
+			return application.childWindows(of: window)
 		}
 	}
 }

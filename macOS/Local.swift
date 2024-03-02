@@ -5,7 +5,9 @@
 //  Created by Saagar Jha on 10/9/23.
 //
 
+import AVFoundation
 import Accelerate
+import AppKit
 import CryptoKit
 import Foundation
 import SystemConfiguration
@@ -98,6 +100,8 @@ class Local: LocalInterface, macOSInterface {
 				return try await _dragEnded(parameters: .decode(data)).encode()
 			case .typed:
 				return try await _typed(parameters: .decode(data)).encode()
+			case .appIcon:
+				return try await _appIcon(parameters: .decode(data)).encode()
 			default:
 				return nil
 		}
@@ -162,7 +166,7 @@ class Local: LocalInterface, macOSInterface {
 
 	func _startWatchingForChildWindows(parameters: M.StartWatchingForChildWindows.Request) async throws -> M.StartWatchingForChildWindows.Reply {
 		childObservers[parameters.windowID] = Task {
-			for try await children in await windowManager.childrenOfWindow(idenitifiedBy: parameters.windowID) {
+			for try await children in try await windowManager.childrenOfWindow(identifiedBy: parameters.windowID) {
 				try await remote.childWindows(parent: parameters.windowID, children: children)
 			}
 		}
@@ -230,5 +234,18 @@ class Local: LocalInterface, macOSInterface {
 		await eventDispatcher.injectKey(key: parameters.key, down: parameters.down)
 
 		return .init()
+	}
+
+	func _appIcon(parameters: M.AppIcon.Request) async throws -> M.AppIcon.Reply {
+		let icon = try await windowManager.lookupApplication(forWindowID: parameters.windowID)!.icon!
+		let size = AVMakeRect(aspectRatio: icon.size, insideRect: .init(origin: .zero, size: .init(width: parameters.size.width, height: parameters.size.height))).size
+		let representation = NSBitmapImageRep(bitmapDataPlanes: nil, pixelsWide: Int(size.width), pixelsHigh: Int(size.height), bitsPerSample: 8, samplesPerPixel: 4, hasAlpha: true, isPlanar: false, colorSpaceName: .calibratedRGB, bytesPerRow: 0, bitsPerPixel: 0)!
+
+		NSGraphicsContext.saveGraphicsState()
+		NSGraphicsContext.current = NSGraphicsContext(bitmapImageRep: representation)
+		icon.draw(in: NSRect(origin: .zero, size: size), from: NSRect(origin: .zero, size: icon.size), operation: .copy, fraction: 1)
+		NSGraphicsContext.restoreGraphicsState()
+
+		return .init(image: representation.representation(using: .png, properties: [:])!)
 	}
 }

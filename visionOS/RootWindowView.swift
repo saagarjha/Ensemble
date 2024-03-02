@@ -12,9 +12,11 @@ struct RootWindowView: View {
 	let remote: Remote
 	let window: Window
 
-
 	@State
 	var children = [Window]()
+
+	@State
+	var appIcon: Data?
 
 	var body: some View {
 		GeometryReader { geometry in
@@ -33,11 +35,18 @@ struct RootWindowView: View {
 						}
 				}
 			}
+			.ornament(attachmentAnchor: .scene(.init(x: 0.5, y: 1 + 64 / geometry.size.height))) {
+				WindowToolbarView(title: window.title!, icon: appIcon)
+			}
 		}
 		.background {
 			AspectRatioConstrainingView(size: window.frame.size)
 		}
 		.task {
+			do {
+				// TODO: Scale appropriately
+				appIcon = try await remote.appIcon(for: window.id, size: .init(width: 128, height: 128))
+			} catch {}
 			do {
 				for await children in try await remote.children(of: window.id) {
 					let windows = try await remote.windows
