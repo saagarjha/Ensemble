@@ -18,15 +18,13 @@ struct RootWindowView: View {
 
 	var body: some View {
 		GeometryReader { geometry in
-			let actual = AVMakeRect(aspectRatio: window.frame.size, insideRect: CGRect(origin: .zero, size: geometry.size)).size
-
 			ZStack {
 				WindowView(remote: remote, window: window)
 				ForEach(children) { child in
-					let width = child.frame.width / window.frame.width * actual.width
-					let height = child.frame.height / window.frame.height * actual.height
-					let x = (child.frame.minX - window.frame.minX + child.frame.width / 2) / window.frame.width * actual.width / geometry.size.width + (geometry.size.width - actual.width) / 2 / geometry.size.width
-					let y = (child.frame.minY - window.frame.minY + child.frame.height / 2) / window.frame.height * actual.height / geometry.size.height + (geometry.size.height - actual.height) / 2 / geometry.size.height
+					let width = child.frame.width / window.frame.width * geometry.size.width
+					let height = child.frame.height / window.frame.height * geometry.size.height
+					let x = (child.frame.minX - window.frame.minX + child.frame.width / 2) / window.frame.width * geometry.size.width / geometry.size.width
+					let y = (child.frame.minY - window.frame.minY + child.frame.height / 2) / window.frame.height * geometry.size.height / geometry.size.height
 
 					Color.clear
 						.ornament(attachmentAnchor: .scene(.init(x: x, y: y))) {
@@ -35,6 +33,9 @@ struct RootWindowView: View {
 						}
 				}
 			}
+		}
+		.background {
+			AspectRatioConstrainingView(size: window.frame.size)
 		}
 		.task {
 			do {
@@ -48,5 +49,29 @@ struct RootWindowView: View {
 				}
 			} catch {}
 		}
+	}
+}
+
+struct AspectRatioConstrainingView: UIViewRepresentable {
+	let size: CGSize
+
+	class _View: UIView {
+		var _size = CGSize.zero {
+			didSet {
+				window?.windowScene?.requestGeometryUpdate(.Vision(size: _size, resizingRestrictions: .uniform))
+			}
+		}
+
+		override func didMoveToWindow() {
+			_size = { _size }()
+		}
+	}
+
+	func makeUIView(context: Context) -> _View {
+		_View()
+	}
+
+	func updateUIView(_ uiView: UIViewType, context: Context) {
+		uiView._size = size
 	}
 }
