@@ -5,6 +5,7 @@
 //  Created by Saagar Jha on 10/21/23.
 //
 
+import ApplicationServices
 import CoreGraphics
 
 // FB13556001
@@ -15,3 +16,10 @@ let SLSCopyAssociatedWindows = unsafeBitCast(dlsym(skylight, "SLSCopyAssociatedW
 
 // FB13607817
 let sandbox_extension_consume = unsafeBitCast(dlsym(dlopen(nil, RTLD_LAZY | RTLD_NOLOAD), "sandbox_extension_consume"), to: (@convention(c) (UnsafePointer<CChar>) -> Int64)?.self)
+
+// FB13607820
+let _AXUIElementGetWindow = unsafeBitCast(dlsym(dlopen(nil, RTLD_LAZY), "_AXUIElementGetWindow"), to: (@convention(c) (AXUIElement, UnsafeMutablePointer<CGWindowID>) -> AXError)?.self)
+
+// This isn't even SPI, it's just deprecated API that Swift refuses to expose
+let GetProcessForPID = unsafeBitCast(dlsym(dlopen(nil, RTLD_LAZY), "GetProcessForPID"), to: (@convention(c) (pid_t, UnsafePointer<ProcessSerialNumber>) -> OSStatus)?.self)!
+let SetFrontProcessWithOptions = unsafeBitCast(dlsym(dlopen(nil, RTLD_LAZY), "SetFrontProcessWithOptions"), to: (@convention(c) (UnsafePointer<ProcessSerialNumber>, OptionBits) -> OSStatus)?.self)!

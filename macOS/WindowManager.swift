@@ -135,6 +135,64 @@ actor WindowManager {
 			return application.childWindows(of: window)
 		}
 	}
+
+	func activatedWindow() -> CGWindowID? {
+		let app = NSWorkspace.shared.frontmostApplication!
+		let element = AXUIElementCreateApplication(app.processIdentifier)
+
+		var window: CFTypeRef?
+		AXUIElementCopyAttributeValue(element, kAXMainWindowAttribute as CFString, &window)
+		return (window as! AXUIElement?)?.windowID
+	}
+
+	func activateWindow(identifiedBy windowID: CGWindowID) async {
+		guard _AXUIElementGetWindow != nil else {
+			return
+		}
+
+		guard activatedWindow() != windowID else {
+			return
+		}
+
+		let window = windows[windowID]!
+		let application = window.application!
+
+		var psn = ProcessSerialNumber()
+		_ = GetProcessForPID(application.application.processID, &psn)
+		_ = SetFrontProcessWithOptions(&psn, OptionBits(kSetFrontProcessFrontWindowOnly | kSetFrontProcessCausedByUser))
+
+		var windows: CFArray?
+		AXUIElementCopyAttributeValues(AXUIElementCreateApplication(application.application.processID), kAXWindowsAttribute as CFString, 0, .max, &windows)
+		guard
+			let element = (windows as? [AXUIElement] ?? []).first(where: {
+				$0.windowID == windowID
+			})
+		else {
+			return
+		}
+
+		AXUIElementPerformAction(element, kAXRaiseAction as CFString)
+
+		// TODO: Don't poll for this
+		while activatedWindow() != windowID {
+			try? await Task.sleep(for: .milliseconds(100))
+		}
+	}
+}
+
+extension AXUIElement {
+	var windowID: CGWindowID {
+		assert(
+			{
+				var role: CFTypeRef?
+				AXUIElementCopyAttributeValue(self, kAXRoleAttribute as CFString, &role)
+				return role as! String == kAXWindowRole
+			}())
+
+		var windowID: CGWindowID = 0
+		_ = _AXUIElementGetWindow!(self, &windowID)
+		return windowID
+	}
 }
 
 extension AXObserver {

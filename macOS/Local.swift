@@ -187,23 +187,27 @@ class Local: LocalInterface, macOSInterface {
 
 	func _clicked(parameters: M.Clicked.Request) async throws -> M.Clicked.Reply {
 		let window = try await windowManager.lookupWindow(byID: parameters.windowID)!
+		await windowManager.activateWindow(identifiedBy: parameters.windowID)
 		await eventDispatcher.injectClick(at: .init(x: window.frame.minX + window.frame.width * parameters.x, y: window.frame.minY + window.frame.height * parameters.y))
 		return .init()
 	}
 
 	func _scrollBegan(parameters: M.ScrollBegan.Request) async throws -> M.ScrollBegan.Reply {
+		await windowManager.activateWindow(identifiedBy: parameters.windowID)
 		await eventDispatcher.injectScrollBegan()
 
 		return .init()
 	}
 
 	func _scrollChanged(parameters: M.ScrollChanged.Request) async throws -> M.ScrollChanged.Reply {
+		await windowManager.activateWindow(identifiedBy: parameters.windowID)
 		await eventDispatcher.injectScrollChanged(translationX: parameters.x, translationY: parameters.y)
 
 		return .init()
 	}
 
 	func _scrollEnded(parameters: M.ScrollEnded.Request) async throws -> M.ScrollEnded.Reply {
+		await windowManager.activateWindow(identifiedBy: parameters.windowID)
 		await eventDispatcher.injectScrollEnded()
 
 		return .init()
@@ -211,6 +215,7 @@ class Local: LocalInterface, macOSInterface {
 
 	func _dragBegan(parameters: M.DragBegan.Request) async throws -> M.DragBegan.Reply {
 		let window = try await windowManager.lookupWindow(byID: parameters.windowID)!
+		await windowManager.activateWindow(identifiedBy: parameters.windowID)
 		await eventDispatcher.injectDragBegan(at: .init(x: window.frame.minX + window.frame.width * parameters.x, y: window.frame.minY + window.frame.height * parameters.y))
 
 		return .init()
@@ -218,6 +223,7 @@ class Local: LocalInterface, macOSInterface {
 
 	func _dragChanged(parameters: M.DragChanged.Request) async throws -> M.DragChanged.Reply {
 		let window = try await windowManager.lookupWindow(byID: parameters.windowID)!
+		await windowManager.activateWindow(identifiedBy: parameters.windowID)
 		await eventDispatcher.injectDragChanged(to: .init(x: window.frame.minX + window.frame.width * parameters.x, y: window.frame.minY + window.frame.height * parameters.y))
 
 		return .init()
@@ -231,6 +237,7 @@ class Local: LocalInterface, macOSInterface {
 	}
 
 	func _typed(parameters: M.Typed.Request) async throws -> M.Typed.Reply {
+		await windowManager.activateWindow(identifiedBy: parameters.windowID)
 		await eventDispatcher.injectKey(key: parameters.key, down: parameters.down)
 
 		return .init()
