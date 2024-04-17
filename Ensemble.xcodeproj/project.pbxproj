@@ -63,6 +63,8 @@
 		49E09BD12AD52D9F00B56CD3 /* visionOSInterface.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49E09BCF2AD52D9F00B56CD3 /* visionOSInterface.swift */; };
 		49E09BD32AD5390500B56CD3 /* WindowPickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49E09BD22AD5390500B56CD3 /* WindowPickerView.swift */; };
 		49EDAA6E2B28E58A00546EAB /* EventDispatcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49EDAA6D2B28E58A00546EAB /* EventDispatcher.swift */; };
+		49FF01EF2BCFE970002552CE /* Chronicle in Frameworks */ = {isa = PBXBuildFile; productRef = 49FF01EE2BCFE970002552CE /* Chronicle */; };
+		49FF01F12BCFE977002552CE /* Chronicle in Frameworks */ = {isa = PBXBuildFile; productRef = 49FF01F02BCFE977002552CE /* Chronicle */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -126,6 +128,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				49E09BAB2AD33C1600B56CD3 /* AppleConnect in Frameworks */,
+				49FF01EF2BCFE970002552CE /* Chronicle in Frameworks */,
 				49E09BBA2AD4F88100B56CD3 /* Cod in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -135,6 +138,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				49E09BAD2AD33C1F00B56CD3 /* AppleConnect in Frameworks */,
+				49FF01F12BCFE977002552CE /* Chronicle in Frameworks */,
 				49E09BBC2AD4F88900B56CD3 /* Cod in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -284,6 +288,7 @@
 			packageProductDependencies = (
 				49E09BAA2AD33C1600B56CD3 /* AppleConnect */,
 				49E09BB92AD4F88100B56CD3 /* Cod */,
+				49FF01EE2BCFE970002552CE /* Chronicle */,
 			);
 			productName = Ensemble;
 			productReference = 49E09B532AD2EE5000B56CD3 /* Ensemble.app */;
@@ -305,6 +310,7 @@
 			packageProductDependencies = (
 				49E09BAC2AD33C1F00B56CD3 /* AppleConnect */,
 				49E09BBB2AD4F88900B56CD3 /* Cod */,
+				49FF01F02BCFE977002552CE /* Chronicle */,
 			);
 			productName = Ensemble;
 			productReference = 49E09B922AD3237D00B56CD3 /* Ensemble.app */;
@@ -342,6 +348,7 @@
 			packageReferences = (
 				49E09BA62AD33BD500B56CD3 /* XCRemoteSwiftPackageReference "AppleConnect" */,
 				49E09BB82AD4F86E00B56CD3 /* XCRemoteSwiftPackageReference "Cod" */,
+				49FF01ED2BCFE962002552CE /* XCRemoteSwiftPackageReference "Chronicle" */,
 			);
 			productRefGroup = 49E09B542AD2EE5000B56CD3 /* Products */;
 			projectDirPath = "";
@@ -554,6 +561,14 @@
 				kind = branch;
 			};
 		};
+		49FF01ED2BCFE962002552CE /* XCRemoteSwiftPackageReference "Chronicle" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/saagarjha/Chronicle.git";
+			requirement = {
+				branch = main;
+				kind = branch;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -576,6 +591,16 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 49E09BB82AD4F86E00B56CD3 /* XCRemoteSwiftPackageReference "Cod" */;
 			productName = Cod;
+		};
+		49FF01EE2BCFE970002552CE /* Chronicle */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 49FF01ED2BCFE962002552CE /* XCRemoteSwiftPackageReference "Chronicle" */;
+			productName = Chronicle;
+		};
+		49FF01F02BCFE977002552CE /* Chronicle */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 49FF01ED2BCFE962002552CE /* XCRemoteSwiftPackageReference "Chronicle" */;
+			productName = Chronicle;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};
