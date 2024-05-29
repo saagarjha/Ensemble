@@ -48,7 +48,7 @@ struct Preference<T>: DynamicProperty {
 	}
 
 	var isSet: Bool {
-		return UserDefaults.standard.value(forKey: key) == nil
+		return UserDefaults.standard.value(forKey: key) != nil
 	}
 
 	func reset() {
@@ -100,7 +100,7 @@ struct CodablePreference<T: Codable> {
 	}
 
 	var isSet: Bool {
-		UserDefaults.standard.value(forKey: key) == nil
+		UserDefaults.standard.value(forKey: key) != nil
 	}
 
 	func reset() {
