@@ -105,7 +105,7 @@ struct API {
 				let next = try await getRequest(endpoint: endpoint, parsing: Response<T>.self)
 				result.append(contentsOf: next.data)
 				nextEndpoint = next.links.next
-			} 
+			}
 			return result
 		}
 	}
@@ -331,12 +331,14 @@ for build in builds {
 	print("\(version.attributes.platform.rawValue)")
 }
 
-let macOSBuild = builds[buildPlatforms.firstIndex { 
-	$0.attributes.platform == .MAC_OS
-}!]
-let visionOSBuild = builds[buildPlatforms.firstIndex {
-	$0.attributes.platform == .VISION_OS
-}!]
+let macOSBuild = builds[
+	buildPlatforms.firstIndex {
+		$0.attributes.platform == .MAC_OS
+	}!]
+let visionOSBuild = builds[
+	buildPlatforms.firstIndex {
+		$0.attributes.platform == .VISION_OS
+	}!]
 
 print("Waiting for builds to process...")
 
