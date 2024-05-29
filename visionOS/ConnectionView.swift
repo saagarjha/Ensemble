@@ -18,6 +18,9 @@ struct ConnectionView: View {
 	@State
 	var endpoints: [NWEndpoint] = []
 
+	@Environment(\.openWindow)
+	var openWindow
+
 	var body: some View {
 		NavigationSplitView(
 			sidebar: {
@@ -65,6 +68,13 @@ struct ConnectionView: View {
 						.padding()
 				}
 				.navigationTitle("Available Macs")
+				.toolbar {
+					Button(action: {
+						openWindow(id: "logs")
+					}) {
+						Image(systemName: "doc.text.below.ecg")
+					}
+				}
 			}
 		)
 		.task {
