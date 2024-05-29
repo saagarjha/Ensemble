@@ -11,7 +11,8 @@ struct WindowToolbarView: View {
 	let title: String
 	let icon: Data?
 
-	@Environment(\.openWindow) private var openWindow
+	@Environment(\.openWindow)
+	var openWindow
 
 	var body: some View {
 		HStack {
