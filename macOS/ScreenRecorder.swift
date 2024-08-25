@@ -38,12 +38,16 @@ actor ScreenRecorder {
 				continuation.yield(sampleBuffer)
 			}
 		}
+		
+		let frames: AsyncStream<CMSampleBuffer>
+		let continuation: AsyncStream<CMSampleBuffer>.Continuation
 
-		let (frames, continuation) = AsyncStream.makeStream(of: CMSampleBuffer.self, bufferingPolicy: .bufferingNewest(1))
 		let output: Output
 		let stream: SCStream
 
 		init(window: SCWindow) async throws {
+			(frames, continuation) = AsyncStream.makeStream(of: CMSampleBuffer.self, bufferingPolicy: .bufferingNewest(1))
+			
 			let filter = SCContentFilter(desktopIndependentWindow: window)
 
 			let configuration = ScreenRecorder.streamConfiguration()
