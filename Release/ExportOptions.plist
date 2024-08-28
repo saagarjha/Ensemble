@@ -7,7 +7,7 @@
 	<key>manageAppVersionAndBuildNumber</key>
 	<false/>
 	<key>method</key>
-	<string>app-store</string>
+	<string>app-store-connect</string>
 	<key>stripSwiftSymbols</key>
 	<false/>
 </dict>
