@@ -18,8 +18,6 @@ struct {
 	char *name;
 	void *load_address;
 } bad_libraries[] = {
-    {"/System/Library/Frameworks/CoreVideo.framework"},
-    {"/System/Library/PrivateFrameworks/AppleJPEG.framework"},
 };
 
 struct stub {
