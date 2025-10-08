@@ -56,8 +56,8 @@ jobs:
           security list-keychains -d user -s "$KEYCHAIN"
           security import "$RUNNER_TEMP/Certificate.p12" -P "${{ secrets.CERTIFICATE_PASSWORD }}" -A -k "$KEYCHAIN"
 
-          mkdir -p ~/Library/MobileDevice/Provisioning\ Profiles
-          cp Release/iOS.mobileprovision ~/Library/MobileDevice/Provisioning\ Profiles
+          mkdir -p ~/Library/Developer/Xcode/UserData/Provisioning\ Profiles
+          cp Release/iOS.mobileprovision ~/Library/Developer/Xcode/UserData/Provisioning\ Profiles
 
       - name: Select Xcode
         run: sudo xcode-select -s /Applications/Xcode_26.0.1.app
