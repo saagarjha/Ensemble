@@ -1,4 +1,5 @@
 {
+  "originHash" : "84db83d7b57406c6883914d413f920366b77c9d954cf952f524afdd3e0c80418",
   "pins" : [
     {
       "identity" : "appleconnect",
@@ -15,7 +16,7 @@
       "location" : "https://github.com/saagarjha/Chronicle.git",
       "state" : {
         "branch" : "main",
-        "revision" : "5bda5f91eb303ab9cf6f266473d790116c15215a"
+        "revision" : "2e442a8f1e559a5e4807955b741520db8127b1f2"
       }
     },
     {
@@ -28,5 +29,5 @@
       }
     }
   ],
-  "version" : 2
+  "version" : 3
 }
