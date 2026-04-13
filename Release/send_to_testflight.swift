@@ -1,5 +1,4 @@
 #!/usr/bin/env DYLD_FRAMEWORK_PATH=/System/Library/Frameworks swift
-// ^ Temporary workaround for https://github.com/apple/swift/issues/68785
 
 import CryptoKit
 import Foundation
@@ -232,8 +231,8 @@ struct API {
 		let attributes: Attributes
 	}
 
-	func betaGroups() async throws -> [BetaGroup] {
-		try await _api.pagedGetRequest(endpoint: "https://api.appstoreconnect.apple.com/v1/betaGroups", parsing: BetaGroup.self)
+	func betaGroups(forAppID appID: String) async throws -> [BetaGroup] {
+		try await _api.pagedGetRequest(endpoint: "https://api.appstoreconnect.apple.com/v1/apps/\(appID)/betaGroups", parsing: BetaGroup.self)
 	}
 
 	struct BetaGroupBuild: Codable {
@@ -372,7 +371,7 @@ for line in notes.split(separator: "\n") {
 }
 
 print("Listing beta groups...", terminator: "")
-let betaGroup = try await api.betaGroups().first {
+let betaGroup = try await api.betaGroups(forAppID: appID).first {
 	$0.attributes.name == "Test" && !$0.attributes.isInternalGroup
 }!
 print("Found beta group \(betaGroup.id)")
